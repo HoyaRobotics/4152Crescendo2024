@@ -49,7 +49,8 @@ public class RobotContainer {
 
   //not working yet
     //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    //NM here - yada yada yada
+    //NM here - the above line was working, but all it does is give a button that resets field orientation based on current orienation.
+    //the cause of the original issue may be due to the wierd coordinate system. 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
