@@ -4,9 +4,14 @@
 
 package frc.robot.Subsystems;
 
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
+    private TalonFX leftElevator = new TalonFX(26);
+    private TalonFX rightElevator = new TalonFX(27);
+
   /** Creates a new Climber. */
   public Climber() {}
 
