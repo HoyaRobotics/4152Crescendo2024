@@ -14,6 +14,21 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Subsystems.Climber;
+import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.Shooter;
+import frc.robot.commands.AlignWithChain;
+import frc.robot.commands.AlignWithPodium;
+import frc.robot.commands.ChangeClimbPosition;
+import frc.robot.commands.ChangeLights;
+import frc.robot.commands.DownElevator;
+import frc.robot.commands.ForwardTrap;
+import frc.robot.commands.Outake;
+import frc.robot.commands.ReverseTrap;
+import frc.robot.commands.Shoot;
+import frc.robot.commands.SwitchDriveMode;
+import frc.robot.commands.UpElevator;
+import frc.robot.commands.rollIntake;
 import frc.robot.generated.TunerConstants;
 
 public class RobotContainer {
@@ -21,7 +36,11 @@ public class RobotContainer {
   private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
   /* Setting up bindings for necessary control of the swerve drive platform */
-  private final CommandXboxController joystick = new CommandXboxController(0); // My joystick
+  private final CommandXboxController driverController = new CommandXboxController(0); // My driverController
+  private final CommandXboxController operatorController = new CommandXboxController(1);
+  private final Intake intake = new Intake();
+  private final Climber climber = new Climber();
+  private final Shooter shooter = new Shooter();
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -34,21 +53,36 @@ public class RobotContainer {
 
   private void configureBindings() {
     drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-        drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
+        drivetrain.applyRequest(() -> drive.withVelocityX(-driverController.getLeftY() * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
-            .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-            .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+            .withVelocityY(-driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ));
 
-    joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-    joystick.b().whileTrue(drivetrain
-        .applyRequest(() -> point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))));
+    driverController.start().whileTrue(drivetrain.applyRequest(() -> brake));
+    driverController.back().whileTrue(drivetrain
+        .applyRequest(() -> point.withModuleDirection(new Rotation2d(-driverController.getLeftY(), -driverController.getLeftX()))));
 
     
     drivetrain.seedFieldRelative();
 
+//BUTTON ASSIGNING BELOW//
+driverController.a().whileTrue(new Outake(intake));
+driverController.b().whileTrue(new rollIntake(intake));
+driverController.y().onTrue(new SwitchDriveMode());
+
+operatorController.a().onTrue(new AlignWithPodium());
+operatorController.b().onTrue(new AlignWithChain());
+operatorController.y().onTrue(new ChangeClimbPosition(climber));
+operatorController.rightBumper().whileTrue(new Shoot(shooter));
+operatorController.rightTrigger().whileTrue(new ForwardTrap());
+operatorController.leftTrigger().whileTrue(new ReverseTrap());
+operatorController.povUp().onTrue(new UpElevator(climber));
+operatorController.povDown().onTrue(new DownElevator(climber));
+operatorController.rightStick().onTrue(new ChangeLights());
+
   //not working yet
-    //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    //driverController.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     //NM here - the above line was working, but all it does is give a button that resets field orientation based on current orienation.
     //the cause of the original issue may be due to the wierd coordinate system. 
     if (Utils.isSimulation()) {
