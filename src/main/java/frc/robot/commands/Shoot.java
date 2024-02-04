@@ -5,13 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 
 public class Shoot extends Command {
+  private final Shooter shooter;
+  private final Intake intake;
   /** Creates a new Shoot. 
  * @param shooter */
-  public Shoot(Shooter shooter) {
+  public Shoot(Shooter shooter, Intake intake) {
+    this.shooter = shooter;
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(shooter, intake);
   }
 
   // Called when the command is initially scheduled.
