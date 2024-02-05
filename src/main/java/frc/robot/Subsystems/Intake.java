@@ -6,6 +6,7 @@ package frc.robot.Subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkFlex;
@@ -21,6 +22,7 @@ public class Intake extends SubsystemBase {
   private CANSparkFlex rollerMotor = new CANSparkFlex(23, MotorType.kBrushless);
 
   final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
+  final VoltageOut voltageRequest = new VoltageOut(0);
 
   /** Creates a new Intake. */
   public Intake() {
@@ -64,6 +66,18 @@ public class Intake extends SubsystemBase {
 
   public void setRollerSpeed(double speed) {
     rollerMotor.set(speed);
+  }
+
+  public void setRotationVoltage(double voltage) {
+    rotationMotor.setControl(voltageRequest.withOutput(voltage));
+  }
+
+  public void stopRotation() {
+    rotationMotor.stopMotor();
+  }
+
+  public void stopRoller() {
+    rollerMotor.stopMotor();
   }
 
   public boolean isRollerStalled() {
