@@ -22,7 +22,7 @@ public class IntakeConstants {
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs rotationCurrentLimits = new CurrentLimitsConfigs()
-        .withStatorCurrentLimit(40.0)
+        .withStatorCurrentLimit(20.0)
         .withStatorCurrentLimitEnable(true);
     public static final VoltageConfigs rotationVoltageConfigs = new VoltageConfigs()
         .withPeakForwardVoltage(10.0)
@@ -47,6 +47,6 @@ public class IntakeConstants {
     public static final double loadingPosition = 0.0;
     public static final double outakePosition = 0.0;
 
-    public static final double floorSpeed = 0.5;
-    public static final double stallSpeed = 0.05;
+    public static final double floorSpeed = 0.2;
+    public static final double stallSpeed = 0.01;
 }

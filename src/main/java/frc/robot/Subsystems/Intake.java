@@ -35,6 +35,7 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("IntakeRollerCurrent", rollerMotor.getOutputCurrent());
     SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("IntakeRotationVelocity", rotationMotor.getVelocity().getValueAsDouble());
   }
 
   private void configureRotationMotor() {
