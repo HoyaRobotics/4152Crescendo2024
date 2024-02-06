@@ -35,7 +35,7 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("IntakeRollerCurrent", rollerMotor.getOutputCurrent());
     SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
-    SmartDashboard.putNumber("IntakeRotationVelocity", rotationMotor.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
   }
 
   private void configureRotationMotor() {
@@ -57,7 +57,8 @@ public class Intake extends SubsystemBase {
     rollerMotor.restoreFactoryDefaults();
     rollerMotor.enableVoltageCompensation(10);
     rollerMotor.setIdleMode(IdleMode.kBrake);
-    rollerMotor.setSmartCurrentLimit(5);
+    rollerMotor.setSmartCurrentLimit(40);
+    rollerMotor.setInverted(true);
     rollerMotor.set(IntakeConstants.stallSpeed);
   }
 
@@ -82,8 +83,14 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isRollerStalled() {
-    double rollerCurrent = rollerMotor.getOutputCurrent();
-    if(rollerCurrent > 2) {
+    /*double rollerCurrent = rollerMotor.getOutputCurrent();
+    if(rollerCurrent > 40) {
+      return true;
+    }else{
+      return false;
+    }*/
+    double rollerSpeed = rollerMotor.getEncoder().getVelocity();
+    if(rollerSpeed < 0.1) {
       return true;
     }else{
       return false;
