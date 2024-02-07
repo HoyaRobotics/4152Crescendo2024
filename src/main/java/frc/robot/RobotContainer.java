@@ -19,6 +19,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.IntakeFromGround;
 import frc.robot.generated.TunerConstants;
+import frc.robot.Subsystems.Shooter;
 
 public class RobotContainer {
   private double MaxSpeed = 6; // 6 meters per second desired top speed
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final CommandXboxController operatorController = new CommandXboxController(1);
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
   private final Intake intake = new Intake();
+  private final Shooter shooter = new Shooter();
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
@@ -50,12 +52,16 @@ public class RobotContainer {
     //BUTTON ASSIGNING BELOW//
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGround(intake));
-    driverController.leftBumper().whileTrue(new Shoot(intake));
+    driverController.leftBumper().whileTrue(new Shoot(intake,shooter));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
+
+    
+    //TODO remove line after this. It's being used for testing purposes
+    drivetrain.seedFieldRelative();
   }
 
   public RobotContainer() {
