@@ -38,7 +38,6 @@ public class Shoot extends Command {
   public void execute() {
     if(shooter.isShooterAtSpeed()) 
     {
-      System.out.println("at speed");
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
 

@@ -46,12 +46,11 @@ public class IntakeConstants {
         .withReverseSoftLimitThreshold(-0.58);
     public static final double stowedPosition = 0.0;
     public static final double shootPosition = -0.022;
-    public static final double floorPosition = -0.55;
+    public static final double floorPosition = -0.54;
     public static final double outakePosition = -0.078;
     //Can assign later if need be
     public static final double sourcePosition = 0.0;
-
-    public static final double floorSpeed = 0.6;
+    public static final double floorSpeed = 0.75; //0.6
     public static final double stallSpeed = 0.05;
-    public static final double shootSpeed = -0.6;
+    public static final double shootSpeed = -1.0; //-0.6
 }

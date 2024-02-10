@@ -17,12 +17,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.IntakeConstants;
 
+
 public class Intake extends SubsystemBase {
   private TalonFX rotationMotor = new TalonFX(22);
   private CANSparkFlex rollerMotor = new CANSparkFlex(23, MotorType.kBrushless);
 
   final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
   final VoltageOut voltageRequest = new VoltageOut(0);
+
+  
 
   /** Creates a new Intake. */
   public Intake() {
@@ -91,7 +94,7 @@ public class Intake extends SubsystemBase {
     }*/
     //TODO fix the bug where it retracts early
     double rollerSpeed = rollerMotor.getEncoder().getVelocity();
-    if(rollerSpeed < 0.1) {
+    if(rollerSpeed < 0.005) {
       return true;
     }else{
       return false;

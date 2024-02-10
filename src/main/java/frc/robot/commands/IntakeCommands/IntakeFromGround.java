@@ -4,12 +4,16 @@
 
 package frc.robot.commands.IntakeCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
 
 public class IntakeFromGround extends Command {
   private final Intake intake;
+  double stallTime = 0.0;
+  boolean stalled = false;
+  boolean finished = false;
   /** Creates a new Intake. */
   public IntakeFromGround(Intake intake) {
     this.intake = intake;
@@ -20,6 +24,9 @@ public class IntakeFromGround extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    finished = false;
+    stalled = false;
+    stallTime = 0.0;
     intake.setIntakePosition(IntakeConstants.floorPosition);
     intake.setRollerSpeed(IntakeConstants.floorSpeed);
     System.out.println("Running Intake");
@@ -27,7 +34,15 @@ public class IntakeFromGround extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if(intake.isRollerStalled() && stalled == false) {
+      stallTime = Timer.getFPGATimestamp();
+      stalled = true;
+    }
+    if(stalled == true && Timer.getFPGATimestamp() - stallTime > 0.3) {
+      finished = true;
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -40,6 +55,6 @@ public class IntakeFromGround extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return intake.isRollerStalled();
+    return finished;
   }
 }
