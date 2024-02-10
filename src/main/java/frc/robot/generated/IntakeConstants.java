@@ -51,6 +51,9 @@ public class IntakeConstants {
     //Can assign later if need be
     public static final double sourcePosition = 0.0;
     public static final double floorSpeed = 0.75; //0.6
-    public static final double stallSpeed = 0.05;
+    public static final double stallSpeed = 0.03;
     public static final double shootSpeed = -1.0; //-0.6
+
+    public static final double stallTriggerTime = 0.025;
+    public static final double stallRPM = 0.1;
 }

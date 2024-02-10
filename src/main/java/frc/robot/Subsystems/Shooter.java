@@ -31,8 +31,7 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     //System.out.println("shooting");
-     //SmartDashboard.putNumber("shooter speed", (shootLeft.getEncoder().getVelocity()));
-     //isShooterAtSpeed();
+     SmartDashboard.putNumber("shooter speed", (shootLeft.getEncoder().getVelocity()));
   }
 
   private void configShooterMotors() {
@@ -75,7 +74,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isShooterAtSpeed() {
-    if((shootLeft.getEncoder().getVelocity()+shootRight.getEncoder().getVelocity())/2 >= 0.95*ShooterConstants.shootingRPM) upToSpeed = true;
+    if((shootLeft.getEncoder().getVelocity()+shootRight.getEncoder().getVelocity())/2 >= ShooterConstants.speedThreshold*ShooterConstants.shootingRPM) upToSpeed = true;
     return upToSpeed;
   }
 }

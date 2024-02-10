@@ -94,7 +94,7 @@ public class Intake extends SubsystemBase {
     }*/
     //TODO fix the bug where it retracts early
     double rollerSpeed = rollerMotor.getEncoder().getVelocity();
-    if(rollerSpeed < 0.005) {
+    if(rollerSpeed < IntakeConstants.stallRPM) {
       return true;
     }else{
       return false;

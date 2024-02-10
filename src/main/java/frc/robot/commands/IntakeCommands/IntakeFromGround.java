@@ -14,6 +14,8 @@ public class IntakeFromGround extends Command {
   double stallTime = 0.0;
   boolean stalled = false;
   boolean finished = false;
+  double oldTime = 0;
+  double currentTime = 0;
   /** Creates a new Intake. */
   public IntakeFromGround(Intake intake) {
     this.intake = intake;
@@ -35,13 +37,27 @@ public class IntakeFromGround extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(intake.isRollerStalled() && stalled == false) {
-      stallTime = Timer.getFPGATimestamp();
+    currentTime = Timer.getFPGATimestamp();
+    if(intake.isRollerStalled())
+    {
+      if(stalled)
+      {
+        stallTime += currentTime-oldTime;
+        if(stallTime >= IntakeConstants.stallTriggerTime)
+        {
+           finished = true;
+           System.out.println("intake finished, or it should be. Stalled for: " + stallTime);
+        }
+      }
       stalled = true;
     }
-    if(stalled == true && Timer.getFPGATimestamp() - stallTime > 0.3) {
-      finished = true;
+    else{
+      if(stalled) System.out.println("stalled for: " + stallTime);
+      stallTime = 0;
+      stalled = false;
+      
     }
+    oldTime = currentTime;
   }
 
   // Called once the command ends or is interrupted.
