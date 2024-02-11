@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Intake;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.IntakeCommands.Amp;
 import frc.robot.commands.IntakeCommands.IntakeFromGround;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
@@ -53,6 +54,7 @@ public class RobotContainer {
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGround(intake));
     driverController.leftBumper().whileTrue(new Shoot(intake,shooter));
+    driverController.b().whileTrue(new Amp(intake));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));

@@ -100,4 +100,13 @@ public class Intake extends SubsystemBase {
       return false;
     }
   }
+
+  public boolean isIntakeAtPosition(double position) {
+    double error = Math.abs(position - rotationMotor.getPosition().getValue());
+    if(error < IntakeConstants.positionError) {
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

@@ -21,7 +21,7 @@ public class IntakeConstants {
         .withKS(0.3) // output to overcome static friction (output)
         .withKV(0.1176*rotationGearRatio) // output per unit of target velocity (output/rps)
         .withKA(0.02372*rotationGearRatio) // output per unit of target acceleration (output/(rps/s))
-        .withKP(20) // output per unit of error in position (output/rotation)
+        .withKP(25) // output per unit of error in position (output/rotation)
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs rotationCurrentLimits = new CurrentLimitsConfigs()
@@ -34,26 +34,30 @@ public class IntakeConstants {
         .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
         .withSensorToMechanismRatio(rotationGearRatio);
     public static final MotionMagicConfigs rotationMotionMagicConfigs = new MotionMagicConfigs()
-        .withMotionMagicAcceleration(2.0) // controls acceleration and deceleration rates during the beginning and end of motion
+        .withMotionMagicAcceleration(3.0) // controls acceleration and deceleration rates during the beginning and end of motion
         .withMotionMagicCruiseVelocity(2.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
         .withMotionMagicExpo_kA(0.0) // voltage required to apply a given acceleration, in V/(rps/s)
         .withMotionMagicExpo_kV(0) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs rotationSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(0.0)
+        .withForwardSoftLimitThreshold(0.02)
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(-0.58);
     public static final double stowedPosition = 0.0;
     public static final double shootPosition = -0.022;
     public static final double floorPosition = -0.54;
     public static final double outakePosition = -0.078;
-    //Can assign later if need be
     public static final double sourcePosition = 0.0;
+    public static final double ampPosition = -0.23;
+
+    public static final double positionError = 0.01;
+    //Can assign later if need be
     public static final double floorSpeed = 0.75; //0.6
     public static final double stallSpeed = 0.03;
     public static final double shootSpeed = -1.0; //-0.6
+    public static final double ampSpeed = -0.9;
 
-    public static final double stallTriggerTime = 0.025;
+    public static final double stallTriggerTime = 0.05;
     public static final double stallRPM = 0.1;
 }

@@ -4,67 +4,59 @@
 
 package frc.robot.Subsystems;
 
-import com.revrobotics.SparkPIDController;
-import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
-
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
-    private CANSparkMax shootLeft = new CANSparkMax(24, MotorType.kBrushless);
-    private CANSparkMax shootRight = new CANSparkMax(25, MotorType.kBrushless);
-    private SparkPIDController leftPID = shootLeft.getPIDController();
-    private SparkPIDController rightPID = shootRight.getPIDController();
+    //private CANSparkMax shootLeft = new CANSparkMax(24, MotorType.kBrushless);
+    //private CANSparkMax shootRight = new CANSparkMax(25, MotorType.kBrushless);
+
+    private TalonFX shootLeft = new TalonFX(24);
+    private TalonFX shootRight = new TalonFX(25);
+
+    final VelocityVoltage voltageRequest = new VelocityVoltage(0);
+
+    /*private SparkPIDController leftPID = shootLeft.getPIDController();
+    private SparkPIDController rightPID = shootRight.getPIDController();*/
     
   private boolean upToSpeed = false;
 
   /** Creates a new Shooter. */
   public Shooter() {
     configShooterMotors();
-    configPIDControls();
+    setShooterSpeeds();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     //System.out.println("shooting");
-     SmartDashboard.putNumber("shooter speed", (shootLeft.getEncoder().getVelocity()));
+     SmartDashboard.putNumber("shooter speed", getAverageRPM());
   }
-
+  
   private void configShooterMotors() {
-    shootLeft.restoreFactoryDefaults();
-    shootRight.restoreFactoryDefaults();
-    shootLeft.enableVoltageCompensation(10);
-    shootRight.enableVoltageCompensation(10);
-    shootLeft.setIdleMode(IdleMode.kCoast);
-    shootLeft.setInverted(true);
-    shootRight.setIdleMode(IdleMode.kCoast);
-    shootRight.setInverted(false);
-    shootLeft.setSmartCurrentLimit(30);
-    shootRight.setSmartCurrentLimit(30);
-
+    
+    shootLeft.getConfigurator().apply(new TalonFXConfiguration());
+    shootRight.getConfigurator().apply(new TalonFXConfiguration());
+    var talonfxConfigs = new TalonFXConfiguration();
+    talonfxConfigs.Slot0 = ShooterConstants.shooterSlot0Configs;
+    talonfxConfigs.CurrentLimits = ShooterConstants.shooterCurrentLimits;
+    talonfxConfigs.Voltage = ShooterConstants.shooterVoltageConfigs;
+    talonfxConfigs.Feedback = ShooterConstants.shooterFeedbackConfigs;
+    talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    shootLeft.getConfigurator().apply(talonfxConfigs);
+    shootRight.getConfigurator().apply(talonfxConfigs);
+    shootRight.setInverted(true);
   }
 
-  private void configPIDControls() {
-    leftPID.setFF(ShooterConstants.kFF);
-    leftPID.setP(ShooterConstants.kP);
-    leftPID.setI(ShooterConstants.kI);
-    leftPID.setD(ShooterConstants.kD);
-    leftPID.setOutputRange(-1,1);
-
-    rightPID.setFF(ShooterConstants.kFF);
-    rightPID.setP(ShooterConstants.kP);
-    rightPID.setI(ShooterConstants.kI);
-    rightPID.setD(ShooterConstants.kD);
-    rightPID.setOutputRange(-1,1);
-  }
-
-  public void setShooterSpeeds(double leftSpeed, double rightSpeed) {
-    leftPID.setReference(ShooterConstants.shootingRPM*(1 - ShooterConstants.spinFactor), CANSparkMax.ControlType.kVelocity);
-    rightPID.setReference(ShooterConstants.shootingRPM*(1 + ShooterConstants.spinFactor), CANSparkMax.ControlType.kVelocity);
+  public void setShooterSpeeds() {
+    shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.shootingRPM*(1-ShooterConstants.spinFactor)/60));
+    shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.shootingRPM*(1+ShooterConstants.spinFactor)/60));
   }
 
   public void stopShooter() {
@@ -74,8 +66,13 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isShooterAtSpeed() {
-    if((shootLeft.getEncoder().getVelocity()+shootRight.getEncoder().getVelocity())/2 >= ShooterConstants.speedThreshold*ShooterConstants.shootingRPM) upToSpeed = true;
+    if(getAverageRPM()>=ShooterConstants.speedThreshold*ShooterConstants.shootingRPM) upToSpeed = true;
     return upToSpeed;
+  }
+
+  public double getAverageRPM()
+  {
+    return (shootLeft.getVelocity().getValue()+shootRight.getVelocity().getValue())*30;
   }
 }
  
