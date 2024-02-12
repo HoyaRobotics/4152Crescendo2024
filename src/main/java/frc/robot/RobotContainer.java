@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.Photonvision;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.Amp;
 import frc.robot.commands.IntakeCommands.IntakeFromGround;
@@ -32,6 +33,7 @@ public class RobotContainer {
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
+  private final Photonvision photonvision = new Photonvision();
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
@@ -53,7 +55,7 @@ public class RobotContainer {
     //BUTTON ASSIGNING BELOW//
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGround(intake));
-    driverController.leftBumper().whileTrue(new Shoot(intake,shooter, drivetrain));
+    driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain));
     driverController.b().whileTrue(new Amp(intake));
 
     if (Utils.isSimulation()) {

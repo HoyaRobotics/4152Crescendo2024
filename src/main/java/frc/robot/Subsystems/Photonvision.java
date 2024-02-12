@@ -4,6 +4,8 @@
 
 package frc.robot.Subsystems;
 
+import java.util.List;
+
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
@@ -11,24 +13,42 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Photonvision extends SubsystemBase {
   private final PhotonCamera shooterCamera = new PhotonCamera("photonvision");
+  List<PhotonTrackedTarget> targets;
   /** Creates a new Photonvision. */
   public Photonvision() {}
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    targets = shooterCamera.getLatestResult().getTargets();
   }
 
-  public double tx(int tagID) {
-    var targets = shooterCamera.getLatestResult().getTargets();
-    PhotonTrackedTarget target = shooterCamera.getLatestResult().getBestTarget();
-    for(int i = 0; i<14; i++) {
+  public boolean doesTagExist(int tagID) {
+    targets = shooterCamera.getLatestResult().getTargets();
+    PhotonTrackedTarget target = null;
+    for(int i = 0; i<targets.size(); i++) {
       var currentTarget = targets.get(i);
       if(currentTarget.getFiducialId() == tagID) {
         target = currentTarget;
       }
     }
-    double x = target.getYaw();
-    return x;
+    if(target.getFiducialId() == tagID) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public double getTagYaw(int tagID) {
+    targets = shooterCamera.getLatestResult().getTargets();
+    PhotonTrackedTarget target = null;
+    for(int i = 0; i<targets.size(); i++) {
+      var currentTarget = targets.get(i);
+      if(currentTarget.getFiducialId() == tagID) {
+        target = currentTarget;
+      }
+    }
+    double yaw = target.getYaw();
+    return yaw;
   }
 }
