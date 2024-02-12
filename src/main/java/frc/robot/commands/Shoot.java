@@ -4,7 +4,10 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
 import frc.robot.Subsystems.Shooter;
@@ -13,12 +16,16 @@ public class Shoot extends Command {
   //private final Shooter shooter;
   private final Intake intake;
   private final Shooter shooter;
+  private final CommandSwerveDrivetrain drivetrain;
+
+  private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric();
   /** Creates a new Shoot. 
  * @param shooter */
-  public Shoot(Intake intake, Shooter shooter) {
+  public Shoot(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain) {
     //this.shooter = shooter;
     this.intake = intake;
     this.shooter = shooter;
+    this.drivetrain = drivetrain;
     //shooter.setShooterSpeeds(0, 0);
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,7 +43,8 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(shooter.isShooterAtSpeed()) 
+    
+    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.stowedPosition)) 
     {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
