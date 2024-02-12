@@ -22,6 +22,7 @@ public class Shoot extends Command {
   private final CommandSwerveDrivetrain drivetrain;
 
   private PIDController yawPIDController = new PIDController(0, 0, 0); 
+  private PIDController distancePIDController = new PIDController(0, 0, 0); 
 
   private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric();
   /** Creates a new Shoot. 
@@ -35,12 +36,14 @@ public class Shoot extends Command {
     //shooter.setShooterSpeeds(0, 0);
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake, shooter);
+    addRequirements(intake, shooter, drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    yawPIDController.setTolerance(1);
+    distancePIDController.setTolerance(0.4);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.stowedPosition);
 
@@ -51,9 +54,12 @@ public class Shoot extends Command {
   public void execute() {
     if(photonvision.doesTagExist(7)) {
       double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(7));
-      drivetrain.setControl(drive.withRotationalRate(turnSpeed));
+      double drivespeed = distancePIDController.calculate(photonvision.getTagDistance(7));
+      drivetrain.setControl(drive.withRotationalRate(turnSpeed).withVelocityX(drivespeed));
+    }else{
+      //Manual Drive!
     }
-    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.stowedPosition)) 
+    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.stowedPosition) && yawPIDController.atSetpoint()) 
     {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }

@@ -7,9 +7,11 @@ package frc.robot.Subsystems;
 import java.util.List;
 
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.generated.PhotonConstants;
 
 public class Photonvision extends SubsystemBase {
   private final PhotonCamera shooterCamera = new PhotonCamera("photonvision");
@@ -24,7 +26,6 @@ public class Photonvision extends SubsystemBase {
   }
 
   public boolean doesTagExist(int tagID) {
-    targets = shooterCamera.getLatestResult().getTargets();
     PhotonTrackedTarget target = null;
     for(int i = 0; i<targets.size(); i++) {
       var currentTarget = targets.get(i);
@@ -40,7 +41,6 @@ public class Photonvision extends SubsystemBase {
   }
 
   public double getTagYaw(int tagID) {
-    targets = shooterCamera.getLatestResult().getTargets();
     PhotonTrackedTarget target = null;
     for(int i = 0; i<targets.size(); i++) {
       var currentTarget = targets.get(i);
@@ -50,5 +50,17 @@ public class Photonvision extends SubsystemBase {
     }
     double yaw = target.getYaw();
     return yaw;
+  }
+
+  public double getTagDistance(int tagID) {
+    PhotonTrackedTarget target = null;
+    for(int i = 0; i<targets.size(); i++) {
+      var currentTarget = targets.get(i);
+      if(currentTarget.getFiducialId() == tagID) {
+        target = currentTarget;
+      }
+    }
+    double distance = PhotonUtils.calculateDistanceToTargetMeters(PhotonConstants.cameraHeight, PhotonConstants.targetHeight, PhotonConstants.cameraPitch, target.getPitch());
+    return distance;
   }
 }
