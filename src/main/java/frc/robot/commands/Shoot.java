@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -21,18 +23,24 @@ public class Shoot extends Command {
   private final Photonvision photonvision;
   private final CommandSwerveDrivetrain drivetrain;
 
+  private final DoubleSupplier translationX, translationY, rotation;
+
   private PIDController yawPIDController = new PIDController(0, 0, 0); 
   private PIDController distancePIDController = new PIDController(0, 0, 0); 
 
-  private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric();
+  private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
+  private final SwerveRequest.FieldCentric driveField = new SwerveRequest.FieldCentric();
   /** Creates a new Shoot. 
  * @param shooter */
-  public Shoot(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain) {
+  public Shoot(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
     //this.shooter = shooter;
     this.intake = intake;
     this.shooter = shooter;
     this.photonvision = photonvision;
     this.drivetrain = drivetrain;
+    this.translationX = translationX;
+    this.translationY = translationY;
+    this.rotation = rotation;
     //shooter.setShooterSpeeds(0, 0);
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -46,7 +54,6 @@ public class Shoot extends Command {
     distancePIDController.setTolerance(0.4);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.stowedPosition);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,11 +62,11 @@ public class Shoot extends Command {
     if(photonvision.doesTagExist(7)) {
       double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(7));
       double drivespeed = distancePIDController.calculate(photonvision.getTagDistance(7));
-      drivetrain.setControl(drive.withRotationalRate(turnSpeed).withVelocityX(drivespeed));
+      drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(translationY.getAsDouble()));
     }else{
-      //Manual Drive!
+      drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
     }
-    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.stowedPosition) && yawPIDController.atSetpoint()) 
+    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.stowedPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint()) 
     {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }

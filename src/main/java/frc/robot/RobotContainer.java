@@ -55,7 +55,7 @@ public class RobotContainer {
     //BUTTON ASSIGNING BELOW//
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGround(intake));
-    driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain));
+    driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
 
     if (Utils.isSimulation()) {
