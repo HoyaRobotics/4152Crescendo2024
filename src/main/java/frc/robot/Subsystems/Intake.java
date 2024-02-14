@@ -39,6 +39,7 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putNumber("IntakeRollerCurrent", rollerMotor.getOutputCurrent());
     SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
     SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("IntakeRotationVoltage", rotationMotor.getMotorVoltage().getValueAsDouble());
   }
 
   private void configureRotationMotor() {

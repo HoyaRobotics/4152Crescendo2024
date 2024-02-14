@@ -4,10 +4,11 @@
 
 package frc.robot.generated;
 
+import edu.wpi.first.math.util.Units;
+
 /** Add your docs here. */
 public class PhotonConstants {
-    public static final double cameraHeight = 0.0;
-    public static final double cameraPitch = 0.0;
-    public static final double targetHeight = 0.0;
-    public static final double targetPitch = 0.0;
+    public static final double cameraHeight = Units.inchesToMeters(16.873407);
+    public static final double cameraPitch = Units.degreesToRadians(38.0);
+    public static final double targetHeight = Units.inchesToMeters(56.375);
 }

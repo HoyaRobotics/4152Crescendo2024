@@ -10,6 +10,7 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.PhotonConstants;
 
@@ -60,7 +61,7 @@ public class Photonvision extends SubsystemBase {
         target = currentTarget;
       }
     }
-    double distance = PhotonUtils.calculateDistanceToTargetMeters(PhotonConstants.cameraHeight, PhotonConstants.targetHeight, PhotonConstants.cameraPitch, target.getPitch());
+    double distance = PhotonUtils.calculateDistanceToTargetMeters(PhotonConstants.cameraHeight, PhotonConstants.targetHeight, PhotonConstants.cameraPitch, Units.degreesToRadians(target.getPitch()));
     return distance;
   }
 }
