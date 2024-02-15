@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.PhotonConstants;
 
 public class Photonvision extends SubsystemBase {
-  private final PhotonCamera shooterCamera = new PhotonCamera("photonvision");
+  private final PhotonCamera shooterCamera = new PhotonCamera("ShootCamera");
   List<PhotonTrackedTarget> targets;
   /** Creates a new Photonvision. */
   public Photonvision() {}
@@ -34,9 +34,13 @@ public class Photonvision extends SubsystemBase {
         target = currentTarget;
       }
     }
-    if(target.getFiducialId() == tagID) {
-      return true;
-    }else{
+    try{
+      if(target.getFiducialId() == tagID) {
+        return true;
+      }else{
+        return false;
+      }
+    } catch(Exception booo) {
       return false;
     }
   }

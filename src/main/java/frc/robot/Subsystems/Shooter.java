@@ -29,13 +29,12 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter() {
     configShooterMotors();
-    setShooterSpeeds();
+    //setShooterSpeeds();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //System.out.println("shooting");
      SmartDashboard.putNumber("shooter speed", getAverageRPM());
   }
   

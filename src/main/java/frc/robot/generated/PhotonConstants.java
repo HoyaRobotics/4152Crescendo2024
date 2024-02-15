@@ -8,7 +8,7 @@ import edu.wpi.first.math.util.Units;
 
 /** Add your docs here. */
 public class PhotonConstants {
-    public static final double cameraHeight = Units.inchesToMeters(16.873407);
+    public static final double cameraHeight = Units.inchesToMeters(17.4);
     public static final double cameraPitch = Units.degreesToRadians(38.0);
     public static final double targetHeight = Units.inchesToMeters(56.375);
 }

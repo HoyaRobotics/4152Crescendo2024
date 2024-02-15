@@ -31,7 +31,7 @@ public class IntakeFromGround extends Command {
     stallTime = 0.0;
     intake.setIntakePosition(IntakeConstants.floorPosition);
     intake.setRollerSpeed(IntakeConstants.floorSpeed);
-    System.out.println("Running Intake");
+    //System.out.println("Running Intake");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,13 +46,13 @@ public class IntakeFromGround extends Command {
         if(stallTime >= IntakeConstants.stallTriggerTime)
         {
            finished = true;
-           System.out.println("intake finished, or it should be. Stalled for: " + stallTime);
+           //System.out.println("intake finished, or it should be. Stalled for: " + stallTime);
         }
       }
       stalled = true;
     }
     else{
-      if(stalled) System.out.println("stalled for: " + stallTime);
+      //if(stalled) System.out.println("stalled for: " + stallTime);
       stallTime = 0;
       stalled = false;
       
@@ -65,7 +65,7 @@ public class IntakeFromGround extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    System.out.println("Stopping Intake");
+    //System.out.println("Stopping Intake");
   }
 
   // Returns true when the command should end.
