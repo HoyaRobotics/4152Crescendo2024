@@ -27,6 +27,7 @@ public class Shoot extends Command {
   private final DoubleSupplier translationX, translationY, rotation;
   private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
   private PIDController distancePIDController = new PIDController(2.0, 0, 0); 
+  
 
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
   private final SwerveRequest.FieldCentric driveField = new SwerveRequest.FieldCentric();
@@ -41,6 +42,9 @@ public class Shoot extends Command {
     this.translationX = translationX;
     this.translationY = translationY;
     this.rotation = rotation;
+  
+    //yawPIDController.setIZone(0);
+   //distancePIDController.setIZone(0); //these can be useful for limiting 
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake, shooter, drivetrain);
@@ -49,12 +53,12 @@ public class Shoot extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    yawPIDController.setTolerance(1);
-    distancePIDController.setTolerance(0.1);
+    yawPIDController.setTolerance(2);
+    distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
     distancePIDController.setSetpoint(Units.inchesToMeters(120));
     shooter.setShooterSpeeds();
-    intake.setIntakePosition(IntakeConstants.stowedPosition);
+    intake.setIntakePosition(IntakeConstants.shootPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -72,7 +76,7 @@ public class Shoot extends Command {
       drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
       System.out.println("TAG NOT FOUND");
     }
-    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.stowedPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint()) 
+    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint()) 
     {
       System.out.println("SHOOTING");
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
