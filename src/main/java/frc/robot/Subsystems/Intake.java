@@ -62,7 +62,7 @@ public class Intake extends SubsystemBase {
     rollerMotor.restoreFactoryDefaults();
     //rollerMotor.enableVoltageCompensation(10);
     rollerMotor.setIdleMode(IdleMode.kBrake);
-    rollerMotor.setSmartCurrentLimit(40);
+    rollerMotor.setSmartCurrentLimit(60);
     rollerMotor.setInverted(true);
     rollerMotor.set(IntakeConstants.stallSpeed);
   }

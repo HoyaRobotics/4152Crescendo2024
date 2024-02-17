@@ -54,7 +54,7 @@ public class IntakeConstants {
     public static final double positionError = 0.01;
     //Can assign later if need be
     public static final double floorSpeed = 0.75; //0.6
-    public static final double stallSpeed = 0.03;
+    public static final double stallSpeed = 0.05;  //60 current + 0.5 = speaker
     public static final double shootSpeed = -1.0;
     public static final double ampSpeed = -0.9;
 
