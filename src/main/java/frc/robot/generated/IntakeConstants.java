@@ -19,8 +19,8 @@ public class IntakeConstants {
     public static final Slot0Configs rotationSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Arm_Cosine)
         .withKS(0.3) // output to overcome static friction (output)
-        .withKV(0.1176*rotationGearRatio) // output per unit of target velocity (output/rps)
-        .withKA(0.02372*rotationGearRatio) // output per unit of target acceleration (output/(rps/s))
+        .withKV(5.17) // output per unit of target velocity (output/rps)
+        .withKA(0.353) // output per unit of target acceleration (output/(rps/s))
         .withKP(25) // output per unit of error in position (output/rotation)
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
@@ -34,7 +34,7 @@ public class IntakeConstants {
         .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
         .withSensorToMechanismRatio(rotationGearRatio);
     public static final MotionMagicConfigs rotationMotionMagicConfigs = new MotionMagicConfigs()
-        .withMotionMagicAcceleration(3.0) // controls acceleration and deceleration rates during the beginning and end of motion
+        .withMotionMagicAcceleration(3.5) // controls acceleration and deceleration rates during the beginning and end of motion
         .withMotionMagicCruiseVelocity(2.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
         .withMotionMagicExpo_kA(0.0) // voltage required to apply a given acceleration, in V/(rps/s)
         .withMotionMagicExpo_kV(0) // voltage required to maintain a given velocity, in V/rps
@@ -46,7 +46,7 @@ public class IntakeConstants {
         .withReverseSoftLimitThreshold(-0.58);
     public static final double stowedPosition = 0.0;
     public static final double shootPosition = -0.002;
-    public static final double floorPosition = -0.54;
+    public static final double floorPosition = -0.56;
     public static final double outakePosition = -0.078;
     public static final double sourcePosition = 0.0;
     public static final double ampPosition = -0.23;
