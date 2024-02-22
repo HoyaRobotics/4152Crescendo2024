@@ -7,6 +7,7 @@ package frc.robot;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.SteerRequestType;
 
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.Amp;
 import frc.robot.commands.IntakeCommands.IntakeFromGround;
@@ -41,6 +43,8 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Photonvision photonvision = new Photonvision();
 
+
+
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withSteerRequestType(SteerRequestType.MotionMagic)
@@ -49,6 +53,7 @@ public class RobotContainer {
   //private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
   //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
   private final Telemetry logger = new Telemetry(MaxSpeed);
+
 
   private void configureBindings() {
     drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
@@ -75,6 +80,12 @@ public class RobotContainer {
   }
 
   public RobotContainer() {
+
+    NamedCommands.registerCommand("autoIntake", new IntakeFromGround(intake));
+
+    //HAVING PROBLEMS CODE ISN'T DEPLOYING PROPERLY
+    //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));
+
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();
     SmartDashboard.putData("Auto Chooser", autoChooser);
