@@ -76,10 +76,6 @@ public class Shoot extends Command {
       double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(targetTag));
       double drivespeed = distancePIDController.calculate(photonvision.getTagDistance(targetTag));
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(translationY.getAsDouble()));
-      //drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
-      //drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
-      System.out.println("Dist" + distancePIDController.getPositionError());
-      System.out.println("Yaw" + yawPIDController.getPositionError());
     }else{
       if(tagLostCount<=5)
       {
@@ -87,12 +83,10 @@ public class Shoot extends Command {
       }
       else{
       drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
-      System.out.println("TAG NOT FOUND");
       }
     }
     if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
     {
-      System.out.println("SHOOTING");
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
 

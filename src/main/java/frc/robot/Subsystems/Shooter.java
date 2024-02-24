@@ -8,34 +8,31 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ShooterConstants;
+import monologue.LogLevel;
+import monologue.Annotations.Log;
 
 public class Shooter extends SubsystemBase {
-    //private CANSparkMax shootLeft = new CANSparkMax(24, MotorType.kBrushless);
-    //private CANSparkMax shootRight = new CANSparkMax(25, MotorType.kBrushless);
-
     private TalonFX shootLeft = new TalonFX(24);
     private TalonFX shootRight = new TalonFX(25);
 
     final VelocityVoltage voltageRequest = new VelocityVoltage(0);
 
-    /*private SparkPIDController leftPID = shootLeft.getPIDController();
-    private SparkPIDController rightPID = shootRight.getPIDController();*/
+    @Log.NT(level = LogLevel.DEFAULT) double leftShooterSpeed = shootLeft.getVelocity().getValueAsDouble();
+    @Log.NT(level = LogLevel.DEFAULT) double rightShooterSpeed = shootRight.getVelocity().getValueAsDouble();
     
   private boolean upToSpeed = false;
 
   /** Creates a new Shooter. */
   public Shooter() {
     configShooterMotors();
-    //setShooterSpeeds();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-     SmartDashboard.putNumber("shooter speed", getAverageRPM());
+     //SmartDashboard.putNumber("shooter speed", getAverageRPM());
   }
   
   private void configShooterMotors() {
