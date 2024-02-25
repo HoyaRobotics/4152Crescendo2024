@@ -17,11 +17,9 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
-import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.Amp;
 import frc.robot.commands.IntakeCommands.AutoIntakeFromGround;
@@ -39,7 +37,7 @@ public class RobotContainer {
   /* Setting up bindings for necessary control of the swerve drive platform */
   private final CommandXboxController driverController = new CommandXboxController(0); // My driverController
   private final CommandXboxController operatorController = new CommandXboxController(1);
-  private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
+  public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
   private final Photonvision photonvision = new Photonvision();

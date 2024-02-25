@@ -4,8 +4,6 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
-
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -72,10 +70,8 @@ public class AutoShoot extends Command {
       double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(targetTag));
       double drivespeed = distancePIDController.calculate(photonvision.getTagDistance(targetTag));
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(0.0));
-      //drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
-      //drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
-      System.out.println("Dist" + distancePIDController.getPositionError());
-      System.out.println("Yaw" + yawPIDController.getPositionError());
+      //System.out.println("Dist" + distancePIDController.getPositionError());
+      //System.out.println("Yaw" + yawPIDController.getPositionError());
     }else{
       if(tagLostCount<=5)
       {
