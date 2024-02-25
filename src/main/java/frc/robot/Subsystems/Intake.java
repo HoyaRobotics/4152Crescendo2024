@@ -15,8 +15,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.IntakeConstants;
-import monologue.LogLevel;
-import monologue.Annotations.Log;
+//import monologue.LogLevel;
+//import monologue.Annotations.Log;
 
 
 public class Intake extends SubsystemBase {
@@ -26,7 +26,7 @@ public class Intake extends SubsystemBase {
   final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
   final VoltageOut voltageRequest = new VoltageOut(0);
 
-  @Log.NT(level = LogLevel.DEFAULT) double IntakeRotationPosition = rotationMotor.getPosition().getValueAsDouble();
+  //@Log.NT(level = LogLevel.DEFAULT) double IntakeRotationPosition = rotationMotor.getPosition().getValueAsDouble();
 
   
 

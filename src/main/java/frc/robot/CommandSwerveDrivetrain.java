@@ -12,18 +12,15 @@ import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.generated.TunerConstants;
-import monologue.LogLevel;
-import monologue.Annotations.Log;
+//import monologue.LogLevel;
+//import monologue.Annotations.Log;
 
 /**
  * Class that extends the Phoenix SwerveDrivetrain class and implements subsystem
@@ -36,12 +33,12 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     private final SwerveRequest.ApplyChassisSpeeds autoRequest = new SwerveRequest.ApplyChassisSpeeds();
 
-    @Log.File Pose2d robotPoseEstimator = this.getState().Pose;
-    @Log.NT(level = LogLevel.OVERRIDE_FILE_ONLY) Field2d field = new Field2d();
+    //@Log.File Pose2d robotPoseEstimator = this.getState().Pose;
+    //@Log.NT(level = LogLevel.OVERRIDE_FILE_ONLY) Field2d field = new Field2d();
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
-        SmartDashboard.putData("Field", field);
+        //SmartDashboard.putData("Field", field);
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -109,7 +106,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         return m_kinematics.toChassisSpeeds(getState().ModuleStates);
     }
 
-    public void updateFieldWidget() {
+    /*public void updateFieldWidget() {
         field.setRobotPose(this.getState().Pose);
-    }
+    }*/
 }

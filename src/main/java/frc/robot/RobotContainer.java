@@ -22,7 +22,6 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.Amp;
-import frc.robot.commands.IntakeCommands.AutoIntakeFromGround;
 import frc.robot.commands.IntakeCommands.IntakeFromGround;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
@@ -65,7 +64,7 @@ public class RobotContainer {
     //BUTTON ASSIGNING BELOW//
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGround(intake));
-    driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    //driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
 
@@ -81,7 +80,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    NamedCommands.registerCommand("autoIntake", new IntakeFromGround(intake));
+    //NamedCommands.registerCommand("autoIntake", new IntakeFromGround(intake));
 
     //HAVING PROBLEMS CODE ISN'T DEPLOYING PROPERLY
     //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));

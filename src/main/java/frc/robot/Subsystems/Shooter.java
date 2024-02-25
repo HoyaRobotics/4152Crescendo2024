@@ -10,8 +10,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ShooterConstants;
-import monologue.LogLevel;
-import monologue.Annotations.Log;
+//import monologue.LogLevel;
+//import monologue.Annotations.Log;
 
 public class Shooter extends SubsystemBase {
     private TalonFX shootLeft = new TalonFX(24);
@@ -19,8 +19,8 @@ public class Shooter extends SubsystemBase {
 
     final VelocityVoltage voltageRequest = new VelocityVoltage(0);
 
-    @Log.NT(level = LogLevel.DEFAULT) double leftShooterSpeed = shootLeft.getVelocity().getValueAsDouble();
-    @Log.NT(level = LogLevel.DEFAULT) double rightShooterSpeed = shootRight.getVelocity().getValueAsDouble();
+    //@Log.NT(level = LogLevel.DEFAULT) double leftShooterSpeed = shootLeft.getVelocity().getValueAsDouble();
+    //@Log.NT(level = LogLevel.DEFAULT) double rightShooterSpeed = shootRight.getVelocity().getValueAsDouble();
     
   private boolean upToSpeed = false;
 
