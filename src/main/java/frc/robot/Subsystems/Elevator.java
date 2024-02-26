@@ -25,6 +25,12 @@ public class Elevator extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public void moveElevtor(double power)
+  {
+    leftElevator.set(power);
+    rightElevator.set(power);
+  }
+
   private void configureMotorsControllers() {
     leftElevator.getConfigurator().apply(new TalonFXConfiguration());
     rightElevator.getConfigurator().apply(new TalonFXConfiguration());
@@ -38,5 +44,7 @@ public class Elevator extends SubsystemBase {
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     leftElevator.getConfigurator().apply(talonfxConfigs);
     rightElevator.getConfigurator().apply(talonfxConfigs);
+    leftElevator.setInverted(true);
   }
+
 }

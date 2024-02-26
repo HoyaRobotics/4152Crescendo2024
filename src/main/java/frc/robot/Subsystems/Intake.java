@@ -44,7 +44,7 @@ public class Intake extends SubsystemBase {
     //SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationVoltage", rotationMotor.getMotorVoltage().getValueAsDouble());
-    SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder().getVelocity());
+    SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity());
   }
 
   private void configureRotationMotor() {
@@ -91,7 +91,7 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean isRollerStalled(double stallRPM) {
-    double rollerSpeed = rollerMotor.getEncoder().getVelocity();
+    double rollerSpeed = rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity();
     if(rollerSpeed < stallRPM) {
       return true;
     }else{

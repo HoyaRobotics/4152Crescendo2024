@@ -7,6 +7,6 @@ package frc.robot.generated;
 /** Add your docs here. */
 public class TrapConstants {
 
-    public static final int trapMotorID = 0;
+    public static final int trapMotorID = 28;
     public static final int trapMotorCurrentLimit = 20;
 }

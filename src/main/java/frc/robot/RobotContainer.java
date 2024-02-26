@@ -18,8 +18,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
+import frc.robot.commands.Elevate;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.Amp;
 import frc.robot.commands.IntakeCommands.IntakeFromGroundOld;
@@ -40,6 +42,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
   private final Photonvision photonvision = new Photonvision();
+  private final Elevator elevator = new Elevator();
 
 
 
@@ -66,6 +69,7 @@ public class RobotContainer {
     //driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
+    operatorController.a().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY()));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
