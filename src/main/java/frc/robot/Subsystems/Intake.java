@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.IntakeConstants;
 //import monologue.LogLevel;
@@ -20,8 +21,8 @@ import frc.robot.generated.IntakeConstants;
 
 
 public class Intake extends SubsystemBase {
-  private final TalonFX rotationMotor = new TalonFX(22);
-  private final CANSparkFlex rollerMotor = new CANSparkFlex(23, MotorType.kBrushless);
+  private final TalonFX rotationMotor = new TalonFX(IntakeConstants.rotatoinMotorID);
+  private final CANSparkFlex rollerMotor = new CANSparkFlex(IntakeConstants.rollerMotorID, MotorType.kBrushless);
 
   private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
   private final VoltageOut voltageRequest = new VoltageOut(0);
@@ -43,7 +44,7 @@ public class Intake extends SubsystemBase {
     //SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationVoltage", rotationMotor.getMotorVoltage().getValueAsDouble());
-    //SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder().getVelocity());
+    SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder().getVelocity());
   }
 
   private void configureRotationMotor() {
@@ -64,7 +65,7 @@ public class Intake extends SubsystemBase {
   private void configureRollerMotor() {
     rollerMotor.restoreFactoryDefaults();
     rollerMotor.setIdleMode(IdleMode.kBrake);
-    rollerMotor.setSmartCurrentLimit(60); //55
+    rollerMotor.setSmartCurrentLimit(IntakeConstants.rollerMotorCurrentLimit); //55
     rollerMotor.setInverted(true);
     rollerMotor.set(IntakeConstants.stallSpeed);
   }

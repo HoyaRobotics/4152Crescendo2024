@@ -39,6 +39,9 @@ public class ShooterConstants {
     public static final double speedThreshold = 0.98;
 
     public static final double shootingAngle = 38; //to be used later for projectile profiling.
+    
+    public static final int leftShooterMotorID = 24;
+    public static final int rightShooterMotorID = 25;
 }
 
 

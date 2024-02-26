@@ -14,8 +14,8 @@ import frc.robot.generated.ShooterConstants;
 //import monologue.Annotations.Log;
 
 public class Shooter extends SubsystemBase {
-    private TalonFX shootLeft = new TalonFX(24);
-    private TalonFX shootRight = new TalonFX(25);
+    private TalonFX shootLeft = new TalonFX(ShooterConstants.leftShooterMotorID);
+    private TalonFX shootRight = new TalonFX(ShooterConstants.rightShooterMotorID);
 
     final VelocityVoltage voltageRequest = new VelocityVoltage(0);
 
