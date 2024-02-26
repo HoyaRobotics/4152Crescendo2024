@@ -20,11 +20,11 @@ import frc.robot.generated.IntakeConstants;
 
 
 public class Intake extends SubsystemBase {
-  private TalonFX rotationMotor = new TalonFX(22);
-  private CANSparkFlex rollerMotor = new CANSparkFlex(23, MotorType.kBrushless);
+  private final TalonFX rotationMotor = new TalonFX(22);
+  private final CANSparkFlex rollerMotor = new CANSparkFlex(23, MotorType.kBrushless);
 
-  final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
-  final VoltageOut voltageRequest = new VoltageOut(0);
+  private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
+  private final VoltageOut voltageRequest = new VoltageOut(0);
 
   //@Log.NT(level = LogLevel.DEFAULT) double IntakeRotationPosition = rotationMotor.getPosition().getValueAsDouble();
 
@@ -89,15 +89,9 @@ public class Intake extends SubsystemBase {
     rollerMotor.stopMotor();
   }
 
-  public boolean isRollerStalled() {
-    /*double rollerCurrent = rollerMotor.getOutputCurrent();
-    if(rollerCurrent > 40) {
-      return true;
-    }else{
-      return false;
-    }*/
+  public boolean isRollerStalled(double stallRPM) {
     double rollerSpeed = rollerMotor.getEncoder().getVelocity();
-    if(rollerSpeed < IntakeConstants.stallRPM) {
+    if(rollerSpeed < stallRPM) {
       return true;
     }else{
       return false;

@@ -27,7 +27,6 @@ public class AutoShoot extends Command {
   private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
   private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03);
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
-  private final SwerveRequest.FieldCentric driveField = new SwerveRequest.FieldCentric();
   private int targetTag;
   private int tagLostCount;
 

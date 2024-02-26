@@ -22,7 +22,7 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.IntakeCommands.Amp;
-import frc.robot.commands.IntakeCommands.IntakeFromGround;
+import frc.robot.commands.IntakeCommands.IntakeFromGroundOld;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
 
@@ -44,12 +44,11 @@ public class RobotContainer {
 
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDeadband(MaxSpeed * 0.02).withRotationalDeadband(MaxAngularRate * 0.02) // Add a 2% deadband
       .withSteerRequestType(SteerRequestType.MotionMagic)
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
-  //private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
-  //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
 
@@ -63,7 +62,7 @@ public class RobotContainer {
 
     //BUTTON ASSIGNING BELOW//
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    driverController.rightBumper().whileTrue(new IntakeFromGround(intake));
+    driverController.rightBumper().whileTrue(new IntakeFromGroundOld(intake));
     //driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
@@ -80,7 +79,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    //NamedCommands.registerCommand("autoIntake", new IntakeFromGround(intake));
+    NamedCommands.registerCommand("autoIntake", new IntakeFromGroundOld(intake));
 
     //HAVING PROBLEMS CODE ISN'T DEPLOYING PROPERLY
     //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));

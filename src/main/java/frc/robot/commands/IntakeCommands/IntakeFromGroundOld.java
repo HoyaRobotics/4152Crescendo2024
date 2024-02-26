@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
 
-public class IntakeFromGround extends Command {
+public class IntakeFromGroundOld extends Command {
   private final Intake intake;
   double stallTime = 0.0;
   boolean stalled = false;
@@ -17,7 +17,7 @@ public class IntakeFromGround extends Command {
   double oldTime = 0;
   double currentTime = 0;
   /** Creates a new Intake. */
-  public IntakeFromGround(Intake intake) {
+  public IntakeFromGroundOld(Intake intake) {
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
@@ -38,7 +38,7 @@ public class IntakeFromGround extends Command {
   @Override
   public void execute() {
     currentTime = Timer.getFPGATimestamp();
-    if(intake.isRollerStalled())
+    if(intake.isRollerStalled(IntakeConstants.stallRPM))
     {
       if(stalled)
       {

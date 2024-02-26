@@ -34,11 +34,11 @@ public class ShooterConstants {
     public static final double kD = 0.0002;
     public static final double kFF = 0.000228;*/
 
-    public static final double shootingRPM = 3500 ;//4000
+    public static final double shootingRPM = 3800 ;//4000
     public static final double spinFactor = 0.05;
     public static final double speedThreshold = 0.98;
 
-    public static final double shootingAngle = 35; //to be used later for projectile profiling.
+    public static final double shootingAngle = 38; //to be used later for projectile profiling.
 }
 
 
