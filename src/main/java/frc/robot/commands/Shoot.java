@@ -60,7 +60,7 @@ public class Shoot extends Command {
     yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(110));
+    distancePIDController.setSetpoint(Units.inchesToMeters(110)); //120 with old limelight
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
