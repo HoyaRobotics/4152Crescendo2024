@@ -9,6 +9,7 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ElevatorConstants;
 
@@ -26,6 +27,7 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Elevator Position", leftElevator.getPosition().getValueAsDouble());
   }
 
   public void moveElevtor(double power) {
@@ -51,6 +53,8 @@ public class Elevator extends SubsystemBase {
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     leftElevator.getConfigurator().apply(talonfxConfigs);
     rightElevator.getConfigurator().apply(talonfxConfigs);
+    leftElevator.setPosition(0.0);
+    rightElevator.setPosition(0.0);
     leftElevator.setInverted(true);
   }
 

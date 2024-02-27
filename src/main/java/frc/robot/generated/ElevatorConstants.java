@@ -35,9 +35,9 @@ public class ElevatorConstants {
         .withMotionMagicExpo_kV(0.0) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs elevatorSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
-        .withForwardSoftLimitEnable(false)
-        .withForwardSoftLimitThreshold(0.0)
-        .withReverseSoftLimitEnable(false)
+        .withForwardSoftLimitEnable(true)
+        .withForwardSoftLimitThreshold(2.5)
+        .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(0.0);
     public static final int leftElevatorMotorID = 26;
     public static final int rightElevatorMotorID = 27;
