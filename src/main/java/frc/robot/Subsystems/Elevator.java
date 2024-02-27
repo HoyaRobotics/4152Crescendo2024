@@ -5,6 +5,7 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -14,6 +15,8 @@ import frc.robot.generated.ElevatorConstants;
 public class Elevator extends SubsystemBase {
     private TalonFX leftElevator = new TalonFX(ElevatorConstants.leftElevatorMotorID);
     private TalonFX rightElevator = new TalonFX(ElevatorConstants.rightElevatorMotorID);
+
+    private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
 
   /** Creates a new Climber. */
   public Elevator() {
@@ -25,10 +28,14 @@ public class Elevator extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void moveElevtor(double power)
-  {
+  public void moveElevtor(double power) {
     leftElevator.set(power);
     rightElevator.set(power);
+  }
+
+  public void setElevatorPosition(double position) {
+    leftElevator.setControl(magicRequest.withPosition(position).withSlot(0));
+    rightElevator.setControl(magicRequest.withPosition(position).withSlot(0));
   }
 
   private void configureMotorsControllers() {
@@ -39,8 +46,8 @@ public class Elevator extends SubsystemBase {
     talonfxConfigs.CurrentLimits = ElevatorConstants.elevatorCurrentLimits;
     talonfxConfigs.Voltage = ElevatorConstants.elevatorVoltageConfigs;
     talonfxConfigs.Feedback = ElevatorConstants.elevatorFeedbackConfigs;
-    //talonfxConfigs.MotionMagic = ClimberConstants.rotationMotionMagicConfigs;
-    //talonfxConfigs.SoftwareLimitSwitch = ClimberConstants.rotationSoftwareLimitSwitchConfigs;
+    talonfxConfigs.MotionMagic = ElevatorConstants.elevatorMotionMagicConfigs;
+    talonfxConfigs.SoftwareLimitSwitch = ElevatorConstants.elevatorSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     leftElevator.getConfigurator().apply(talonfxConfigs);
     rightElevator.getConfigurator().apply(talonfxConfigs);

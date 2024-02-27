@@ -28,11 +28,10 @@ public class AutoShoot extends Command {
   private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03);
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
   private int targetTag;
-  private int tagLostCount;
 
   private boolean finished;
   private boolean timeStampLock = true;
-  private double currentTime;
+  private double shootTime;
 
   /** Creates a new AutoShoot. */
   public AutoShoot(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain) {
@@ -57,7 +56,6 @@ public class AutoShoot extends Command {
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
-    tagLostCount = 0;
     finished = false;
   }
 
@@ -72,13 +70,7 @@ public class AutoShoot extends Command {
       //System.out.println("Dist" + distancePIDController.getPositionError());
       //System.out.println("Yaw" + yawPIDController.getPositionError());
     }else{
-      if(tagLostCount<=5)
-      {
-        tagLostCount++;
-      }
-      else{
       System.out.println("TAG NOT FOUND");
-      }
     }
 
     if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
@@ -87,11 +79,11 @@ public class AutoShoot extends Command {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
 
       if(timeStampLock){
-        currentTime = Timer.getFPGATimestamp();
+        shootTime = Timer.getFPGATimestamp();
         timeStampLock = false;
       }
 
-      if(Timer.getFPGATimestamp() - currentTime > 1){
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 2){
         finished = true;
       }
 
