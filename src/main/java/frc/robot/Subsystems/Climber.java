@@ -11,38 +11,34 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.generated.ClimberConstants;
 import frc.robot.generated.ElevatorConstants;
 
-public class Elevator extends SubsystemBase {
-    private TalonFX leftElevatorMotor = new TalonFX(ElevatorConstants.leftElevatorMotorID);
-    //private TalonFX rightElevator = new TalonFX(ElevatorConstants.rightElevatorMotorID);
+public class Climber extends SubsystemBase {
+  private TalonFX rightCliberMotor = new TalonFX(ClimberConstants.rightClimberMotorID);
 
-    private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
-
+  private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
   /** Creates a new Climber. */
-  public Elevator() {
+  public Climber() {
     configureMotorsControllers();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Elevator Position", leftElevatorMotor.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Climber Position", rightCliberMotor.getPosition().getValueAsDouble());
   }
 
-  public void moveElevtor(double power) {
-    leftElevatorMotor.set(power);
-    //rightElevator.set(power);
+  public void moveClimber(double power) {
+    rightCliberMotor.set(power);
   }
 
   public void setElevatorPosition(double position) {
-    leftElevatorMotor.setControl(magicRequest.withPosition(position).withSlot(0));
-    //rightElevator.setControl(magicRequest.withPosition(position).withSlot(0));
+    rightCliberMotor.setControl(magicRequest.withPosition(position).withSlot(0));
   }
 
   private void configureMotorsControllers() {
-    leftElevatorMotor.getConfigurator().apply(new TalonFXConfiguration());
-    //rightElevator.getConfigurator().apply(new TalonFXConfiguration());
+    rightCliberMotor.getConfigurator().apply(new TalonFXConfiguration());
     var talonfxConfigs = new TalonFXConfiguration();
     talonfxConfigs.Slot0 = ElevatorConstants.elevatorSlot0Configs;
     talonfxConfigs.CurrentLimits = ElevatorConstants.elevatorCurrentLimits;
@@ -51,11 +47,7 @@ public class Elevator extends SubsystemBase {
     talonfxConfigs.MotionMagic = ElevatorConstants.elevatorMotionMagicConfigs;
     talonfxConfigs.SoftwareLimitSwitch = ElevatorConstants.elevatorSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    leftElevatorMotor.getConfigurator().apply(talonfxConfigs);
-    //rightElevator.getConfigurator().apply(talonfxConfigs);
-    leftElevatorMotor.setPosition(0.0);
-    //rightElevator.setPosition(0.0);
-    leftElevatorMotor.setInverted(true);
+    rightCliberMotor.getConfigurator().apply(talonfxConfigs);
+    rightCliberMotor.setPosition(0.0);
   }
-
 }

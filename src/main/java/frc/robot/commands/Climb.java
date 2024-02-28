@@ -7,15 +7,15 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.Elevator;
+import frc.robot.Subsystems.Climber;
 
-public class Elevate extends Command {
-  private final Elevator elevator;
+public class Climb extends Command {
+  private final Climber climber;
   private final DoubleSupplier movePower;
   /** Creates a new Elevate. */
-  public Elevate(Elevator Elevator, DoubleSupplier movePower) {
+  public Climb(Climber climber, DoubleSupplier movePower) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.elevator = Elevator;
+    this.climber = climber;
     this.movePower = movePower;
   }
 
@@ -26,13 +26,13 @@ public class Elevate extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    elevator.moveElevtor(movePower.getAsDouble());
+    climber.moveClimber(movePower.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    elevator.moveElevtor(0);
+    climber.moveClimber(0);
   }
 
   // Returns true when the command should end.
