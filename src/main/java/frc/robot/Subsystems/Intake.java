@@ -42,7 +42,7 @@ public class Intake extends SubsystemBase {
     //SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationVoltage", rotationMotor.getMotorVoltage().getValueAsDouble());
-    SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity());
+    //SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity());
   }
 
   private void configureRotationMotor() {
