@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.Shoot;
 /*import frc.robot.commands.IntakeCommands.Amp;
@@ -72,6 +73,7 @@ public class RobotContainer {
     driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
     operatorController.a().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY()));
+    //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
@@ -88,7 +90,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoIntake", new IntakeFromGroundOld(intake));
 
     //HAVING PROBLEMS CODE ISN'T DEPLOYING PROPERLY
-    //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));
+    NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();

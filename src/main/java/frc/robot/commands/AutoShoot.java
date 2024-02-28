@@ -24,14 +24,14 @@ public class AutoShoot extends Command {
   private final Photonvision photonvision;
   private final CommandSwerveDrivetrain drivetrain;
 
-  private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
+  private PIDController yawPIDController = new PIDController(0.045, 0.0, 0.0);
   private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03);
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
   private int targetTag;
 
-  private boolean finished;
+  private boolean finished = false;
   private boolean timeStampLock = true;
-  private double shootTime;
+  private double shootTime = 0;
 
   /** Creates a new AutoShoot. */
   public AutoShoot(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain) {
@@ -56,6 +56,7 @@ public class AutoShoot extends Command {
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
+    timeStampLock = true;
     finished = false;
   }
 
@@ -83,7 +84,7 @@ public class AutoShoot extends Command {
         timeStampLock = false;
       }
 
-      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 2){
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 1){
         finished = true;
       }
 
@@ -98,6 +99,7 @@ public class AutoShoot extends Command {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
     shooter.stopShooter();
+    finished = false;
   }
 
   // Returns true when the command should end.

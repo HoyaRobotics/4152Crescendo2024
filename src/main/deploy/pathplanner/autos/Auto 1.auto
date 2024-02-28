@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3936381119515482,
-      "y": 5.530613658629914
+      "x": 1.38,
+      "y": 5.55
     },
     "rotation": 0.0
   },
@@ -15,6 +15,12 @@
           "type": "path",
           "data": {
             "pathName": "Path 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoShoot"
           }
         }
       ]
