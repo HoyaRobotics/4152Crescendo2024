@@ -10,7 +10,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 
 public class ClimberConstants {
-    public static final double climberGearRatio = ((68.0/20.0) * 5.0 * 3.0);
+    public static final double climberGearRatio = 25.0;
     public static final Slot0Configs climberSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Elevator_Static)
         .withKS(0) // output to overcome static friction (output)
@@ -35,9 +35,9 @@ public class ClimberConstants {
         .withMotionMagicExpo_kV(0.0) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs climberSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
-        .withForwardSoftLimitEnable(true)
+        .withForwardSoftLimitEnable(false)
         .withForwardSoftLimitThreshold(2.5)
-        .withReverseSoftLimitEnable(true)
+        .withReverseSoftLimitEnable(false)
         .withReverseSoftLimitThreshold(0.0);
     public static final int rightClimberMotorID = 27;
 }
