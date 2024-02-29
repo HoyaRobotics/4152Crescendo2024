@@ -14,7 +14,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ElevatorConstants;
 
 public class Elevator extends SubsystemBase {
+<<<<<<< HEAD
     private TalonFX leftElevator = new TalonFX(ElevatorConstants.leftElevatorMotorID);
+=======
+    private TalonFX leftElevatorMotor = new TalonFX(ElevatorConstants.leftElevatorMotorID);
+>>>>>>> origin/main
     //private TalonFX rightElevator = new TalonFX(ElevatorConstants.rightElevatorMotorID);
 
     private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
@@ -27,21 +31,33 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Elevator Position", leftElevator.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Elevator Position", leftElevatorMotor.getPosition().getValueAsDouble());
   }
 
   public void moveElevtor(double power) {
+<<<<<<< HEAD
     leftElevator.set(power);
+=======
+    leftElevatorMotor.set(power);
+>>>>>>> origin/main
     //rightElevator.set(power);
   }
 
   public void setElevatorPosition(double position) {
+<<<<<<< HEAD
     leftElevator.setControl(magicRequest.withPosition(position).withSlot(0));
+=======
+    leftElevatorMotor.setControl(magicRequest.withPosition(position).withSlot(0));
+>>>>>>> origin/main
     //rightElevator.setControl(magicRequest.withPosition(position).withSlot(0));
   }
 
   private void configureMotorsControllers() {
+<<<<<<< HEAD
     leftElevator.getConfigurator().apply(new TalonFXConfiguration());
+=======
+    leftElevatorMotor.getConfigurator().apply(new TalonFXConfiguration());
+>>>>>>> origin/main
     //rightElevator.getConfigurator().apply(new TalonFXConfiguration());
     var talonfxConfigs = new TalonFXConfiguration();
     talonfxConfigs.Slot0 = ElevatorConstants.elevatorSlot0Configs;
@@ -51,11 +67,19 @@ public class Elevator extends SubsystemBase {
     talonfxConfigs.MotionMagic = ElevatorConstants.elevatorMotionMagicConfigs;
     talonfxConfigs.SoftwareLimitSwitch = ElevatorConstants.elevatorSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+<<<<<<< HEAD
     leftElevator.getConfigurator().apply(talonfxConfigs);
     //rightElevator.getConfigurator().apply(talonfxConfigs);
     leftElevator.setPosition(0.0);
     //rightElevator.setPosition(0.0);
     leftElevator.setInverted(true);
+=======
+    leftElevatorMotor.getConfigurator().apply(talonfxConfigs);
+    //rightElevator.getConfigurator().apply(talonfxConfigs);
+    leftElevatorMotor.setPosition(0.0);
+    //rightElevator.setPosition(0.0);
+    leftElevatorMotor.setInverted(true);
+>>>>>>> origin/main
   }
 
 }

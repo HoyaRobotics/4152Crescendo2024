@@ -19,12 +19,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Climber;
+<<<<<<< HEAD
 import frc.robot.Subsystems.Elevator;
+=======
+>>>>>>> origin/main
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.Climb;
+<<<<<<< HEAD
 import frc.robot.commands.Elevate;
+=======
+>>>>>>> origin/main
 import frc.robot.commands.Shoot;
 /*import frc.robot.commands.IntakeCommands.Amp;
 import frc.robot.commands.IntakeCommands.AutoIntakeFromGround;
@@ -47,8 +53,13 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
   private final Photonvision photonvision = new Photonvision();
+<<<<<<< HEAD
   private final Elevator elevator = new Elevator();
   private final Climber climber = new Climber();
+=======
+  private final Climber climber = new Climber();
+  //private final Elevator elevator = new Elevator();
+>>>>>>> origin/main
 
 
 
