@@ -50,6 +50,5 @@ public class Climber extends SubsystemBase {
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     rightClimberMotor.getConfigurator().apply(talonfxConfigs);
     rightClimberMotor.setPosition(0.0);
-    rightClimberMotor.setInverted(true);
   }
 }
