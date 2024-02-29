@@ -31,17 +31,17 @@ public class Elevator extends SubsystemBase {
   }
 
   public void moveElevtor(double power) {
-    leftElevator.set(power);
+    leftElevatorMotor.set(power);
     //rightElevator.set(power);
   }
 
   public void setElevatorPosition(double position) {
-    leftElevator.setControl(magicRequest.withPosition(position).withSlot(0));
+    leftElevatorMotor.setControl(magicRequest.withPosition(position).withSlot(0));
     //rightElevator.setControl(magicRequest.withPosition(position).withSlot(0));
   }
 
   private void configureMotorsControllers() {
-    leftElevator.getConfigurator().apply(new TalonFXConfiguration());
+    leftElevatorMotor.getConfigurator().apply(new TalonFXConfiguration());
     //rightElevator.getConfigurator().apply(new TalonFXConfiguration());
     var talonfxConfigs = new TalonFXConfiguration();
     talonfxConfigs.Slot0 = ElevatorConstants.elevatorSlot0Configs;
@@ -51,11 +51,11 @@ public class Elevator extends SubsystemBase {
     talonfxConfigs.MotionMagic = ElevatorConstants.elevatorMotionMagicConfigs;
     talonfxConfigs.SoftwareLimitSwitch = ElevatorConstants.elevatorSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    leftElevator.getConfigurator().apply(talonfxConfigs);
+    leftElevatorMotor.getConfigurator().apply(talonfxConfigs);
     //rightElevator.getConfigurator().apply(talonfxConfigs);
-    leftElevator.setPosition(0.0);
+    leftElevatorMotor.setPosition(0.0);
     //rightElevator.setPosition(0.0);
-    leftElevator.setInverted(true);
+    leftElevatorMotor.setInverted(true);
   }
 
 }
