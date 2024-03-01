@@ -13,6 +13,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  private final boolean useLimelight = false;
   
 
   @Override
@@ -38,6 +39,12 @@ public class Robot extends TimedRobot {
      //Monologue.setFileOnly(DriverStation.isFMSAttached());
      // This method needs to be called periodically, or no logging annotations will process properly.
      //Monologue.updateAll();
+
+     if(useLimelight) {
+      var latestResults = m_robotContainer.photonvision.getLatestPoseEstimate();
+      var latestLatency = m_robotContainer.photonvision.getLatestPoseLatency();
+      m_robotContainer.drivetrain.addVisionMeasurement(latestResults, latestLatency);
+     }
   }
 
   @Override
