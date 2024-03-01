@@ -41,12 +41,12 @@ public class Climber extends SubsystemBase {
   private void configureMotorsControllers() {
     rightClimberMotor.getConfigurator().apply(new TalonFXConfiguration());
     var talonfxConfigs = new TalonFXConfiguration();
-    talonfxConfigs.Slot0 = ElevatorConstants.elevatorSlot0Configs;
-    talonfxConfigs.CurrentLimits = ElevatorConstants.elevatorCurrentLimits;
-    talonfxConfigs.Voltage = ElevatorConstants.elevatorVoltageConfigs;
-    talonfxConfigs.Feedback = ElevatorConstants.elevatorFeedbackConfigs;
-    talonfxConfigs.MotionMagic = ElevatorConstants.elevatorMotionMagicConfigs;
-    talonfxConfigs.SoftwareLimitSwitch = ElevatorConstants.elevatorSoftwareLimitSwitchConfigs;
+    talonfxConfigs.Slot0 = ClimberConstants.climberSlot0Configs;
+    talonfxConfigs.CurrentLimits = ClimberConstants.climberCurrentLimits;
+    talonfxConfigs.Voltage = ClimberConstants.climberVoltageConfigs;
+    talonfxConfigs.Feedback = ClimberConstants.climberFeedbackConfigs;
+    talonfxConfigs.MotionMagic = ClimberConstants.climberMotionMagicConfigs;
+    talonfxConfigs.SoftwareLimitSwitch = ClimberConstants.climberSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     rightClimberMotor.getConfigurator().apply(talonfxConfigs);
     rightClimberMotor.setPosition(0.0);

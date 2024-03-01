@@ -11,11 +11,13 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
 import frc.robot.generated.IntakeConstants;
+import frc.robot.generated.ShooterConstants;
 import frc.robot.Subsystems.Shooter;
 
 public class Shoot extends Command {
@@ -60,7 +62,7 @@ public class Shoot extends Command {
     yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(110)); //120 with old limelight
+    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)); //120 with old limelight
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
@@ -76,6 +78,7 @@ public class Shoot extends Command {
       double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(targetTag));
       double drivespeed = distancePIDController.calculate(photonvision.getTagDistance(targetTag));
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(translationY.getAsDouble()));
+      SmartDashboard.putNumber("distance from target", photonvision.getTagDistance(targetTag));
     }else{
       if(tagLostCount<=5)
       {
@@ -89,7 +92,6 @@ public class Shoot extends Command {
     {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
-
   }
 
   // Called once the command ends or is interrupted.

@@ -29,4 +29,8 @@ public class Trap extends SubsystemBase {
     trapMotor.setSmartCurrentLimit(TrapConstants.trapMotorCurrentLimit);
     trapMotor.stopMotor();
   }
+
+  public void setTrapSpeed(double speed) {
+    trapMotor.set(speed);
+  }
 }

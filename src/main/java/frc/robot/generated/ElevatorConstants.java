@@ -10,7 +10,8 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 
 public class ElevatorConstants {
-    public static final double elevatorGearRatio = ((68.0/20.0) * 5.0 * 3.0);
+    public static final double elevatorGearRatio = ((68.0/20.0) * 5.0);
+    
     public static final Slot0Configs elevatorSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Elevator_Static)
         .withKS(0) // output to overcome static friction (output)
@@ -40,5 +41,4 @@ public class ElevatorConstants {
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(0.0);
     public static final int leftElevatorMotorID = 26;
-    public static final int rightElevatorMotorID = 27;
 }

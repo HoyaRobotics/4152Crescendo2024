@@ -38,6 +38,10 @@ public class ShooterConstants {
     public static final double spinFactor = 0.05;
     public static final double speedThreshold = 0.98;
 
+    public static final double trapRPM = 2000;
+
+    public static final double shootPosition = 110;
+
     public static final double shootingAngle = 38; //to be used later for projectile profiling.
     
     public static final int leftShooterMotorID = 24;

@@ -10,7 +10,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 
 public class ClimberConstants {
-    public static final double climberGearRatio = 25.0;
+    public static final double climberGearRatio = 45.0;
     public static final Slot0Configs climberSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Elevator_Static)
         .withKS(0) // output to overcome static friction (output)
@@ -20,7 +20,7 @@ public class ClimberConstants {
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs climberCurrentLimits = new CurrentLimitsConfigs()
-        .withStatorCurrentLimit(40.0)
+        .withStatorCurrentLimit(50.0)
         .withStatorCurrentLimitEnable(true);
     public static final VoltageConfigs climberVoltageConfigs = new VoltageConfigs()
         .withPeakForwardVoltage(10.0)
@@ -35,9 +35,11 @@ public class ClimberConstants {
         .withMotionMagicExpo_kV(0.0) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs climberSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
-        .withForwardSoftLimitEnable(false)
-        .withForwardSoftLimitThreshold(2.5)
-        .withReverseSoftLimitEnable(false)
-        .withReverseSoftLimitThreshold(0.0);
+        .withForwardSoftLimitEnable(true)
+        .withForwardSoftLimitThreshold(3.69)
+        .withReverseSoftLimitEnable(true)
+        .withReverseSoftLimitThreshold(-0.5);
     public static final int rightClimberMotorID = 27;
+
+    public static final double midCamClearPosition = 0.7;
 }

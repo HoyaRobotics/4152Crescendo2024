@@ -30,7 +30,7 @@ public class Elevator extends SubsystemBase {
     SmartDashboard.putNumber("Elevator Position", leftElevatorMotor.getPosition().getValueAsDouble());
   }
 
-  public void moveElevtor(double power) {
+  public void moveElevator(double power) {
     leftElevatorMotor.set(power);
     //rightElevator.set(power);
   }

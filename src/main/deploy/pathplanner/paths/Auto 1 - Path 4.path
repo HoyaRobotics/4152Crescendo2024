@@ -8,36 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.29235458470917,
-        "y": 4.236583330309518
+        "x": 1.2603703129484178,
+        "y": 5.090829921919584
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.53840850538844,
-        "y": 4.192604956638485
+        "x": 2.40647338437534,
+        "y": 4.304549907801114
       },
       "prevControl": {
-        "x": 0.749954642766429,
-        "y": 4.265902246090207
-      },
-      "nextControl": {
-        "x": 2.751674402580122,
-        "y": 4.183864551015875
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.377154468594652,
-        "y": 4.852280561703981
-      },
-      "prevControl": {
-        "x": 0.8525708479988392,
-        "y": 4.177945498748141
+        "x": 1.1537560737459134,
+        "y": 4.704353304810505
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "RunIntake",
-      "waypointRelativePos": 0.3,
+      "waypointRelativePos": 0.15,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,7 +41,24 @@
             {
               "type": "named",
               "data": {
-                "name": "autoIntake"
+                "name": "startIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
               }
             }
           ]
@@ -67,14 +68,14 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.5,
-    "maxAcceleration": 6.0,
-    "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 540.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -13.57043438516143,
-    "rotateFast": false
+    "rotation": -21.5014343240479,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": null,

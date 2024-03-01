@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.AutoCommands;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
@@ -15,6 +15,7 @@ import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
 import frc.robot.generated.IntakeConstants;
+import frc.robot.generated.ShooterConstants;
 import frc.robot.Subsystems.Shooter;
 
 
@@ -51,7 +52,7 @@ public class AutoShoot extends Command {
     yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(120));
+    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition));
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
@@ -98,7 +99,7 @@ public class AutoShoot extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    shooter.stopShooter();
+    //shooter.stopShooter();
     finished = false;
   }
 

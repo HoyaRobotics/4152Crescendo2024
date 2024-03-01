@@ -53,6 +53,11 @@ public class Shooter extends SubsystemBase {
     shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.shootingRPM*(1+ShooterConstants.spinFactor)/60));
   }
 
+  public void setTrapShooterSpeeds(){
+    shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.trapRPM));
+    shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.trapRPM));
+  }
+
   public void stopShooter() {
     shootLeft.stopMotor();
     shootRight.stopMotor();

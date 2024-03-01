@@ -9,4 +9,7 @@ public class TrapConstants {
 
     public static final int trapMotorID = 28;
     public static final int trapMotorCurrentLimit = 20;
+
+    public static final double trapHandoffSpeed = 0.2;
+    public static final double trapHandoffTime = 1.0;
 }
