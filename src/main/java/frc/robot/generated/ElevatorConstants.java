@@ -10,7 +10,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 
 public class ElevatorConstants {
-    public static final double elevatorGearRatio = ((68.0/20.0) * 5.0);
+    public static final double elevatorGearRatio = ((68.0/18.0) * 5.0);
     
     public static final Slot0Configs elevatorSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Elevator_Static)
@@ -41,4 +41,10 @@ public class ElevatorConstants {
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(0.0);
     public static final int leftElevatorMotorID = 26;
+
+    public static final double elevatorStowedPosition = 0.0;
+    public static final double elevatorHandoffPosition = 1.0;
+    public static final double trapPosition = 1.5;
+
+    public static final double positionError = 0.01;
 }

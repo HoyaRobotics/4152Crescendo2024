@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.generated.ClimberConstants;
-import frc.robot.generated.ElevatorConstants;
 
 public class Climber extends SubsystemBase {
   private TalonFX rightClimberMotor = new TalonFX(ClimberConstants.rightClimberMotorID);
@@ -36,6 +35,10 @@ public class Climber extends SubsystemBase {
 
   public void setClimberPosition(double position) {
     rightClimberMotor.setControl(magicRequest.withPosition(position).withSlot(0));
+  }
+
+  public double getClimberPosition() {
+    return rightClimberMotor.getPosition().getValueAsDouble();
   }
 
   private void configureMotorsControllers() {

@@ -35,9 +35,22 @@ public class Elevator extends SubsystemBase {
     //rightElevator.set(power);
   }
 
+  public boolean isElevatorAtPosition(double position) {
+    double error = Math.abs(position - leftElevatorMotor.getPosition().getValue());
+    if(error < ElevatorConstants.positionError) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   public void setElevatorPosition(double position) {
     leftElevatorMotor.setControl(magicRequest.withPosition(position).withSlot(0));
     //rightElevator.setControl(magicRequest.withPosition(position).withSlot(0));
+  }
+
+  public double getElevatorPosition() {
+    return leftElevatorMotor.getPosition().getValueAsDouble();
   }
 
   private void configureMotorsControllers() {

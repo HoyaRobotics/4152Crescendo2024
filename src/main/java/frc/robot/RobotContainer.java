@@ -24,6 +24,9 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Photonvision;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
+import frc.robot.commands.HoldClimber;
+import frc.robot.commands.HoldElevator;
+import frc.robot.commands.RunTrap;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
@@ -34,6 +37,7 @@ import frc.robot.commands.IntakeCommands.IntakeFromGroundOld;*/
 import frc.robot.commands.IntakeCommands.*;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
+import frc.robot.Subsystems.Trap;
 
 public class RobotContainer {
 
@@ -51,6 +55,7 @@ public class RobotContainer {
   private final Photonvision photonvision = new Photonvision();
   private final Climber climber = new Climber();
   private final Elevator elevator = new Elevator();
+  private final Trap trap = new Trap();
   
 
 
@@ -77,8 +82,9 @@ public class RobotContainer {
     driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
     driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
-    operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY()));
-    operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY()));
+    operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
+    operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
+    operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));
     //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
 
     if (Utils.isSimulation()) {
@@ -95,8 +101,6 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("startIntake", new IntakeStart(intake));
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
-
-    //HAVING PROBLEMS CODE ISN'T DEPLOYING PROPERLY
     NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));
 
     autoChooser = AutoBuilder.buildAutoChooser();

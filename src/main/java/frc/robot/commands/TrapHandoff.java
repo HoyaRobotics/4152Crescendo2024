@@ -4,18 +4,21 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
 import frc.robot.generated.IntakeConstants;
+import frc.robot.generated.TrapConstants;
 
 public class TrapHandoff extends Command {
   private final Intake intake;
   private final Shooter shooter;
   private final Elevator elevator;
   private final Trap trap;
+  private double handoffTime;
 
   /** Creates a new TrapHandoff. */
   public TrapHandoff(Intake intake, Shooter shooter, Elevator elevator, Trap trap) {
@@ -33,7 +36,9 @@ public class TrapHandoff extends Command {
     shooter.setTrapShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
     intake.setRollerSpeed(IntakeConstants.trapSpeed);
-    trap.setTrapSpeed(0);
+    elevator.setElevatorPosition(1);
+    trap.setTrapSpeed(0.1);
+    handoffTime = Timer.getFPGATimestamp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,11 +47,20 @@ public class TrapHandoff extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    shooter.stopShooter();
+    intake.setIntakePosition(IntakeConstants.stowedPosition);
+    intake.setRollerSpeed(IntakeConstants.stallRPM);
+    trap.setTrapSpeed(0.0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(Timer.getFPGATimestamp() - handoffTime > TrapConstants.trapHandoffTime) {
+      return true;
+    }else{
+      return false;
+    }
   }
 }
