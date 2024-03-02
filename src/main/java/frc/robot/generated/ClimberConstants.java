@@ -29,8 +29,8 @@ public class ClimberConstants {
         .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
         .withSensorToMechanismRatio(climberGearRatio);
         public static final MotionMagicConfigs climberMotionMagicConfigs = new MotionMagicConfigs()
-        .withMotionMagicAcceleration(2.0) // controls acceleration and deceleration rates during the beginning and end of motion
-        .withMotionMagicCruiseVelocity(2.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
+        .withMotionMagicAcceleration(6.0) // controls acceleration and deceleration rates during the beginning and end of motion
+        .withMotionMagicCruiseVelocity(3.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
         .withMotionMagicExpo_kA(0.0) // voltage required to apply a given acceleration, in V/(rps/s)
         .withMotionMagicExpo_kV(0.0) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration

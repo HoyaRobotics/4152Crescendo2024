@@ -4,6 +4,7 @@
 
 package frc.robot.Subsystems;
 
+import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
@@ -13,10 +14,12 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.PhotonConstants;
@@ -82,8 +85,20 @@ public class Photonvision extends SubsystemBase {
     return distance;
   }
 
-  public Pose2d getLatestPoseEstimate() {
-    return photonPoseEstimator.update(targets).get().estimatedPose.toPose2d();
+  public boolean isTagPresent() {
+    return targets.hasTargets();
+  }
+
+  public boolean isPoseOnField(Pose2d pose) {
+    if(pose.getX() > 0.5 && pose.getY() > 0.5 && pose.getX() <16.06 && pose.getY() < 7.7){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public EstimatedRobotPose getLatestPoseEstimate() {
+    return photonPoseEstimator.update(targets).get();
   }
 
   public double getLatestPoseLatency() {
@@ -92,5 +107,35 @@ public class Photonvision extends SubsystemBase {
 
   public void setPipeline(int pipeline) {
     shooterCamera.setPipelineIndex(pipeline);;
+  }
+
+  public Vector<N3> confidenceCalculator(EstimatedRobotPose estimation) {
+    double smallestDistance = Double.POSITIVE_INFINITY;
+    for (var target : estimation.targetsUsed) {
+      var t3d = target.getBestCameraToTarget();
+      var distance = Math.sqrt(Math.pow(t3d.getX(), 2) + Math.pow(t3d.getY(), 2) + Math.pow(t3d.getZ(), 2));
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+      }
+    }
+    double poseAmbiguityFactor = estimation.targetsUsed.size() != 1
+        ? 1
+        : Math.max(
+          1,
+          (estimation.targetsUsed.get(0).getPoseAmbiguity()
+              + PhotonConstants.POSE_AMBIGUITY_SHIFTER)
+              * PhotonConstants.POSE_AMBIGUITY_MULTIPLIER);
+    double confidenceMultiplier = Math.max(
+        1,
+        (Math.max(
+            1,
+            Math.max(0, smallestDistance - PhotonConstants.NOISY_DISTANCE_METERS)
+                * PhotonConstants.DISTANCE_WEIGHT)
+            * poseAmbiguityFactor)
+            / (1
+                + ((estimation.targetsUsed.size() - 1) * PhotonConstants.TAG_PRESENCE_WEIGHT)));
+    
+    return PhotonConstants.VISION_MEASUREMENT_STANDARD_DEVIATIONS.times(confidenceMultiplier);
+    //return null;
   }
 }

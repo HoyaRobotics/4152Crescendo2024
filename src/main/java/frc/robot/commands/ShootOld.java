@@ -20,7 +20,7 @@ import frc.robot.generated.IntakeConstants;
 import frc.robot.generated.ShooterConstants;
 import frc.robot.Subsystems.Shooter;
 
-public class Shoot extends Command {
+public class ShootOld extends Command {
   //private final Shooter shooter;
   private final Intake intake;
   private final Shooter shooter;
@@ -39,7 +39,7 @@ public class Shoot extends Command {
   private int tagLostCount;
   /** Creates a new Shoot. 
  * @param shooter */
-  public Shoot(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
+  public ShootOld(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
     //this.shooter = shooter;
     this.intake = intake;
     this.shooter = shooter;

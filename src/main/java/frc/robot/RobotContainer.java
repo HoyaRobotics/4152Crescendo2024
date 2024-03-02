@@ -27,7 +27,7 @@ import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
 import frc.robot.commands.HoldElevator;
 import frc.robot.commands.RunTrap;
-import frc.robot.commands.Shoot;
+import frc.robot.commands.ShootOld;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
 import frc.robot.commands.AutoCommands.IntakeStop;
@@ -80,7 +80,7 @@ public class RobotContainer {
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGroundOld(intake));
     driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
-    driverController.leftBumper().whileTrue(new Shoot(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    driverController.leftBumper().whileTrue(new ShootOld(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
