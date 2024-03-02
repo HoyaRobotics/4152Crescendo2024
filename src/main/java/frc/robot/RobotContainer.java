@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+  // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -99,7 +99,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    NamedCommands.registerCommand("startIntake", new IntakeStart(intake));
+    NamedCommands.registerCommand("startIntake", new IntakeStart(intake, drivetrain));
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
     NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));
 
@@ -117,6 +117,6 @@ public class RobotContainer {
   }
 
   public void configureTeleopSettings() {
-    shooter.stopShooter();
+    //shooter.stopShooter();
   }
 }

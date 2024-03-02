@@ -61,8 +61,8 @@ public class IntakeConstants {
 
     public static final double stallTriggerTime = 0.05;
     public static final double stallRPM = 0.05;
-    public static final double fastStallRPM = 20;
+    public static final double fastStallRPM = 3700;
     public static final int rotatoinMotorID = 22;
     public static final int rollerMotorID = 23;
-    public static final int rollerMotorCurrentLimit = 50;
+    public static final int rollerMotorCurrentLimit = 60;
 }

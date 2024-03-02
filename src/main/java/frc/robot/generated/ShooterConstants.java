@@ -35,7 +35,7 @@ public class ShooterConstants {
     public static final double kFF = 0.000228;*/
 
     public static final double shootingRPM = 3800 ;//4000
-    public static final double spinFactor = 0.05;
+    public static final double spinFactor = 0;
     public static final double speedThreshold = 0.98;
 
     public static final double trapRPM = 2000;

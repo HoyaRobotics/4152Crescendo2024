@@ -10,6 +10,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
@@ -52,7 +53,7 @@ public class AutoShoot extends Command {
     yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition));
+    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)-0.06);
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
@@ -71,6 +72,7 @@ public class AutoShoot extends Command {
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(0.0));
       //System.out.println("Dist" + distancePIDController.getPositionError());
       //System.out.println("Yaw" + yawPIDController.getPositionError());
+      SmartDashboard.putNumber("distance from target", photonvision.getTagDistance(targetTag));
     }else{
       System.out.println("TAG NOT FOUND");
     }

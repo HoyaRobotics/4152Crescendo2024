@@ -62,7 +62,7 @@ public class Shoot extends Command {
     yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)); //120 with old limelight
+    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)-0.06); //120 with old limelight
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
@@ -99,7 +99,7 @@ public class Shoot extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    shooter.stopShooter();
+    //shooter.stopShooter();
   }
 
   // Returns true when the command should end.

@@ -21,6 +21,7 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public Climber() {
     configureMotorsControllers();
+    setClimberPosition(ClimberConstants.midCamClearPosition);
   }
 
   @Override

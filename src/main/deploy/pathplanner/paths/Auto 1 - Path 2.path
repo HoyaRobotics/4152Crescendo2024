@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9800164275653225,
-        "y": 7.409689624574055
+        "x": 3.0061784798894275,
+        "y": 6.290240112947758
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5002523511540526,
-        "y": 6.663389950156524
+        "x": 1.633520150157183,
+        "y": 5.957070615439933
       },
       "isLocked": false,
       "linkedName": "Auto 1 - Path 1"
@@ -28,12 +28,18 @@
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.25,
+      "rotationDegrees": 10.522611605704322,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "RunIntake",
-      "waypointRelativePos": 0.1,
+      "waypointRelativePos": 0.2,
       "command": {
         "type": "parallel",
         "data": {
@@ -68,19 +74,19 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.5,
-    "maxAcceleration": 4.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 540.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 29.05460409907724,
+    "rotation": 38.157226587368996,
     "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 52.43140797117244,
+    "rotation": 19.855214369321153,
     "velocity": 0
   },
   "useDefaultConstraints": true

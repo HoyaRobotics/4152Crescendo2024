@@ -5,14 +5,17 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
 
 public class IntakeStart extends Command {
   private final Intake intake;
+  private final CommandSwerveDrivetrain drivetrain;
   /** Creates a new IntakeStart. */
-  public IntakeStart(Intake intake) {
+  public IntakeStart(Intake intake, CommandSwerveDrivetrain drivetrain) {
     this.intake = intake;
+    this.drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
   }
@@ -26,7 +29,13 @@ public class IntakeStart extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    /*if(LimelightHelpers.getTV("")){
+      double rotation = drivetrain.getState().Pose.getRotation().getDegrees()+LimelightHelpers.getTX("");
+      Rotation2d rotationTarget = Rotation2d.fromDegrees(rotation);
+      PPHolonomicDriveController.setRotationTargetOverride(()-> Optional.of(rotationTarget));
+    }*/
+  }
 
   // Called once the command ends or is interrupted.
   @Override
