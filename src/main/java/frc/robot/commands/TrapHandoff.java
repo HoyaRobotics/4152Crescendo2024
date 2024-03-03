@@ -10,6 +10,7 @@ import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
+import frc.robot.generated.ElevatorConstants;
 import frc.robot.generated.IntakeConstants;
 import frc.robot.generated.TrapConstants;
 
@@ -36,8 +37,8 @@ public class TrapHandoff extends Command {
     shooter.setTrapShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
     intake.setRollerSpeed(IntakeConstants.trapSpeed);
-    elevator.setElevatorPosition(1);
-    trap.setTrapSpeed(0.1);
+    elevator.setElevatorPosition(ElevatorConstants.elevatorHandoffPosition);
+    trap.setTrapSpeed(TrapConstants.trapHandoffSpeed);
     handoffTime = Timer.getFPGATimestamp();
   }
 
@@ -53,6 +54,7 @@ public class TrapHandoff extends Command {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallRPM);
     trap.setTrapSpeed(0.0);
+    shooter.stopShooter();
   }
 
   // Returns true when the command should end.

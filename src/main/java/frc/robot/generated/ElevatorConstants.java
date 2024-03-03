@@ -43,7 +43,7 @@ public class ElevatorConstants {
     public static final int leftElevatorMotorID = 26;
 
     public static final double elevatorStowedPosition = 0.0;
-    public static final double elevatorHandoffPosition = 1.0;
+    public static final double elevatorHandoffPosition = 0.8;
     public static final double trapPosition = 1.5;
 
     public static final double positionError = 0.01;
