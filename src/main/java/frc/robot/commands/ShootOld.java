@@ -29,7 +29,8 @@ public class ShootOld extends Command {
 
   private final DoubleSupplier translationX, translationY, rotation;
   private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
-  private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
+  //private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
+  private PIDController distancePIDController = new PIDController(3.0, 0, 0);
   
 
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
@@ -40,7 +41,6 @@ public class ShootOld extends Command {
   /** Creates a new Shoot. 
  * @param shooter */
   public ShootOld(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
-    //this.shooter = shooter;
     this.intake = intake;
     this.shooter = shooter;
     this.photonvision = photonvision;
@@ -88,8 +88,9 @@ public class ShootOld extends Command {
       drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
       }
     }
-    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
+    if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
     {
+
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
   }
@@ -99,7 +100,9 @@ public class ShootOld extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    //shooter.stopShooter();
+    shooter.stopShooter();
+    
+    //shooter.idleMotor();
   }
 
   // Returns true when the command should end.

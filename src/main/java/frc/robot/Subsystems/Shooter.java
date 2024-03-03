@@ -9,6 +9,8 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ShooterConstants;
@@ -18,6 +20,7 @@ public class Shooter extends SubsystemBase {
     private TalonFX shootRight = new TalonFX(ShooterConstants.rightShooterMotorID);
 
     final VelocityVoltage voltageRequest = new VelocityVoltage(0);
+    final PowerDistribution pdp = new PowerDistribution(1, ModuleType.kRev);
 
     //@Log.NT(level = LogLevel.DEFAULT) double leftShooterSpeed = shootLeft.getVelocity().getValueAsDouble();
     //@Log.NT(level = LogLevel.DEFAULT) double rightShooterSpeed = shootRight.getVelocity().getValueAsDouble();
@@ -27,13 +30,20 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter() {
     configShooterMotors();
-    setShooterSpeeds();
+    //setShooterSpeeds();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("shooter speed", getAverageRPM());
+
+    SmartDashboard.putNumber("current Draw Right Shooter", pdp.getCurrent(3) );
+    SmartDashboard.putNumber("Power Draw Right Shooter", pdp.getVoltage()*pdp.getCurrent(3) );
+
+    SmartDashboard.putNumber("Current Draw Left Shooter", pdp.getCurrent(16));
+    SmartDashboard.putNumber("Power Draw Left Shooter", pdp.getCurrent(16)*pdp.getVoltage());
+
   }
   
   private void configShooterMotors() {
@@ -57,18 +67,31 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setTrapShooterSpeeds(){
-    shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.trapRPM));
-    shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.trapRPM));
+    shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.trapHandoffRPM/60));
+    shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.trapHandoffRPM/60));
+  }
+
+  public void setTrapShootRPM(){
+    shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.trapShootRPM/60));
+    shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.trapShootRPM/60));
   }
 
   public void stopShooter() {
-    shootLeft.stopMotor();
+   shootLeft.stopMotor();
     shootRight.stopMotor();
     upToSpeed = false;
   }
 
-  public boolean isShooterAtSpeed() {
-    if(getAverageRPM()>=ShooterConstants.speedThreshold*ShooterConstants.shootingRPM) upToSpeed = true;
+  public void idleMotor()
+  {
+    stopShooter();
+    shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.idleSpeed/60));
+    shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.idleSpeed/60));
+    upToSpeed = false;
+  }
+
+  public boolean isShooterAtSpeed(double setSpeed) {
+    if(getAverageRPM()>=ShooterConstants.speedThreshold*setSpeed) upToSpeed = true;
     return upToSpeed;
   }
 

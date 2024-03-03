@@ -48,7 +48,8 @@ public class TrapHandoff extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.stopShooter();
+    //shooter.stopShooter();
+    shooter.idleMotor();
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallRPM);
     trap.setTrapSpeed(0.0);

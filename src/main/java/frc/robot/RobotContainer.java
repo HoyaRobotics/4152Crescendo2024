@@ -17,6 +17,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
@@ -26,6 +27,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
 import frc.robot.commands.HoldElevator;
+import frc.robot.commands.ManuelShoot;
 import frc.robot.commands.RunTrap;
 import frc.robot.commands.ShootOld;
 import frc.robot.commands.AutoCommands.AutoShoot;
@@ -80,11 +82,14 @@ public class RobotContainer {
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGroundOld(intake));
     driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
-    driverController.leftBumper().whileTrue(new ShootOld(intake,shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    driverController.leftBumper().whileTrue(new ShootOld(intake, shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.b().whileTrue(new Amp(intake));
+    driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
     operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));
+    operatorController.rightBumper().onTrue(new IntakeDownClimb(intake));
+    operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(), climber));
     //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
 
     if (Utils.isSimulation()) {
@@ -117,6 +122,7 @@ public class RobotContainer {
   }
 
   public void configureTeleopSettings() {
-    //shooter.stopShooter();
+    //shooter.idleMotor();
+    shooter.stopShooter();
   }
 }

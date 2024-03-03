@@ -2,39 +2,40 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
-
-import java.util.function.DoubleSupplier;
+package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.Climber;
+import frc.robot.Subsystems.Intake;
+import frc.robot.generated.IntakeConstants;
 
-public class Climb extends Command {
-    private final Climber climber;
-    private final DoubleSupplier movePower;
-
-  /** Creates a new Climb. */
-  public Climb(Climber climber, DoubleSupplier movePower) {
-    this.climber = climber;
-    this.movePower = movePower;
-
+public class TrapShoot extends Command {
+  private Intake intake;
+  /** Creates a new TrapShoot. */
+  public TrapShoot(Intake intake) {
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    intake.setIntakePosition(IntakeConstants.ampPosition);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.moveClimber(movePower.getAsDouble());
+    if(intake.isIntakeAtPosition(IntakeConstants.ampPosition)) {
+      intake.setRollerSpeed(IntakeConstants.shootTrapSpeed);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climber.stopClimber();
+    intake.setIntakePosition(IntakeConstants.stowedPosition);
+    intake.setRollerSpeed(IntakeConstants.stallSpeed);
   }
 
   // Returns true when the command should end.

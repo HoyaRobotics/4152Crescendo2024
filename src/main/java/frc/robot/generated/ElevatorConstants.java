@@ -14,10 +14,10 @@ public class ElevatorConstants {
     
     public static final Slot0Configs elevatorSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Elevator_Static)
-        .withKS(0) // output to overcome static friction (output)
-        .withKV(0) // output per unit of target velocity (output/rps)
-        .withKA(0) // output per unit of target acceleration (output/(rps/s))
-        .withKP(0) // output per unit of error in position (output/rotation)
+        .withKS(0.3) // output to overcome static friction (output)
+        .withKV(2.25) // output per unit of target velocity (output/rps)
+        .withKA(.03) // output per unit of target acceleration (output/(rps/s))
+        .withKP(5) // output per unit of error in position (output/rotation)
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs elevatorCurrentLimits = new CurrentLimitsConfigs()
@@ -30,14 +30,14 @@ public class ElevatorConstants {
         .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
         .withSensorToMechanismRatio(elevatorGearRatio);
         public static final MotionMagicConfigs elevatorMotionMagicConfigs = new MotionMagicConfigs()
-        .withMotionMagicAcceleration(0.0) // controls acceleration and deceleration rates during the beginning and end of motion
-        .withMotionMagicCruiseVelocity(0.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
+        .withMotionMagicAcceleration(30.0) // controls acceleration and deceleration rates during the beginning and end of motion
+        .withMotionMagicCruiseVelocity(3.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
         .withMotionMagicExpo_kA(0.0) // voltage required to apply a given acceleration, in V/(rps/s)
         .withMotionMagicExpo_kV(0.0) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs elevatorSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(2.5)
+        .withForwardSoftLimitThreshold(2.31)
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(0.0);
     public static final int leftElevatorMotorID = 26;

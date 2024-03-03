@@ -77,7 +77,7 @@ public class AutoShoot extends Command {
       System.out.println("TAG NOT FOUND");
     }
 
-    if(shooter.isShooterAtSpeed() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
+    if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
     {
       System.out.println("SHOOTING");
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
@@ -87,7 +87,7 @@ public class AutoShoot extends Command {
         timeStampLock = false;
       }
 
-      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 1){
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.4){
         finished = true;
       }
 

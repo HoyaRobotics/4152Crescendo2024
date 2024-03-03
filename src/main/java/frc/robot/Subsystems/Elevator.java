@@ -35,6 +35,10 @@ public class Elevator extends SubsystemBase {
     //rightElevator.set(power);
   }
 
+  public void stopElevator() {
+    leftElevatorMotor.stopMotor();
+  }
+
   public boolean isElevatorAtPosition(double position) {
     double error = Math.abs(position - leftElevatorMotor.getPosition().getValue());
     if(error < ElevatorConstants.positionError) {

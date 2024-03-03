@@ -20,11 +20,11 @@ public class ShooterConstants {
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs shooterCurrentLimits = new CurrentLimitsConfigs()
-        .withStatorCurrentLimit(40.0)
+        .withStatorCurrentLimit(45.0)
         .withStatorCurrentLimitEnable(true);
     public static final VoltageConfigs shooterVoltageConfigs = new VoltageConfigs()
-        .withPeakForwardVoltage(10.0)
-        .withPeakReverseVoltage(10.0);
+        .withPeakForwardVoltage(11.0)
+        .withPeakReverseVoltage(11.0);
     public static final FeedbackConfigs shooterFeedbackConfigs = new FeedbackConfigs()
         .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
         .withSensorToMechanismRatio(gearRatio);
@@ -34,13 +34,15 @@ public class ShooterConstants {
     public static final double kD = 0.0002;
     public static final double kFF = 0.000228;*/
 
-    public static final double shootingRPM = 3800 ;//4000
-    public static final double spinFactor = 0;
+    public static final double shootingRPM = 4200;
+    public static final double trapShootRPM = 4400;
+    public static final double spinFactor = 0.05; //0.1
     public static final double speedThreshold = 0.98;
+    public static final double idleSpeed = 2000;
 
-    public static final double trapRPM = 2000;
+    public static final double trapHandoffRPM = 2000;
 
-    public static final double shootPosition = 110;
+    public static final double shootPosition = 114;
 
     public static final double shootingAngle = 38; //to be used later for projectile profiling.
     

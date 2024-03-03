@@ -16,7 +16,7 @@ public class ClimberConstants {
         .withKS(0.165) // output to overcome static friction (output)
         .withKV(5) // output per unit of target velocity (output/rps)
         .withKA(0.475) // output per unit of target acceleration (output/(rps/s))
-        .withKP(0) // output per unit of error in position (output/rotation)
+        .withKP(5) // output per unit of error in position (output/rotation)
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs climberCurrentLimits = new CurrentLimitsConfigs()

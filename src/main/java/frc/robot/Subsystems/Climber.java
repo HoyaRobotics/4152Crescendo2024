@@ -21,7 +21,7 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public Climber() {
     configureMotorsControllers();
-    setClimberPosition(ClimberConstants.midCamClearPosition);
+    //setClimberPosition(ClimberConstants.midCamClearPosition);
   }
 
   @Override
@@ -32,6 +32,10 @@ public class Climber extends SubsystemBase {
 
   public void moveClimber(double power) {
     rightClimberMotor.set(power);
+  }
+
+  public void stopClimber() {
+    rightClimberMotor.stopMotor();
   }
 
   public void setClimberPosition(double position) {
@@ -53,6 +57,10 @@ public class Climber extends SubsystemBase {
     talonfxConfigs.SoftwareLimitSwitch = ClimberConstants.climberSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     rightClimberMotor.getConfigurator().apply(talonfxConfigs);
+    rightClimberMotor.setPosition(0.0);
+  }
+
+  public void resetEncoder() {
     rightClimberMotor.setPosition(0.0);
   }
 }

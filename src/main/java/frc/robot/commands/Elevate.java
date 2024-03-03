@@ -34,7 +34,7 @@ public class Elevate extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    elevator.moveElevator(0);
+    elevator.stopElevator();
   }
 
   // Returns true when the command should end.
