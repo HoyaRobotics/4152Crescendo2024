@@ -65,6 +65,7 @@ public class ShootOld extends Command {
     distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)-0.06); //120 with old limelight
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
+    //shooter.setShooterSpeeds(ShooterConstants.shootingRPM, ShooterConstants.spinFactor);
     intake.setIntakePosition(IntakeConstants.shootPosition);
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
     tagLostCount = 0;

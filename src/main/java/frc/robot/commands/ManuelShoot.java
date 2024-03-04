@@ -25,6 +25,7 @@ public class ManuelShoot extends Command {
   @Override
   public void initialize() {
     shooter.setTrapShootRPM();
+    //shooter.setShooterSpeeds(ShooterConstants.trapShootRPM, 0.0);
     intake.setIntakePosition(IntakeConstants.shootPosition);
   }
 

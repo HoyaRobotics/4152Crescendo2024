@@ -22,7 +22,9 @@ public class TrapScoring extends SequentialCommandGroup {
     addCommands(
       new ElevatorPosition(elevator, ElevatorConstants.elevatorHandoffPosition),
       new TrapHandoff(intake, shooter, elevator, trap)
-      //new ElevatorPosition(elevator, ElevatorConstants.trapPosition)
+      //new ElevatorPosition(elevator, ElevatorConstants.trapPosition),
+      //new DepositTrapNote(elevator, trap)
+      //new ElevatorPosition(elevator, ElevatorConstants.elevatorStowedPosition)
     );
   }
 }

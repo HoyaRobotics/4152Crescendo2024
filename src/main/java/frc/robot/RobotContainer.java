@@ -84,8 +84,8 @@ public class RobotContainer {
     driverController.rightBumper().whileTrue(new IntakeFromGroundOld(intake));
     driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
     driverController.leftBumper().whileTrue(new ShootOld(intake, shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
-    driverController.b().whileTrue(new Amp(intake));
     driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake));
+    driverController.b().whileTrue(new Amp(intake));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
     operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));

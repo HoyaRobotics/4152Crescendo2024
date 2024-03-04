@@ -33,4 +33,8 @@ public class Trap extends SubsystemBase {
   public void setTrapSpeed(double speed) {
     trapMotor.set(speed);
   }
+
+  public void stopTrapMotor() {
+    trapMotor.stopMotor();
+  }
 }

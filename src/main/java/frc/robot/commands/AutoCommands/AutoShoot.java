@@ -55,7 +55,8 @@ public class AutoShoot extends Command {
     yawPIDController.setSetpoint(0.0);
     distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)-0.06);
     distancePIDController.setIZone(1);
-    shooter.setShooterSpeeds();
+    //shooter.setShooterSpeeds();
+    shooter.setShooterSpeeds(ShooterConstants.shootingRPM, ShooterConstants.spinFactor);
     intake.setIntakePosition(IntakeConstants.shootPosition);
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
     timeStampLock = true;
