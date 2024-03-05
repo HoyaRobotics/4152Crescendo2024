@@ -3,8 +3,9 @@
   "robotLength": 0.9493,
   "holonomicMode": true,
   "pathFolders": [
-    "4 Piece Bottom",
-    "5 Piece Top"
+    "4 Piece Mid Notes",
+    "5 Piece Top",
+    "4 Piece Wing Notes"
   ],
   "autoFolders": [],
   "defaultMaxVel": 4.35,

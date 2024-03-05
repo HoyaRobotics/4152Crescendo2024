@@ -3,49 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4079508827275409,
-        "y": 3.54625931208903
+        "x": 5.5,
+        "y": 6.69004350995715
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7655157028691144,
-        "y": 3.6540185729536137
+        "x": 6.5,
+        "y": 6.69004350995715
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "End Of Test Path 1.1"
     },
     {
       "anchor": {
-        "x": 1.9712379281560473,
-        "y": 3.3748241243499195
+        "x": 1.846748628562192,
+        "y": 6.69004350995715
       },
       "prevControl": {
-        "x": 1.7851082957535838,
-        "y": 3.6491204247324958
+        "x": 0.8467486285621919,
+        "y": 6.69004350995715
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "4 Piece Bottom - Path 1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.25,
+    "maxVelocity": 4.35,
     "maxAcceleration": 4.0,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 540.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -48.27048792318362,
-    "rotateFast": false
+    "rotation": 180.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "4 Piece Mid Notes",
+  "folder": null,
   "previewStartingState": {
-    "rotation": -90.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

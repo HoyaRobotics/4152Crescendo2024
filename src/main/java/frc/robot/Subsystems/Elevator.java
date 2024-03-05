@@ -31,7 +31,7 @@ public class Elevator extends SubsystemBase {
   }
 
   public void moveElevator(double power) {
-    leftElevatorMotor.set(power);
+    leftElevatorMotor.set(-power);
     //rightElevator.set(power);
   }
 

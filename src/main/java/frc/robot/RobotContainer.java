@@ -89,7 +89,7 @@ public class RobotContainer {
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
     operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));
-    //operatorController.rightBumper().onTrue(new IntakeDownClimb(intake));
+    operatorController.leftBumper().onTrue(new IntakeDownClimb(intake));
     operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(), climber));
     //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
     operatorController.rightBumper().whileTrue(new TrapScoring(elevator, intake, shooter, trap));

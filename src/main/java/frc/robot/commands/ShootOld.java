@@ -29,8 +29,8 @@ public class ShootOld extends Command {
 
   private final DoubleSupplier translationX, translationY, rotation;
   private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
-  //private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
-  private PIDController distancePIDController = new PIDController(3.0, 0, 0);
+  private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
+  //private PIDController distancePIDController = new PIDController(3.0, 0, 0);
   
 
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
@@ -62,7 +62,7 @@ public class ShootOld extends Command {
     yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)-0.06); //120 with old limelight
+    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)); //120 with old limelight
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     //shooter.setShooterSpeeds(ShooterConstants.shootingRPM, ShooterConstants.spinFactor);
@@ -78,6 +78,7 @@ public class ShootOld extends Command {
     if(photonvision.doesTagExist(targetTag)) {
       double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(targetTag));
       double drivespeed = distancePIDController.calculate(photonvision.getTagDistance(targetTag));
+      SmartDashboard.putNumber("Shooting Drive Speed", drivespeed);
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(translationY.getAsDouble()));
       SmartDashboard.putNumber("distance from target", photonvision.getTagDistance(targetTag));
     }else{
