@@ -85,6 +85,18 @@ public class Photonvision extends SubsystemBase {
     return distance;
   }
 
+  public double getTagArea(int tagID) {
+    PhotonTrackedTarget target = null;
+    for(int i = 0; i<targets.getTargets().size(); i++) {
+      var currentTarget = targets.getTargets().get(i);
+      if(currentTarget.getFiducialId() == tagID) {
+        target = currentTarget;
+      }
+    }
+
+    return target.getArea();
+  }
+
   public boolean isTagPresent() {
     return targets.hasTargets();
   }
@@ -104,7 +116,7 @@ public class Photonvision extends SubsystemBase {
   public double getLatestPoseLatency() {
     return targets.getTimestampSeconds();
   }
-
+ 
   public void setPipeline(int pipeline) {
     shooterCamera.setPipelineIndex(pipeline);;
   }

@@ -60,7 +60,10 @@ public class Climber extends SubsystemBase {
     rightClimberMotor.setPosition(0.0);
   }
 
-  public void resetEncoder() {
+  public void resetEncoder(boolean stop) {
+    if(stop) {
+      rightClimberMotor.stopMotor();
+    }
     rightClimberMotor.setPosition(0.0);
   }
 }

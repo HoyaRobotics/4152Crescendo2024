@@ -28,9 +28,9 @@ public class ShootOld extends Command {
   private final CommandSwerveDrivetrain drivetrain;
 
   private final DoubleSupplier translationX, translationY, rotation;
-  private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
-  private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
-  //private PIDController distancePIDController = new PIDController(3.0, 0, 0);
+  private PIDController yawPIDController = new PIDController(0.08, 0.0, 0.0);
+  //private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
+  private PIDController distancePIDController = new PIDController(2, 0, 0);
   
 
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
@@ -59,7 +59,7 @@ public class ShootOld extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    yawPIDController.setTolerance(2);
+    yawPIDController.setTolerance(4);
     distancePIDController.setTolerance(0.05);
     yawPIDController.setSetpoint(0.0);
     distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)); //120 with old limelight
@@ -90,6 +90,13 @@ public class ShootOld extends Command {
       drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
       }
     }
+    System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
+    System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
+    System.out.println(yawPIDController.atSetpoint());
+    System.out.println(distancePIDController.atSetpoint());
+    System.out.println(photonvision.doesTagExist(targetTag));
+    System.out.println("loop end");
+
     if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
     {
 

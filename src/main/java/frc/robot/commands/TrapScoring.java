@@ -9,6 +9,8 @@ import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
+import frc.robot.commands.IntakeCommands.IntakeDownClimb;
+import frc.robot.commands.IntakeCommands.IntakeUpClimb;
 import frc.robot.generated.ElevatorConstants;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -21,10 +23,12 @@ public class TrapScoring extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ElevatorPosition(elevator, ElevatorConstants.elevatorHandoffPosition),
-      new TrapHandoff(intake, shooter, elevator, trap)
-      //new ElevatorPosition(elevator, ElevatorConstants.trapPosition),
-      //new DepositTrapNote(elevator, trap)
-      //new ElevatorPosition(elevator, ElevatorConstants.elevatorStowedPosition)
+      new TrapHandoff(intake, shooter, elevator, trap),
+      new IntakeDownClimb(intake),
+      new ElevatorPosition(elevator, ElevatorConstants.trapPosition),
+      new DepositTrapNote(elevator, trap),
+      new IntakeUpClimb(intake),
+      new ElevatorPosition(elevator, ElevatorConstants.elevatorStowedPosition)
     );
   }
 }

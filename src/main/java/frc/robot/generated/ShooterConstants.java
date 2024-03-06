@@ -42,9 +42,7 @@ public class ShooterConstants {
 
     public static final double trapHandoffRPM = 500;
 
-    public static final double shootPosition = 121
-    
-    ;
+    public static final double shootPosition = 112;
 
     public static final double shootingAngle = 38; //to be used later for projectile profiling.
     

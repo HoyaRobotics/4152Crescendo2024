@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
 
-public class IntakeDownClimb extends Command {
+public class IntakeUpClimb extends Command {
   private final Intake intake;
   /** Creates a new Intake. */
-  public IntakeDownClimb(Intake intake) {
+  public IntakeUpClimb(Intake intake) {
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
@@ -20,7 +20,7 @@ public class IntakeDownClimb extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.setIntakePosition(IntakeConstants.floorPosition);
+    intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
   }
 

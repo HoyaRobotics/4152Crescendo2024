@@ -17,7 +17,7 @@ public class ElevatorConstants {
         .withKS(0.3) // output to overcome static friction (output)
         .withKV(2.25) // output per unit of target velocity (output/rps)
         .withKA(.03) // output per unit of target acceleration (output/(rps/s))
-        .withKP(5) // output per unit of error in position (output/rotation)
+        .withKP(10) // output per unit of error in position (output/rotation)
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs elevatorCurrentLimits = new CurrentLimitsConfigs()
@@ -44,7 +44,7 @@ public class ElevatorConstants {
 
     public static final double elevatorStowedPosition = 0.0;
     public static final double elevatorHandoffPosition = 0.5; //0.6
-    public static final double trapPosition = 1.5;
+    public static final double trapPosition = 2.30;
 
-    public static final double positionError = 0.01;
+    public static final double positionError = 0.02;
 }

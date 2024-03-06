@@ -90,9 +90,10 @@ public class RobotContainer {
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
     operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));
     operatorController.leftBumper().onTrue(new IntakeDownClimb(intake));
-    operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(), climber));
+    operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(true), climber));
     //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
-    operatorController.rightBumper().whileTrue(new TrapScoring(elevator, intake, shooter, trap));
+    //operatorController.rightBumper().whileTrue(new TrapScoring(elevator, intake, shooter, trap));
+    operatorController.rightBumper().onTrue(new TrapScoring(elevator, intake, shooter, trap));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
