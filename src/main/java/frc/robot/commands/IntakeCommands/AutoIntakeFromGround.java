@@ -50,8 +50,8 @@ public class AutoIntakeFromGround extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(LimelightHelpers.getTV("")){
-      double yawSpeed = yawPIDController.calculate(LimelightHelpers.getTX(""));
+    if(LimelightHelpers.getTV("limeight-intake")){
+      double yawSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-intake"));
       drivetrain.setControl(request.withRotationalRate(yawSpeed).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
     }else{
       drivetrain.setControl(request.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));

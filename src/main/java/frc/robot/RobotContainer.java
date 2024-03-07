@@ -22,14 +22,14 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.Photonvision;
+//import frc.robot.Subsystems.Photonvision;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
 import frc.robot.commands.HoldElevator;
 import frc.robot.commands.ManuelShoot;
 import frc.robot.commands.RunTrap;
-import frc.robot.commands.ShootOld;
+import frc.robot.commands.ShootNew;
 import frc.robot.commands.TrapScoring;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
@@ -55,7 +55,7 @@ public class RobotContainer {
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
-  public final Photonvision photonvision = new Photonvision();
+  //public final Photonvision photonvision = new Photonvision();
   private final Climber climber = new Climber();
   private final Elevator elevator = new Elevator();
   private final Trap trap = new Trap();
@@ -83,7 +83,8 @@ public class RobotContainer {
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     driverController.rightBumper().whileTrue(new IntakeFromGroundOld(intake));
     driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
-    driverController.leftBumper().whileTrue(new ShootOld(intake, shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    //driverController.leftBumper().whileTrue(new ShootOld(intake, shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    driverController.leftBumper().whileTrue(new ShootNew(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake));
     driverController.b().whileTrue(new Amp(intake));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
@@ -102,14 +103,14 @@ public class RobotContainer {
 
     
     //TODO remove line after this. It's being used for testing purposes
-    drivetrain.seedFieldRelative();
+    //drivetrain.seedFieldRelative();
   }
 
   public RobotContainer() {
 
     NamedCommands.registerCommand("startIntake", new IntakeStart(intake, drivetrain));
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
-    NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, photonvision, drivetrain));
+    NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();

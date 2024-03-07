@@ -44,6 +44,9 @@ public class ShooterConstants {
 
     public static final double shootPosition = 112;
 
+    public static final double xSetPoint = 0;
+    public static final double ySetPoint = 0;
+
     public static final double shootingAngle = 38; //to be used later for projectile profiling.
     
     public static final int leftShooterMotorID = 24;

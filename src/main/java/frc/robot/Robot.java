@@ -5,9 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.generated.PhotonConstants;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -24,6 +24,9 @@ public class Robot extends TimedRobot {
     //boolean fileOnly = false;
     //boolean lazyLogging = false;
     //Monologue.setupMonologue(this, "Robot", fileOnly, lazyLogging);
+    SmartDashboard.putNumber("distance P", 3);
+    SmartDashboard.putNumber("yaw P", 3);
+
   }
 
   @Override
@@ -37,19 +40,6 @@ public class Robot extends TimedRobot {
     //Monologue.setFileOnly(DriverStation.isFMSAttached());
     // This method needs to be called periodically, or no logging annotations will process properly.
     //Monologue.updateAll();
-
-    if(PhotonConstants.useLimelight) {
-      if(m_robotContainer.photonvision.isTagPresent()){
-        var latestResults = m_robotContainer.photonvision.getLatestPoseEstimate();
-        var latestPose = latestResults.estimatedPose.toPose2d();
-        if(m_robotContainer.photonvision.isPoseOnField(latestPose)){
-          var latestLatency = m_robotContainer.photonvision.getLatestPoseLatency();
-          var VisionStdDevs = m_robotContainer.photonvision.confidenceCalculator(latestResults);
-          m_robotContainer.drivetrain.setVisionMeasurementStdDevs(VisionStdDevs);
-          m_robotContainer.drivetrain.addVisionMeasurement(latestPose, latestLatency);
-        }
-      }
-    }
   }
 
   @Override

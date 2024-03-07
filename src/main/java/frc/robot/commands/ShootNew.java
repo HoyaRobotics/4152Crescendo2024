@@ -6,22 +6,16 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
-import org.photonvision.PhotonUtils;
-
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
-import edu.wpi.first.apriltag.AprilTagFieldLayout;
-import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
+import frc.robot.LimelightHelpers;
 import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.Photonvision;
 import frc.robot.generated.IntakeConstants;
-import frc.robot.generated.PhotonConstants;
 import frc.robot.generated.ShooterConstants;
 import frc.robot.Subsystems.Shooter;
 
@@ -29,25 +23,24 @@ public class ShootNew extends Command {
   //private final Shooter shooter;
   private final Intake intake;
   private final Shooter shooter;
-  private final Photonvision photonvision;
   private final CommandSwerveDrivetrain drivetrain;
 
   private final DoubleSupplier translationX, translationY, rotation;
   private PIDController yawPIDController = new PIDController(0.1, 0.0, 0.0);
-  private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
+  //private PIDController distancePIDController = new PIDController(3.0, 0.3, 0.03); 
+  private PIDController distancePIDController = new PIDController(0.5, 0, 0);
   
 
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
   private final SwerveRequest.FieldCentric driveField = new SwerveRequest.FieldCentric();
 
   private int targetTag;
+  private int tagLostCount;
   /** Creates a new Shoot. 
  * @param shooter */
-  public ShootNew(Intake intake, Shooter shooter, Photonvision photonvision, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
-    //this.shooter = shooter;
+  public ShootNew(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
     this.intake = intake;
     this.shooter = shooter;
-    this.photonvision = photonvision;
     this.drivetrain = drivetrain;
     this.translationX = translationX;
     this.translationY = translationY;
@@ -63,38 +56,49 @@ public class ShootNew extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    yawPIDController.setTolerance(2);
-    distancePIDController.setTolerance(0.05);
-    yawPIDController.setSetpoint(0.0);
-    distancePIDController.setSetpoint(Units.inchesToMeters(ShooterConstants.shootPosition)-0.06); //120 with old limelight
+    targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
+    LimelightHelpers.setPipelineIndex("limelight-shooter", targetTag);
+    yawPIDController.setTolerance(1);
+    distancePIDController.setTolerance(0.15);
+    yawPIDController.setSetpoint(ShooterConstants.xSetPoint);
+    distancePIDController.setSetpoint(ShooterConstants.ySetPoint); //120 with old limelight
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     //shooter.setShooterSpeeds(ShooterConstants.shootingRPM, ShooterConstants.spinFactor);
     intake.setIntakePosition(IntakeConstants.shootPosition);
-    targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
+    tagLostCount = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    if(photonvision.doesTagExist(targetTag)) {
-      double turnSpeed = yawPIDController.calculate(photonvision.getTagYaw(targetTag));
-      double driveSpeed = distancePIDController.calculate(photonvision.getTagDistance(targetTag));
-      drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(driveSpeed).withVelocityY(translationY.getAsDouble()));
-      SmartDashboard.putNumber("distance from target", photonvision.getTagDistance(targetTag));
-    }else if(PhotonConstants.useLimelight){
-      AprilTagFieldLayout fieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
-      double turnSpeed = yawPIDController.calculate(PhotonUtils.getYawToPose(drivetrain.getState().Pose, fieldLayout.getTagPose(targetTag).get().toPose2d()).getDegrees());
-      double driveSpeed = distancePIDController.calculate(PhotonUtils.getDistanceToPose(drivetrain.getState().Pose, fieldLayout.getTagPose(targetTag).get().toPose2d()));
-      drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(driveSpeed).withVelocityY(translationY.getAsDouble()));
-      //drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
+    //yawPIDController.setP(SmartDashboard.getNumber("yaw P", 0.0));
+    //distancePIDController.setP(SmartDashboard.getNumber("distance P", 0.0));
+    boolean hasTarget = LimelightHelpers.getTV("limelight-shooter");
+    if(hasTarget) {
+      double turnSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-shooter"));
+      double drivespeed = distancePIDController.calculate(-LimelightHelpers.getTY("limelight-shooter"));
+      SmartDashboard.putNumber("Shooting Drive Speed", drivespeed);
+      drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(translationY.getAsDouble()));
     }else{
+      if(tagLostCount<=5)
+      {
+        tagLostCount++;
+      }
+      else{
       drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
+      }
     }
-    
-    if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && photonvision.doesTagExist(targetTag)) 
+    System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
+    System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
+    System.out.println(yawPIDController.atSetpoint());
+    System.out.println(distancePIDController.atSetpoint());
+    System.out.println(hasTarget);
+    System.out.println("loop end");
+
+    if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && hasTarget) 
     {
+
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
   }
@@ -105,7 +109,8 @@ public class ShootNew extends Command {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
     shooter.stopShooter();
-    shooter.idleMotor();
+    
+    //shooter.idleMotor();
   }
 
   // Returns true when the command should end.
