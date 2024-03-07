@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4079508827275409,
-        "y": 3.54625931208903
+        "x": 0.4675064242729913,
+        "y": 4.124240802180888
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7655157028691144,
-        "y": 3.6540185729536137
+        "x": 1.035691617922615,
+        "y": 3.825453760692724
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 3.3748241243499195
       },
       "prevControl": {
-        "x": 1.7851082957535838,
-        "y": 3.6491204247324958
+        "x": 1.618571256235591,
+        "y": 3.609935238963556
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,9 +43,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4 Piece Mid Notes",
+  "folder": "4 Piece Bottom",
   "previewStartingState": {
-    "rotation": -90.0,
+    "rotation": 0.9710219310791677,
     "velocity": 0
   },
   "useDefaultConstraints": true

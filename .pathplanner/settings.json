@@ -3,11 +3,13 @@
   "robotLength": 0.86,
   "holonomicMode": true,
   "pathFolders": [
-    "4 Piece Mid Notes",
-    "5 Piece Top",
-    "4 Piece Wing Notes"
+    "4 Piece Bottom",
+    "4 Piece Wing",
+    "5 Piece Top"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "Test Autos"
+  ],
   "defaultMaxVel": 4.35,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 90.0,

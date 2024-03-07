@@ -3,38 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.7406258968362088,
-        "y": 6.650063170256211
+        "x": 1.463789772448279,
+        "y": 7.347222331676167
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6068665903565567,
-        "y": 6.4501614717515166
+        "x": 1.8360490372532046,
+        "y": 7.32273159057058
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.0061784798894275,
-        "y": 6.290240112947758
+        "x": 2.4659508984889085,
+        "y": 7.469676037204103
       },
       "prevControl": {
-        "x": 2.09995744666814,
-        "y": 6.023704514941497
+        "x": 2.1916545981063322,
+        "y": 7.273750108359406
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "5 Piece Top - Path 1"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.45,
-      "rotationDegrees": -15.048274918469593,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -45,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 13.760785111791286,
+    "rotation": 38.829824904970394,
     "rotateFast": true
   },
   "reversed": false,
   "folder": "5 Piece Top",
   "previewStartingState": {
-    "rotation": 60.172915345525226,
+    "rotation": -0.3354401105169994,
     "velocity": 0
   },
   "useDefaultConstraints": true

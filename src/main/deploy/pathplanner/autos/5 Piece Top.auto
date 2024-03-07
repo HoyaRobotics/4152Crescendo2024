@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.38,
-      "y": 5.55
+      "x": 1.463789772448279,
+      "y": 7.347222331676167
     },
     "rotation": 0.0
   },
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Auto 1 - Path 1"
+            "pathName": "5 Piece Top - Path 1"
           }
         },
         {
@@ -26,7 +26,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Auto 1 - Path 2"
+            "pathName": "5 Piece Top - Path 2"
           }
         },
         {
@@ -38,7 +38,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Auto 1 - Path 3"
+            "pathName": "5 Piece Top - Path 3"
           }
         },
         {
@@ -50,7 +50,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Auto 1 - Path 4"
+            "pathName": "5 Piece Top - Path 4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "5 Piece Top - Path 5"
           }
         },
         {

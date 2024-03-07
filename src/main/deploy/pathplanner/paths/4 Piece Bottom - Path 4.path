@@ -94,7 +94,42 @@
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RunIntake",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "startIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 2.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 4.35,
     "maxAcceleration": 3.0,
@@ -107,7 +142,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4 Piece Mid Notes",
+  "folder": "4 Piece Bottom",
   "previewStartingState": {
     "rotation": -41.00908690157017,
     "velocity": 0
