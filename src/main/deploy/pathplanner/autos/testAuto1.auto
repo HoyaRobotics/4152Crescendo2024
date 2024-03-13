@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.5,
-      "y": 6.69004350995715
+      "x": 1.3803113320512361,
+      "y": 5.55593454044051
     },
-    "rotation": 0
+    "rotation": -90.00000000000006
   },
   "command": {
     "type": "sequential",
@@ -14,19 +14,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4PW (2056 M) - Path 2 Improved"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
             "pathName": "Test Path 1.2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoShootAlign"
           }
         }
       ]

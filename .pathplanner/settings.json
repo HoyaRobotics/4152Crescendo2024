@@ -3,10 +3,14 @@
   "robotLength": 0.86,
   "holonomicMode": true,
   "pathFolders": [
+    "2 Sides",
     "4 Piece Bottom",
     "4 Piece Wing",
     "5 Piece Top",
-    "2 Sides"
+    "Cross The Line",
+    "4PB Alt Start",
+    "One Piece Bottom",
+    "Thread the Needle Top"
   ],
   "autoFolders": [
     "Test Autos"

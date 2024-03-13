@@ -6,8 +6,11 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
+import org.photonvision.PhotonUtils;
+
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,6 +39,9 @@ public class ShootNew extends Command {
 
   private int targetTag;
   private int tagLostCount;
+  private boolean tryFinding = false; //TODO test
+  private double drivespeed = 0;
+  private double turnSpeed = 0;
   /** Creates a new Shoot. 
  * @param shooter */
   public ShootNew(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
@@ -58,7 +64,7 @@ public class ShootNew extends Command {
   public void initialize() {
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
     LimelightHelpers.setPipelineIndex("limelight-shooter", targetTag);
-    yawPIDController.setTolerance(1);
+    yawPIDController.setTolerance(2);
     distancePIDController.setTolerance(0.15);
     yawPIDController.setSetpoint(ShooterConstants.xSetPoint);
     distancePIDController.setSetpoint(ShooterConstants.ySetPoint); //120 with old limelight
@@ -76,10 +82,13 @@ public class ShootNew extends Command {
     //distancePIDController.setP(SmartDashboard.getNumber("distance P", 0.0));
     boolean hasTarget = LimelightHelpers.getTV("limelight-shooter");
     if(hasTarget) {
-      double turnSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-shooter"));
-      double drivespeed = distancePIDController.calculate(-LimelightHelpers.getTY("limelight-shooter"));
+      turnSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-shooter"));
+      drivespeed = distancePIDController.calculate(-LimelightHelpers.getTY("limelight-shooter"));
       SmartDashboard.putNumber("Shooting Drive Speed", drivespeed);
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(translationY.getAsDouble()));
+    }else if(tryFinding){
+      turnSpeed = yawPIDController.calculate(PhotonUtils.getYawToPose(drivetrain.getState().Pose, AprilTagFields.k2024Crescendo.loadAprilTagLayoutField().getTagPose(targetTag).get().toPose2d()).getDegrees());
+      drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(0).withVelocityY(0));
     }else{
       if(tagLostCount<=5)
       {
@@ -89,12 +98,12 @@ public class ShootNew extends Command {
       drivetrain.setControl(driveField.withRotationalRate(rotation.getAsDouble()).withVelocityX(translationX.getAsDouble()).withVelocityY(translationY.getAsDouble()));
       }
     }
-    System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
+    /*System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
     System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
     System.out.println(yawPIDController.atSetpoint());
     System.out.println(distancePIDController.atSetpoint());
     System.out.println(hasTarget);
-    System.out.println("loop end");
+    System.out.println("loop end");*/
 
     if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && hasTarget) 
     {

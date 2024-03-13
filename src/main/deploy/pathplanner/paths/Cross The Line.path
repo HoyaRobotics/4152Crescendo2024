@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3803113320512361,
-        "y": 5.541275082550166
+        "x": 0.46076351892963474,
+        "y": 1.452619009134121
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.673500489858122,
-        "y": 6.330220452648697
+        "x": 1.460763518929637,
+        "y": 1.452619009134121
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.0061784798894275,
-        "y": 6.290240112947758
+        "x": 2.939544580387862,
+        "y": 0.43978373671032994
       },
       "prevControl": {
-        "x": 2.313185925073149,
-        "y": 6.1036651943433755
+        "x": 2.659682202481288,
+        "y": 0.7063193347165908
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "4 Piece Wing Path 1 end"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 11.63363399894051,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4 Piece Wing",
+  "folder": "Cross The Line",
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

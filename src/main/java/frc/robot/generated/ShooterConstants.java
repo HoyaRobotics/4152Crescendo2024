@@ -10,6 +10,8 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+
 /** Add your docs here. */
 public class ShooterConstants {
      public static final double gearRatio = 1.25;
@@ -51,6 +53,8 @@ public class ShooterConstants {
     
     public static final int leftShooterMotorID = 24;
     public static final int rightShooterMotorID = 25;
+
+    public static AprilTagFieldLayout aprilTags;
 }
 
 

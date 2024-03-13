@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.5,
-      "y": 6.69004350995715
+      "x": 0.7539526767365219,
+      "y": 4.424490926903931
     },
-    "rotation": 0
+    "rotation": -59.036243467926454
   },
   "command": {
     "type": "sequential",
@@ -14,24 +14,24 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4PW (2056 M) - Path 2 Improved"
+            "pathName": "One P. Path 1"
           }
         },
         {
-          "type": "wait",
+          "type": "named",
           "data": {
-            "waitTime": 2.0
+            "name": "autoShoot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Test Path 1.2"
+            "pathName": "One Piece Path 2"
           }
         }
       ]
     }
   },
-  "folder": "Test Autos",
+  "folder": null,
   "choreoAuto": false
 }

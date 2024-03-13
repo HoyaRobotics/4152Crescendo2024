@@ -4,9 +4,12 @@
 
 package frc.robot.commands.AutoCommands;
 
+import org.photonvision.PhotonUtils;
+
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,17 +32,22 @@ public class AutoShoot extends Command {
   private PIDController distancePIDController = new PIDController(0.5, 0, 0);
   private final SwerveRequest.RobotCentric driveRobot = new SwerveRequest.RobotCentric();
   private int targetTag;
+  private double drivespeed = 0;
+  private double turnSpeed = 0;
 
   private boolean finished = false;
   private boolean timeStampLock = true;
   private double shootTime = 0;
+  private boolean tryFinding; //TODO test
+  private Pose2d targetPose;
 
   /** Creates a new AutoShoot. */
-  public AutoShoot(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain) {
+  public AutoShoot(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain, boolean tryFinding) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
     this.shooter = shooter;
     this.drivetrain = drivetrain;
+    this.tryFinding = tryFinding;
 
     addRequirements(intake, shooter, drivetrain);
 
@@ -49,6 +57,9 @@ public class AutoShoot extends Command {
   @Override
   public void initialize() {
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
+    //System.out.println(Timer.getFPGATimestamp());
+    targetPose = ShooterConstants.aprilTags.getTagPose(targetTag).get().toPose2d();
+    //System.out.println(Timer.getFPGATimestamp());
     LimelightHelpers.setPipelineIndex("limelight-shooter", targetTag);
     yawPIDController.setTolerance(1);
     distancePIDController.setTolerance(0.15);
@@ -67,13 +78,18 @@ public class AutoShoot extends Command {
   public void execute() {
     boolean hasTarget = LimelightHelpers.getTV("limelight-shooter");
     if(hasTarget) {
-      double turnSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-shooter"));
-      double drivespeed = distancePIDController.calculate(-LimelightHelpers.getTY("limelight-shooter"));
+      turnSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-shooter"));
+      drivespeed = distancePIDController.calculate(-LimelightHelpers.getTY("limelight-shooter"));
       drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(drivespeed).withVelocityY(0.0));
       //System.out.println("Dist" + distancePIDController.getPositionError());
       //System.out.println("Yaw" + yawPIDController.getPositionError());
+    }else if(tryFinding){
+      turnSpeed = yawPIDController.calculate(PhotonUtils.getYawToPose(drivetrain.getState().Pose, targetPose).getDegrees());
+      drivetrain.setControl(driveRobot.withRotationalRate(turnSpeed).withVelocityX(0).withVelocityY(0));
+      System.out.println(turnSpeed);
     }else{
-      System.out.println("TAG NOT FOUND");
+      //System.out.println("TAG NOT FOUND");
+      drivetrain.setControl(driveRobot.withVelocityX(0.0).withVelocityY(0.0).withRotationalRate(0.0));
     }
 
     if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && yawPIDController.atSetpoint() && distancePIDController.atSetpoint() && hasTarget) 

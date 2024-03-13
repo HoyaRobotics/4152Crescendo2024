@@ -3,58 +3,36 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6002032004064015,
-        "y": 6.640734424325992
+        "x": 2.347835552813963,
+        "y": 3.4889509779019563
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7113050837080204,
-        "y": 6.5868547938937
+        "x": 4.2095867048876965,
+        "y": 1.8324322362930443
       },
       "isLocked": false,
-      "linkedName": "5 Piece Top - Path 2"
+      "linkedName": "end of 4 PB Alt - path 3"
     },
     {
       "anchor": {
-        "x": 8.054738018783913,
-        "y": 5.8434908277931115
+        "x": 8.021045756377227,
+        "y": 2.15494030988062
       },
       "prevControl": {
-        "x": 5.91424724615559,
-        "y": 6.396981576779384
-      },
-      "nextControl": {
-        "x": 8.6653007753387,
-        "y": 5.685610755732034
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.6002032004064015,
-        "y": 6.640734424325992
-      },
-      "prevControl": {
-        "x": 5.026457881078054,
-        "y": 6.4080723838229146
+        "x": 6.760332377807613,
+        "y": 0.4837621103813641
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "5 Piece Top - Path 2"
+      "linkedName": "end of 4 PB Alt - path 4"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -17.300527191532165,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "RunIntake",
+      "name": "run intake",
       "waypointRelativePos": 0.4,
       "command": {
         "type": "parallel",
@@ -63,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "autoIntake"
+                "name": "startIntake"
               }
             }
           ]
@@ -71,8 +49,8 @@
       }
     },
     {
-      "name": "StopIntake",
-      "waypointRelativePos": 1.4,
+      "name": "stop intake",
+      "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -96,13 +74,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 25.67681568183814,
+    "rotation": 47.20259816176576,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5 Piece Top",
+  "folder": "4PB Alt Start",
   "previewStartingState": {
-    "rotation": 25.55996517182383,
+    "rotation": -49.63546342690262,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.5,
-        "y": 6.69004350995715
+        "x": 1.3803113320512361,
+        "y": 5.55593454044051
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.5,
-        "y": 6.69004350995715
+        "x": 1.6868272697584354,
+        "y": 5.530613658629914
       },
       "isLocked": false,
       "linkedName": "End Of Test Path 1.1"
     },
     {
       "anchor": {
-        "x": 1.846748628562192,
-        "y": 6.69004350995715
+        "x": 2.7796232215841057,
+        "y": 5.55593454044051
       },
       "prevControl": {
-        "x": 2.846748628562192,
-        "y": 6.69004350995715
+        "x": 2.530611567151751,
+        "y": 5.565895006617804
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,21 +32,21 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.35,
+    "maxVelocity": 1.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 90.0,
     "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": -90.0,
     "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -90.00000000000007,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

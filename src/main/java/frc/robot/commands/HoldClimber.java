@@ -20,6 +20,7 @@ public class HoldClimber extends Command {
   @Override
   public void initialize() {
     climber.setClimberPosition(climber.getClimberPosition());
+    //climber.setClimberPosition(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

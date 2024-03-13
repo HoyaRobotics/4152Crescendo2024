@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3803113320512361,
-        "y": 5.541275082550166
+        "x": 8.284915998403426,
+        "y": 0.7622918102979067
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.673500489858122,
-        "y": 6.330220452648697
+        "x": 6.144635146413151,
+        "y": 0.8209296418592844
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "end of 4 PB Alt - path 2"
     },
     {
       "anchor": {
-        "x": 3.0061784798894275,
-        "y": 6.290240112947758
+        "x": 2.347835552813963,
+        "y": 3.4889509779019563
       },
       "prevControl": {
-        "x": 2.313185925073149,
-        "y": 6.1036651943433755
+        "x": 3.2274030262346245,
+        "y": 2.330853804564752
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "4 Piece Wing Path 1 end"
+      "linkedName": "end of 4 PB Alt - path 3"
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 11.63363399894051,
+    "rotation": -47.6025622024998,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4 Piece Wing",
+  "folder": "4PB Alt Start",
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

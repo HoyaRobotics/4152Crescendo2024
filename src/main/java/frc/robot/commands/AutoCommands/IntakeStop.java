@@ -4,6 +4,8 @@
 
 package frc.robot.commands.AutoCommands;
 
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
@@ -30,7 +32,9 @@ public class IntakeStop extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    PPHolonomicDriveController.setRotationTargetOverride(null);
+  }
 
   // Returns true when the command should end.
   @Override

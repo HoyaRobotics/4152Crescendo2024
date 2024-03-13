@@ -108,10 +108,11 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    NamedCommands.registerCommand("startIntake", new IntakeStart(intake, drivetrain));
+    NamedCommands.registerCommand("startIntake", new IntakeStart(intake, drivetrain, false));
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
-    NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain));
-
+    NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain, false));
+    NamedCommands.registerCommand("autoIntake", new IntakeStart(intake, drivetrain, true));
+    NamedCommands.registerCommand("autoShootAlign", new AutoShoot(intake, shooter,drivetrain, true));
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();
     SmartDashboard.putData("Auto Chooser", autoChooser);

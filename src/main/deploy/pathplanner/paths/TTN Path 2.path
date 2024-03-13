@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3803113320512361,
-        "y": 5.541275082550166
+        "x": 2.0733038868675138,
+        "y": 7.356382504972803
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.673500489858122,
-        "y": 6.330220452648697
+        "x": 2.126611006468766,
+        "y": 8.062701839689394
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "TTN Path 1 End"
     },
     {
       "anchor": {
-        "x": 3.0061784798894275,
-        "y": 6.290240112947758
+        "x": 6.7110232921764545,
+        "y": 7.316402165271863
       },
       "prevControl": {
-        "x": 2.313185925073149,
-        "y": 6.1036651943433755
+        "x": 5.7110232921764545,
+        "y": 7.316402165271863
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "4 Piece Wing Path 1 end"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 11.63363399894051,
-    "rotateFast": false
+    "rotation": 0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "4 Piece Wing",
+  "folder": "Thread the Needle Top",
   "previewStartingState": {
-    "rotation": 0.0,
+    "rotation": 18.43494882292213,
     "velocity": 0
   },
   "useDefaultConstraints": true

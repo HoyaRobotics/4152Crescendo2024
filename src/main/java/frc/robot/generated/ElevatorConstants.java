@@ -37,14 +37,14 @@ public class ElevatorConstants {
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs elevatorSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(2.33)
+        .withForwardSoftLimitThreshold(2.32)
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(0.0);
     public static final int leftElevatorMotorID = 26;
 
     public static final double elevatorStowedPosition = 0.0;
     public static final double elevatorHandoffPosition = 0.5; //0.6
-    public static final double trapPosition = 2.29;
+    public static final double trapPosition = 2.27;
 
-    public static final double positionError = 0.02;
+    public static final double positionError = 0.05;
 }

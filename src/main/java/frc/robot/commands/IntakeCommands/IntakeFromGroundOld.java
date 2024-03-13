@@ -6,6 +6,7 @@ package frc.robot.commands.IntakeCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.LimelightHelpers;
 import frc.robot.Subsystems.Intake;
 import frc.robot.generated.IntakeConstants;
 
@@ -26,6 +27,7 @@ public class IntakeFromGroundOld extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    LimelightHelpers.setPipelineIndex("limelight-intake", 0);
     finished = false;
     stalled = false;
     stallTime = 0.0;
