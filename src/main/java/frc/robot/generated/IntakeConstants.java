@@ -59,6 +59,7 @@ public class IntakeConstants {
     public static final double ampSpeed = -0.30;
     public static final double trapSpeed = -0.5;
     public static final double shootTrapSpeed = -0.70;
+    public static final double outakeSpeed = -1.0;
 
     public static final double stallTriggerTime = 0.05;
     public static final double stallRPM = 0.05;

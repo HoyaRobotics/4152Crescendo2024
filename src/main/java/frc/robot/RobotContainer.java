@@ -27,9 +27,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
 import frc.robot.commands.HoldElevator;
-import frc.robot.commands.ManuelShoot;
 import frc.robot.commands.RunTrap;
-import frc.robot.commands.ShootNew;
 import frc.robot.commands.TrapScoring;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
@@ -38,6 +36,8 @@ import frc.robot.commands.AutoCommands.IntakeStop;
 import frc.robot.commands.IntakeCommands.AutoIntakeFromGround;
 import frc.robot.commands.IntakeCommands.IntakeFromGroundOld;*/
 import frc.robot.commands.IntakeCommands.*;
+import frc.robot.commands.ShootCommands.ManuelShoot;
+import frc.robot.commands.ShootCommands.ShootNew;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
