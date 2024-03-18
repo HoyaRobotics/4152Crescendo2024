@@ -76,7 +76,7 @@ public class Limelight extends SubsystemBase {
               double tagDistance = Units.metersToFeet(limelightMeasurement.avgTagDist);
               // Double the distance for solo tag
               if (limelightMeasurement.tagCount == 1) {
-                tagDistance = tagDistance * 2;
+                tagDistance *= 2;
               }
               // Add up to .2 confidence depending on how far away
               confidence = 0.7 + (tagDistance / 100);

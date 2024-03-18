@@ -71,7 +71,8 @@ public class ShootNew extends Command {
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     //shooter.setShooterSpeeds(ShooterConstants.shootingRPM, ShooterConstants.spinFactor);
-    intake.setIntakePosition(IntakeConstants.shootPosition);
+    //intake.setIntakePosition(IntakeConstants.shootPosition);
+    intake.setIntakeRotationSpeed(0.1);
     tagLostCount = 0;
   }
 

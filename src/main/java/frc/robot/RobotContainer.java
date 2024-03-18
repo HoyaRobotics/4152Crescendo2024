@@ -37,6 +37,7 @@ import frc.robot.commands.IntakeCommands.AutoIntakeFromGround;
 import frc.robot.commands.IntakeCommands.IntakeFromGroundOld;*/
 import frc.robot.commands.IntakeCommands.*;
 import frc.robot.commands.ShootCommands.ManuelShoot;
+import frc.robot.commands.ShootCommands.ShootDeflect;
 import frc.robot.commands.ShootCommands.ShootNew;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
@@ -95,6 +96,9 @@ public class RobotContainer {
     //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
     //operatorController.rightBumper().whileTrue(new TrapScoring(elevator, intake, shooter, trap));
     operatorController.rightBumper().onTrue(new TrapScoring(elevator, intake, shooter, trap));
+
+    driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
+    driverController.povUp().whileTrue(new ShootFromIntake(intake));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));

@@ -45,8 +45,8 @@ public class IntakeConstants {
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(-0.58);
     public static final double stowedPosition = 0.0;
-    public static final double shootPosition = -0.002;
-    public static final double floorPosition = -0.55;
+    public static final double shootPosition = 0.0;
+    public static final double floorPosition = -0.555;
     public static final double outakePosition = -0.078;
     public static final double sourcePosition = 0.0;
     public static final double ampPosition = -0.21;//-0.23

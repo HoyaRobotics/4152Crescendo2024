@@ -39,7 +39,8 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     //SmartDashboard.putNumber("IntakeRollerCurrent", rollerMotor.getOutputCurrent());
-    //SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
+    SmartDashboard.putBoolean("IntakeSoftLimit", rotationMotor.getFault_ReverseSoftLimit().getValue());
     //SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
     //SmartDashboard.putNumber("IntakeRotationVoltage", rotationMotor.getMotorVoltage().getValueAsDouble());
     SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity());
@@ -70,6 +71,10 @@ public class Intake extends SubsystemBase {
 
   public void setIntakePosition(double position) {
     rotationMotor.setControl(magicRequest.withPosition(position).withSlot(0));
+  }
+
+  public void setIntakeRotationSpeed(double speed) {
+    rotationMotor.setControl(voltageRequest.withOutput(speed));
   }
 
   public void setRollerSpeed(double speed) {
