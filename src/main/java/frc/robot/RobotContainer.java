@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
-//import frc.robot.Subsystems.Photonvision;
+import frc.robot.Subsystems.Limelight;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
@@ -32,13 +32,11 @@ import frc.robot.commands.TrapScoring;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
 import frc.robot.commands.AutoCommands.IntakeStop;
-/*import frc.robot.commands.IntakeCommands.Amp;
-import frc.robot.commands.IntakeCommands.AutoIntakeFromGround;
-import frc.robot.commands.IntakeCommands.IntakeFromGroundOld;*/
 import frc.robot.commands.IntakeCommands.*;
 import frc.robot.commands.ShootCommands.ManuelShoot;
 import frc.robot.commands.ShootCommands.ShootDeflect;
-import frc.robot.commands.ShootCommands.ShootNew;
+import frc.robot.commands.ShootCommands.ShootPose;
+import frc.robot.commands.ShootCommands.Shoot;
 import frc.robot.generated.TunerConstants;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
@@ -54,12 +52,12 @@ public class RobotContainer {
   private final CommandXboxController driverController = new CommandXboxController(0); // My driverController
   private final CommandXboxController operatorController = new CommandXboxController(1);
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
-  private final Intake intake = new Intake();
+  private final Intake intake = new Intake(drivetrain);
   private final Shooter shooter = new Shooter();
-  //public final Photonvision photonvision = new Photonvision();
   private final Climber climber = new Climber();
   private final Elevator elevator = new Elevator();
   private final Trap trap = new Trap();
+  private final Limelight limelight = new Limelight(drivetrain, "limelight-shooter");
   
 
 
@@ -81,11 +79,11 @@ public class RobotContainer {
         ));
 
     //BUTTON ASSIGNING BELOW//
-    driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    driverController.rightBumper().whileTrue(new IntakeFromGroundOld(intake));
-    driverController.rightTrigger().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
-    //driverController.leftBumper().whileTrue(new ShootOld(intake, shooter, photonvision, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
-    driverController.leftBumper().whileTrue(new ShootNew(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative(new Pose2d())));
+    driverController.rightTrigger().whileTrue(new IntakeFromGroundOld(intake));
+    driverController.rightBumper().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
+    //driverController.leftBumper().whileTrue(new Shoot(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
+    driverController.leftBumper().whileTrue(new ShootPose(drivetrain, shooter, intake));
     driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake));
     driverController.b().whileTrue(new Amp(intake));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
@@ -93,9 +91,8 @@ public class RobotContainer {
     operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));
     operatorController.leftBumper().onTrue(new IntakeDownClimb(intake));
     operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(true), climber));
-    //driverController.povUp().onTrue(new AutoShoot(intake,shooter, photonvision, drivetrain));
-    //operatorController.rightBumper().whileTrue(new TrapScoring(elevator, intake, shooter, trap));
     operatorController.rightBumper().onTrue(new TrapScoring(elevator, intake, shooter, trap));
+    operatorController.rightTrigger().whileTrue(new TryHarder(intake));
 
     driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
     driverController.povUp().whileTrue(new ShootFromIntake(intake));

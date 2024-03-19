@@ -13,9 +13,16 @@ import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.generated.IntakeConstants;
+import monologue.LogLevel;
+import monologue.Annotations.Log;
 
 
 public class Intake extends SubsystemBase {
@@ -25,12 +32,17 @@ public class Intake extends SubsystemBase {
   private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
   private final VoltageOut voltageRequest = new VoltageOut(0);
 
+  private final CommandSwerveDrivetrain drivetrain;
+
+  @Log.NT(level = LogLevel.DEFAULT) Pose3d intakePose;
+
   //@Log.NT(level = LogLevel.DEFAULT) double IntakeRotationPosition = rotationMotor.getPosition().getValueAsDouble();
 
   
 
   /** Creates a new Intake. */
-  public Intake() {
+  public Intake(CommandSwerveDrivetrain drivetrain) {
+    this.drivetrain = drivetrain;
     configureRotationMotor();
     configureRollerMotor();
   }
@@ -38,12 +50,10 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //SmartDashboard.putNumber("IntakeRollerCurrent", rollerMotor.getOutputCurrent());
     SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
-    SmartDashboard.putBoolean("IntakeSoftLimit", rotationMotor.getFault_ReverseSoftLimit().getValue());
-    //SmartDashboard.putNumber("IntakeRotationCurrent", rotationMotor.getStatorCurrent().getValueAsDouble());
-    //SmartDashboard.putNumber("IntakeRotationVoltage", rotationMotor.getMotorVoltage().getValueAsDouble());
     SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity());
+
+    intakePose = new Pose3d(drivetrain.getState().Pose).transformBy(new Transform3d(0, 0, 0, new Rotation3d(0, Units.rotationsToRadians(rotationMotor.getPosition().getValueAsDouble()), 0)));
   }
 
   private void configureRotationMotor() {

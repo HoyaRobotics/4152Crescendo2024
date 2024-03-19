@@ -8,12 +8,15 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,7 +49,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
-        //SmartDashboard.putData("Field", field);
+
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -117,6 +120,31 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     /*public void updateFieldWidget() {
         field.setRobotPose(this.getState().Pose);
     }*/
+
+    public Command pathfindingCommand (Pose2d endPose) {
+        return AutoBuilder.pathfindToPose(endPose, new PathConstraints(4.35, 3.0, Units.degreesToRadians(90.0), Units.degreesToRadians(360.0)));
+    }
+
+    public Pose2d stagePose(String position) {
+        Pose2d leftStage = new Pose2d(4.5, 4.74, Rotation2d.fromDegrees(120.0));
+        Pose2d rightStage = new Pose2d(4.5, 3.45, Rotation2d.fromDegrees(-120.0));
+        Pose2d centerStage = new Pose2d(5.65, 4.10, Rotation2d.fromDegrees(0.0));
+        if(position == "left") {
+            if(DriverStation.getAlliance().get() == Alliance.Blue) {
+                return leftStage;
+            }else{
+                return rightStage;
+            }
+        }else if(position == "right") {
+            if(DriverStation.getAlliance().get() == Alliance.Blue) {
+                return rightStage;
+            }else{
+                return leftStage;
+            }
+        }else{
+            return centerStage;
+        }
+    }
 
     @Override
     public void periodic() {

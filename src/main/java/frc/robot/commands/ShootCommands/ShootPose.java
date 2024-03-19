@@ -8,13 +8,12 @@ import org.photonvision.PhotonUtils;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
@@ -33,10 +32,10 @@ public class ShootPose extends Command {
   //private final ProfiledPIDController distanceController = new ProfiledPIDController(1, 0, 0, distanceConstraints);
   //private final SimpleMotorFeedforward yawFeedforward = new SimpleMotorFeedforward(0, 2.71/12, 0.18/12);
   //private final SimpleMotorFeedforward distanceFeedforward = new SimpleMotorFeedforward(0, 2.71/12, 0.18/12);
-  private final PIDController yawController = new PIDController(0, 0, 0);
+  private final PIDController yawController = new PIDController(0.06, 0, 0);
   private final PIDController distanceController = new PIDController(0, 0, 0);
-  private final SlewRateLimiter yawFilter = new SlewRateLimiter(0.5);
-  private final SlewRateLimiter distanceFilter = new SlewRateLimiter(1.0);
+  //private final SlewRateLimiter yawFilter = new SlewRateLimiter(0.5);
+  //private final SlewRateLimiter distanceFilter = new SlewRateLimiter(1.0);
 
   private Rotation2d rotationToBlue;
   private double distanceToBlue;
@@ -57,13 +56,14 @@ public class ShootPose extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setShooterSpeeds();
+    //shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
     //yawController.setGoal(0);
     //distanceController.setGoal(Units.inchesToMeters(120));
-    yawController.setSetpoint(0.0);
-    distanceController.setSetpoint(Units.inchesToMeters(120));
+    yawController.setSetpoint(180.0);
+    yawController.enableContinuousInput(-180, 180);
+    distanceController.setSetpoint(Units.inchesToMeters(100));
     targetPose = ShooterConstants.aprilTags.getTagPose(targetTag).get().toPose2d();
   }
 
@@ -73,13 +73,14 @@ public class ShootPose extends Command {
     Pose2d currentPose = drivetrain.getState().Pose;
     rotationToBlue = PhotonUtils.getYawToPose(currentPose, targetPose);
     distanceToBlue = PhotonUtils.getDistanceToPose(currentPose, targetPose);
+    SmartDashboard.putNumber("Yaw To Target", rotationToBlue.getDegrees());
+    SmartDashboard.putNumber("Distance To Target", distanceToBlue);
 
-    double yawSpeed = yawController.calculate(rotationToBlue.getDegrees());
+    double yawSpeed = yawController.calculate(-rotationToBlue.getDegrees());
     double distanceSpeed = yawController.calculate(distanceToBlue);
-    yawSpeed = MathUtil.clamp(-0.8, 0.8, yawSpeed);
-    distanceSpeed = MathUtil.clamp(-0.8, 0.8, distanceSpeed);
-    yawSpeed = yawFilter.calculate(yawSpeed);
-    distanceSpeed = distanceFilter.calculate(distanceSpeed);
+
+    SmartDashboard.putNumber("Yaw Speed", yawSpeed);
+    SmartDashboard.putNumber("Distance Speed", distanceSpeed);
 
 
     /*double yawSpeed = yawController.calculate(rotationToBlue.getDegrees())
@@ -88,7 +89,7 @@ public class ShootPose extends Command {
     double distanceSpeed = distanceController.calculate(distanceToBlue)
       + distanceFeedforward.calculate(distanceController.getSetpoint().velocity);*/
 
-    drivetrain.setControl(drive.withRotationalRate(yawSpeed).withVelocityX(distanceSpeed).withVelocityY(0));
+    drivetrain.setControl(drive.withRotationalRate(yawSpeed).withVelocityX(0).withVelocityY(0));
 
     if(yawController.atSetpoint() && distanceController.atSetpoint() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && shooter.isShooterAtSpeed(ShooterConstants.shootingRPM)) {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);

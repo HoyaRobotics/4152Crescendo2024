@@ -22,7 +22,7 @@ import frc.robot.generated.IntakeConstants;
 import frc.robot.generated.ShooterConstants;
 import frc.robot.Subsystems.Shooter;
 
-public class ShootNew extends Command {
+public class Shoot extends Command {
   //private final Shooter shooter;
   private final Intake intake;
   private final Shooter shooter;
@@ -44,7 +44,7 @@ public class ShootNew extends Command {
   private double turnSpeed = 0;
   /** Creates a new Shoot. 
  * @param shooter */
-  public ShootNew(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
+  public Shoot(Intake intake, Shooter shooter, CommandSwerveDrivetrain drivetrain, DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
     this.intake = intake;
     this.shooter = shooter;
     this.drivetrain = drivetrain;
@@ -71,16 +71,13 @@ public class ShootNew extends Command {
     distancePIDController.setIZone(1);
     shooter.setShooterSpeeds();
     //shooter.setShooterSpeeds(ShooterConstants.shootingRPM, ShooterConstants.spinFactor);
-    //intake.setIntakePosition(IntakeConstants.shootPosition);
-    intake.setIntakeRotationSpeed(0.1);
+    intake.setIntakePosition(IntakeConstants.shootPosition);
     tagLostCount = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //yawPIDController.setP(SmartDashboard.getNumber("yaw P", 0.0));
-    //distancePIDController.setP(SmartDashboard.getNumber("distance P", 0.0));
     boolean hasTarget = LimelightHelpers.getTV("limelight-shooter");
     if(hasTarget) {
       turnSpeed = yawPIDController.calculate(LimelightHelpers.getTX("limelight-shooter"));
@@ -119,7 +116,7 @@ public class ShootNew extends Command {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
     shooter.stopShooter();
-    
+    LimelightHelpers.setPipelineIndex("limelight-shooter", 0);
     //shooter.idleMotor();
   }
 

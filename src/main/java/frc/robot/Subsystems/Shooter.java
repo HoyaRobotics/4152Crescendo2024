@@ -37,13 +37,6 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("shooter speed", getAverageRPM());
-
-    SmartDashboard.putNumber("current Draw Right Shooter", pdp.getCurrent(3) );
-    SmartDashboard.putNumber("Power Draw Right Shooter", pdp.getVoltage()*pdp.getCurrent(3) );
-
-    SmartDashboard.putNumber("Current Draw Left Shooter", pdp.getCurrent(16));
-    SmartDashboard.putNumber("Power Draw Left Shooter", pdp.getCurrent(16)*pdp.getVoltage());
-
   }
   
   private void configShooterMotors() {

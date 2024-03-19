@@ -66,4 +66,13 @@ public class Climber extends SubsystemBase {
     }
     rightClimberMotor.setPosition(0.0);
   }
+
+  public boolean isClimberAtPosition(double position) {
+    double error = Math.abs(position - rightClimberMotor.getPosition().getValue());
+    if(error < ClimberConstants.positionError) {
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

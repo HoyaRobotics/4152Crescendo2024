@@ -41,7 +41,7 @@ public class IntakeConstants {
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs rotationSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(0.02)
+        .withForwardSoftLimitThreshold(0.05)
         .withReverseSoftLimitEnable(true)
         .withReverseSoftLimitThreshold(-0.58);
     public static final double stowedPosition = 0.0;
