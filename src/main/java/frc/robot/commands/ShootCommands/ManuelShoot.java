@@ -13,10 +13,12 @@ import frc.robot.generated.ShooterConstants;
 public class ManuelShoot extends Command {
   Intake intake;
   Shooter shooter;
+  double speed;
   /** Creates a new ManuelShoot. */
-  public ManuelShoot(Shooter shooter, Intake intake) {
+  public ManuelShoot(Shooter shooter, Intake intake, double speed) {
     this.shooter = shooter;
     this.intake = intake;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter, intake);
   }
@@ -24,7 +26,7 @@ public class ManuelShoot extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setTrapShootRPM();
+    shooter.setShooterSpeeds(speed, 0.0);
     //shooter.setShooterSpeeds(ShooterConstants.trapShootRPM, 0.0);
     intake.setIntakePosition(IntakeConstants.shootPosition);
   }

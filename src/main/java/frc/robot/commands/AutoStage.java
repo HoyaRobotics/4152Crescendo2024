@@ -4,30 +4,34 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+import com.pathplanner.lib.path.PathConstraints;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Climber;
 import frc.robot.generated.ClimberConstants;
+import frc.robot.generated.OtherConstants.stageLocation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoStage extends SequentialCommandGroup {
   /** Creates a new AutoStage. */
-  public AutoStage(CommandSwerveDrivetrain drivetrain, Climber climber, String positionOnBlue) {
+  public AutoStage(CommandSwerveDrivetrain drivetrain, Climber climber, stageLocation position) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      drivetrain.pathfindingCommand(drivetrain.stagePose(positionOnBlue)),
+      drivetrain.pathfindingCommand(drivetrain.stagePose(position), new PathConstraints(4.00, 3.0, Units.degreesToRadians(90.0), Units.degreesToRadians(360.0))),
       new ClimberPosition(climber, ClimberConstants.climbingPosition),
+      new PrintCommand("Start Drive"),
       new ParallelDeadlineGroup(
-        new WaitCommand(0.5), 
-        new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.RobotCentric().withVelocityX(0.2)), drivetrain)),
+        new WaitCommand(1.0), 
+        new DriveTillCancel(drivetrain)),
+      new PrintCommand("End Drive"),
       new ClimberPosition(climber, ClimberConstants.readyToClimbPosition)
     );
   }

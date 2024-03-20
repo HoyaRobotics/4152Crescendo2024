@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
@@ -18,7 +19,7 @@ import frc.robot.generated.IntakeConstants;
 public class IntakeStart extends Command {
   private final Intake intake;
   private final CommandSwerveDrivetrain drivetrain;
-  private boolean tryAlign; //TODO test
+  private boolean tryAlign;
   /** Creates a new IntakeStart. */
   public IntakeStart(Intake intake, CommandSwerveDrivetrain drivetrain, boolean tryAlign) {
     this.intake = intake;
@@ -41,10 +42,13 @@ public class IntakeStart extends Command {
   public void execute() {
     if(tryAlign)
     {
-     if(LimelightHelpers.getTV("limelight-intake")){
-       double rotation = drivetrain.getState().Pose.getRotation().getDegrees()-LimelightHelpers.getTX("limelight-intake");
-       Rotation2d rotationTarget = Rotation2d.fromDegrees(rotation);
-       PPHolonomicDriveController.setRotationTargetOverride(()-> Optional.of(rotationTarget));
+      if(LimelightHelpers.getTV("limelight-intake")){
+        double limelighMeasurement = LimelightHelpers.getTX("limelight-intake");
+        //limelighMeasurement = MathUtil.inverseInterpolate(-29.8, 29.8, limelighMeasurement);
+        //limelighMeasurement = MathUtil.interpolate(-20, 20, limelighMeasurement);
+        double rotation = drivetrain.getState().Pose.getRotation().getDegrees()-limelighMeasurement;
+        Rotation2d rotationTarget = Rotation2d.fromDegrees(rotation);
+        PPHolonomicDriveController.setRotationTargetOverride(()-> Optional.of(rotationTarget));
       }
     }
   }

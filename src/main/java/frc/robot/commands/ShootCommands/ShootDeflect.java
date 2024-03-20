@@ -16,11 +16,13 @@ public class ShootDeflect extends Command {
   private final Shooter shooter;
   private final Intake intake;
   private final Elevator elevator;
+  double speed;
   /** Creates a new ShootDeflect. */
-  public ShootDeflect(Shooter shooter, Intake intake, Elevator elevator) {
+  public ShootDeflect(Shooter shooter, Intake intake, Elevator elevator, double speed) {
     this.shooter = shooter;
     this.intake = intake;
     this.elevator = elevator;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter, intake, elevator);
   }
@@ -28,7 +30,7 @@ public class ShootDeflect extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setShooterSpeeds();
+    shooter.setShooterSpeeds(speed, 0.0);
     //shooter.setShooterSpeeds(ShooterConstants.trapHandoffRPM, 0.0);
     intake.setIntakePosition(IntakeConstants.shootPosition);
     elevator.setElevatorPosition(ElevatorConstants.ShootDeflect);
@@ -37,7 +39,7 @@ public class ShootDeflect extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM) && elevator.isElevatorAtPosition(ElevatorConstants.ShootDeflect) && intake.isIntakeAtPosition(IntakeConstants.shootPosition)) {
+    if(shooter.isShooterAtSpeed(ShooterConstants.deflectSpeed) && elevator.isElevatorAtPosition(ElevatorConstants.ShootDeflect) && intake.isIntakeAtPosition(IntakeConstants.shootPosition)) {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
     }
   }

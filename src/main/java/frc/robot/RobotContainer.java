@@ -23,6 +23,7 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Limelight;
+import frc.robot.commands.AutoStage;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
@@ -36,8 +37,9 @@ import frc.robot.commands.IntakeCommands.*;
 import frc.robot.commands.ShootCommands.ManuelShoot;
 import frc.robot.commands.ShootCommands.ShootDeflect;
 import frc.robot.commands.ShootCommands.ShootPose;
-import frc.robot.commands.ShootCommands.Shoot;
+import frc.robot.generated.ShooterConstants;
 import frc.robot.generated.TunerConstants;
+import frc.robot.generated.OtherConstants.stageLocation;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
 
@@ -57,7 +59,7 @@ public class RobotContainer {
   private final Climber climber = new Climber();
   private final Elevator elevator = new Elevator();
   private final Trap trap = new Trap();
-  private final Limelight limelight = new Limelight(drivetrain, "limelight-shooter");
+  //private final Limelight limelight = new Limelight(drivetrain, "limelight-shooter");
   
 
 
@@ -84,8 +86,16 @@ public class RobotContainer {
     driverController.rightBumper().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
     //driverController.leftBumper().whileTrue(new Shoot(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new ShootPose(drivetrain, shooter, intake));
-    driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake));
+    driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake, ShooterConstants.shootingRPM));
     driverController.b().whileTrue(new Amp(intake));
+    driverController.povLeft().whileTrue(new AutoStage(drivetrain, climber, stageLocation.leftStage));
+    driverController.povLeft().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
+    driverController.povUp().whileTrue(new AutoStage(drivetrain, climber, stageLocation.centerStage));
+    driverController.povUp().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
+    driverController.povRight().whileTrue(new AutoStage(drivetrain, climber, stageLocation.rightStage));
+    driverController.povRight().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
+    driverController.rightStick().whileTrue(new AutoAmp(intake, drivetrain));
+    driverController.a().whileTrue(new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
     operatorController.x().whileTrue(new RunTrap(trap, ()-> operatorController.getLeftY()));
@@ -94,8 +104,8 @@ public class RobotContainer {
     operatorController.rightBumper().onTrue(new TrapScoring(elevator, intake, shooter, trap));
     operatorController.rightTrigger().whileTrue(new TryHarder(intake));
 
-    driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
-    driverController.povUp().whileTrue(new ShootFromIntake(intake));
+    //driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
+    //driverController.povUp().whileTrue(new ShootFromIntake(intake));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
@@ -111,7 +121,8 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("startIntake", new IntakeStart(intake, drivetrain, false));
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
-    NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain, false));
+    //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain, false));
+    NamedCommands.registerCommand("autoShoot", new ShootPose(drivetrain, shooter, intake));
     NamedCommands.registerCommand("autoIntake", new IntakeStart(intake, drivetrain, true));
     NamedCommands.registerCommand("autoShootAlign", new AutoShoot(intake, shooter,drivetrain, true));
     autoChooser = AutoBuilder.buildAutoChooser();
