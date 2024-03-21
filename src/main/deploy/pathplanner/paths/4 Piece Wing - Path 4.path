@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.2603703129484178,
-        "y": 5.090829921919584
+        "x": 0.6095527226853972,
+        "y": 4.511194511649166
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.6197018627803486,
-        "y": 4.237916008299549
+        "x": 2.7549416435348384,
+        "y": 4.173222284392062
       },
       "prevControl": {
-        "x": 1.3669845521509219,
-        "y": 4.63771940530894
+        "x": 1.1777379163350208,
+        "y": 4.672833402946042
       },
       "nextControl": null,
       "isLocked": false,
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "autoIntake"
+                "name": "startIntake"
               }
             }
           ]
@@ -59,6 +59,23 @@
               "type": "named",
               "data": {
                 "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.65,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
               }
             }
           ]

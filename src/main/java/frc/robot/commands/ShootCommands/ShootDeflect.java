@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ShootCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
@@ -17,6 +18,9 @@ public class ShootDeflect extends Command {
   private final Intake intake;
   private final Elevator elevator;
   double speed;
+  private boolean finished = false;
+  private boolean timeStampLock = true;
+  private double shootTime = 0;
   /** Creates a new ShootDeflect. */
   public ShootDeflect(Shooter shooter, Intake intake, Elevator elevator, double speed) {
     this.shooter = shooter;
@@ -34,6 +38,8 @@ public class ShootDeflect extends Command {
     //shooter.setShooterSpeeds(ShooterConstants.trapHandoffRPM, 0.0);
     intake.setIntakePosition(IntakeConstants.shootPosition);
     elevator.setElevatorPosition(ElevatorConstants.ShootDeflect);
+    timeStampLock = true;
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +47,14 @@ public class ShootDeflect extends Command {
   public void execute() {
     if(shooter.isShooterAtSpeed(ShooterConstants.deflectSpeed) && elevator.isElevatorAtPosition(ElevatorConstants.ShootDeflect) && intake.isIntakeAtPosition(IntakeConstants.shootPosition)) {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
+      if(timeStampLock){
+        shootTime = Timer.getFPGATimestamp();
+        timeStampLock = false;
+      }
+
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.4){
+        finished = true;
+      }
     }
   }
 
@@ -51,11 +65,12 @@ public class ShootDeflect extends Command {
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
     shooter.stopShooter();
     elevator.setElevatorPosition(ElevatorConstants.elevatorStowedPosition);
+    finished = false;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

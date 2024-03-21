@@ -30,9 +30,11 @@ import frc.robot.commands.HoldClimber;
 import frc.robot.commands.HoldElevator;
 import frc.robot.commands.RunTrap;
 import frc.robot.commands.TrapScoring;
+import frc.robot.commands.AutoCommands.AutoAlign;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
 import frc.robot.commands.AutoCommands.IntakeStop;
+import frc.robot.commands.AutoCommands.ShootPoseAuto;
 import frc.robot.commands.IntakeCommands.*;
 import frc.robot.commands.ShootCommands.ManuelShoot;
 import frc.robot.commands.ShootCommands.ShootDeflect;
@@ -56,10 +58,10 @@ public class RobotContainer {
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
   private final Intake intake = new Intake(drivetrain);
   private final Shooter shooter = new Shooter();
-  private final Climber climber = new Climber();
+  private final Climber climber = new Climber(drivetrain);
   private final Elevator elevator = new Elevator();
   private final Trap trap = new Trap();
-  //private final Limelight limelight = new Limelight(drivetrain, "limelight-shooter");
+  private final Limelight limelight = new Limelight(drivetrain, "limelight-shooter");
   
 
 
@@ -122,9 +124,11 @@ public class RobotContainer {
     NamedCommands.registerCommand("startIntake", new IntakeStart(intake, drivetrain, false));
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
     //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain, false));
-    NamedCommands.registerCommand("autoShoot", new ShootPose(drivetrain, shooter, intake));
+    NamedCommands.registerCommand("autoShoot", new ShootPoseAuto(drivetrain, shooter, intake));
     NamedCommands.registerCommand("autoIntake", new IntakeStart(intake, drivetrain, true));
     NamedCommands.registerCommand("autoShootAlign", new AutoShoot(intake, shooter,drivetrain, true));
+    NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain));
+    NamedCommands.registerCommand("deflect", new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();
     SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -136,10 +140,12 @@ public class RobotContainer {
 
   public void configureAutoSettings() {
     shooter.setShooterSpeeds();
+    limelight.useLimelight(false);
   }
 
   public void configureTeleopSettings() {
     //shooter.idleMotor();
     shooter.stopShooter();
+    limelight.useLimelight(true);
   }
 }

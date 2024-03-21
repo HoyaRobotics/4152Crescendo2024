@@ -65,7 +65,7 @@ public class Limelight extends SubsystemBase {
           // Reasons to blindly trust as much as odometry
           if (trust || DriverStation.isDisabled() || 
               (limelightMeasurement.tagCount >= 2 && limelightMeasurement.avgTagDist < Units.feetToMeters(10))) {
-                confidence = 0.2;
+                confidence = 1.0;//0.2
                 trust = false;
           } else {
             // High trust level anything less than this we shouldn't bother with
@@ -79,7 +79,7 @@ public class Limelight extends SubsystemBase {
                 tagDistance *= 2;
               }
               // Add up to .2 confidence depending on how far away
-              confidence = 0.7 + (tagDistance / 100);
+              confidence = 3 + (tagDistance / 100); //0.7
             }
           }
         }
@@ -94,6 +94,10 @@ public class Limelight extends SubsystemBase {
       publishToField(limelightMeasurement);
       SmartDashboard.putBoolean("PoseUpdate", true);
       SmartDashboard.putNumber("LLConfidence", confide);
+      var visionDeveations = VecBuilder.fill(confide, confide, 99);
+      if(DriverStation.isDisabled() && confide <= 1.0){
+        visionDeveations = VecBuilder.fill(confide, confide, confide);
+      }
       drivetrain.addVisionMeasurement(
           limelightMeasurement.pose,
           limelightMeasurement.timestampSeconds,

@@ -8,7 +8,6 @@ import java.util.Optional;
 
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
@@ -32,7 +31,6 @@ public class IntakeStart extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    LimelightHelpers.setPipelineIndex("limelight-intake", 1);
     intake.setIntakePosition(IntakeConstants.floorPosition);
     intake.setRollerSpeed(IntakeConstants.floorSpeed);
   }

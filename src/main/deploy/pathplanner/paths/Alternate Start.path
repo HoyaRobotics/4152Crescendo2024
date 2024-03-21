@@ -3,59 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.0061784798894275,
-        "y": 6.290240112947758
+        "x": 1.3246823629685442,
+        "y": 5.530009341641595
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.465111215936718,
-        "y": 6.2302696033963505
-      },
-      "isLocked": false,
-      "linkedName": "Auto 1 - Path 1"
-    },
-    {
-      "anchor": {
-        "x": 1.7467977793098448,
-        "y": 6.039696650821874
-      },
-      "prevControl": {
-        "x": 1.8347545266519112,
-        "y": 5.790485866686019
-      },
-      "nextControl": {
-        "x": 1.6063209340775733,
-        "y": 6.437714378979977
+        "x": 1.549997181139947,
+        "y": 6.558620468076258
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.890235494756704,
-        "y": 6.992561413694256
+        "x": 2.8920897937261265,
+        "y": 7.009250104419064
       },
       "prevControl": {
-        "x": 2.3918139264849962,
-        "y": 6.4941398454225485
+        "x": 2.2896175625286808,
+        "y": 6.700666766488664
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.25,
-      "rotationDegrees": 10.522611605704322,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "RunIntake",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.05,
       "command": {
         "type": "parallel",
         "data": {
@@ -71,25 +49,8 @@
       }
     },
     {
-      "name": "StopIntake",
-      "waypointRelativePos": 2.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "stopIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "AlignIntake",
-      "waypointRelativePos": 1.4,
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.35,
       "command": {
         "type": "parallel",
         "data": {
@@ -103,24 +64,41 @@
           ]
         }
       }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.35,
+    "maxVelocity": 3.5,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 90.0,
     "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 37.87498365109824,
+    "rotation": 27.1597956922964,
     "rotateFast": true
   },
   "reversed": false,
   "folder": "4 Piece Wing",
   "previewStartingState": {
-    "rotation": 19.855214369321153,
+    "rotation": 0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

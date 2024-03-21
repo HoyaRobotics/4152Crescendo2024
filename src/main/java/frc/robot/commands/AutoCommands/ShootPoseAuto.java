@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ShootCommands;
+package frc.robot.commands.AutoCommands;
 
 import org.photonvision.PhotonUtils;
 
@@ -23,7 +23,7 @@ import frc.robot.Subsystems.Shooter;
 import frc.robot.generated.IntakeConstants;
 import frc.robot.generated.ShooterConstants;
 
-public class ShootPose extends Command {
+public class ShootPoseAuto extends Command {
   private final CommandSwerveDrivetrain drivetrain;
   private final Shooter shooter;
   private final Intake intake;
@@ -43,7 +43,7 @@ public class ShootPose extends Command {
   private boolean timeStampLock = true;
   private double shootTime = 0;
   /** Creates a new ShootPose. */
-  public ShootPose(CommandSwerveDrivetrain drivetrain, Shooter shooter, Intake intake) {
+  public ShootPoseAuto(CommandSwerveDrivetrain drivetrain, Shooter shooter, Intake intake) {
     this.drivetrain = drivetrain;
     this.shooter = shooter;
     this.intake = intake;
@@ -60,7 +60,7 @@ public class ShootPose extends Command {
     yawController.setSetpoint(180.0);
     yawController.setTolerance(2.0);
     yawController.enableContinuousInput(-180, 180);
-    distanceController.setSetpoint(2.6);
+    distanceController.setSetpoint(3.0);
     distanceController.setTolerance(Units.inchesToMeters(2.0));
     targetPose = ShooterConstants.aprilTags.getTagPose(targetTag).get().toPose2d();
     timeStampLock = true;
@@ -114,7 +114,6 @@ public class ShootPose extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    shooter.stopShooter();
     finished = false;
   }
 

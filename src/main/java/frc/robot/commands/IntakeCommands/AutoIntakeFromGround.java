@@ -43,7 +43,7 @@ public class AutoIntakeFromGround extends Command {
   public void initialize() {
     intake.setIntakePosition(IntakeConstants.floorPosition);
     intake.setRollerSpeed(IntakeConstants.floorSpeed);
-
+    LimelightHelpers.setPipelineIndex("limelight-intake", 0);
     yawPIDController.setSetpoint(0.0);
   }
 

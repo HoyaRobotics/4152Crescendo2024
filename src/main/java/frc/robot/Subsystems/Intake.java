@@ -65,15 +65,15 @@ public class Intake extends SubsystemBase {
     talonfxConfigs.Feedback = IntakeConstants.rotationFeedbackConfigs;
     talonfxConfigs.MotionMagic = IntakeConstants.rotationMotionMagicConfigs;
     talonfxConfigs.SoftwareLimitSwitch = IntakeConstants.rotationSoftwareLimitSwitchConfigs;
-    talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     rotationMotor.getConfigurator().apply(talonfxConfigs);
     rotationMotor.setPosition(0.0);
-    setIntakePosition(IntakeConstants.stowedPosition);
+    setIntakePosition(0.0);
   }
 
   private void configureRollerMotor() {
     rollerMotor.restoreFactoryDefaults();
-    rollerMotor.setIdleMode(IdleMode.kBrake);
+    rollerMotor.setIdleMode(IdleMode.kCoast);
     rollerMotor.setSmartCurrentLimit(IntakeConstants.rollerMotorCurrentLimit); //55
     rollerMotor.setInverted(true);
     rollerMotor.set(IntakeConstants.stallSpeed);

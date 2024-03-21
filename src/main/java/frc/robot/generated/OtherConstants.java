@@ -7,4 +7,5 @@ package frc.robot.generated;
 /** Add your docs here. */
 public class OtherConstants {
     public static enum stageLocation {leftStage, rightStage, centerStage};
+    public static boolean enableLimelight = true;
 }
