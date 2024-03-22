@@ -8,24 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.26050926711088,
-        "y": 4.229927554410594
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 8.025349129454314,
-        "y": 4.094851912853151
-      },
-      "prevControl": {
-        "x": 5.2732325648255065,
-        "y": 4.035167980646249
-      },
-      "nextControl": {
-        "x": 9.255012154326641,
-        "y": 4.121519069890415
+        "x": 13.122537102217061,
+        "y": 2.8879132043978375
       },
       "isLocked": false,
       "linkedName": null
@@ -36,12 +20,12 @@
         "y": 5.54871213049962
       },
       "prevControl": {
-        "x": 4.633393821366733,
-        "y": 3.809661705953783
+        "x": 6.3791864726586605,
+        "y": 4.031350919844697
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "4PC Path 2 end"
     }
   ],
   "rotationTargets": [],
@@ -49,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "RunIntake",
-      "waypointRelativePos": 0.35,
+      "waypointRelativePos": 0.2,
       "command": {
         "type": "parallel",
         "data": {
@@ -66,7 +50,7 @@
     },
     {
       "name": "StopIntake",
-      "waypointRelativePos": 1.3,
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {
@@ -83,7 +67,7 @@
     },
     {
       "name": "AutoAlign",
-      "waypointRelativePos": 0.65,
+      "waypointRelativePos": 0.35,
       "command": {
         "type": "parallel",
         "data": {
