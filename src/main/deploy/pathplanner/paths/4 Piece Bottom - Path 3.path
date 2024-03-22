@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9712379281560473,
-        "y": 3.3748241243499195
+        "x": 1.94674718705046,
+        "y": 3.448296347666681
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.680691657326035,
-        "y": 1.2637222410483004
+        "x": 3.656200916220447,
+        "y": 1.3371944643650617
       },
       "isLocked": false,
       "linkedName": "4 Piece Bottom - Path 1"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 1.9712379281560473,
-        "y": 3.3748241243499195
+        "x": 1.94674718705046,
+        "y": 3.448296347666681
       },
       "prevControl": {
-        "x": 3.763960177085032,
-        "y": 0.4996111185539792
+        "x": 3.7394694359794443,
+        "y": 0.5730833418707406
       },
       "nextControl": null,
       "isLocked": false,
@@ -86,6 +86,16 @@
           ]
         }
       }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.7,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": []
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -96,13 +106,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -56.10383343663608,
+    "rotation": -49.94123891252184,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4 Piece Bottom",
+  "folder": "3 Piece Bottom",
   "previewStartingState": {
-    "rotation": -56.14288985814544,
+    "rotation": -50.35582504285519,
     "velocity": 0
   },
   "useDefaultConstraints": true

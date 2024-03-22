@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6002032004064015,
-        "y": 6.640734424325992
+        "x": 2.9018860901683614,
+        "y": 6.979861215092358
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7113050837080204,
-        "y": 6.5868547938937
+        "x": 5.012987973469981,
+        "y": 6.925981584660065
       },
       "isLocked": false,
       "linkedName": "5 Piece Top - Path 2"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 1.6002032004064015,
-        "y": 6.640734424325992
+        "x": 2.9018860901683614,
+        "y": 6.979861215092358
       },
       "prevControl": {
-        "x": 5.026457881078054,
-        "y": 6.4080723838229146
+        "x": 6.3281407708400135,
+        "y": 6.74719917458928
       },
       "nextControl": null,
       "isLocked": false,
@@ -54,7 +54,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "RunIntake",
+      "name": "AlignIntake",
       "waypointRelativePos": 0.4,
       "command": {
         "type": "parallel",
@@ -64,6 +64,12 @@
               "type": "named",
               "data": {
                 "name": "autoIntake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
               }
             }
           ]

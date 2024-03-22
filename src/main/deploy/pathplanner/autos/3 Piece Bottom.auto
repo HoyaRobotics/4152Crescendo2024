@@ -2,19 +2,25 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.4860844007402306,
-      "y": 2.066983562538554
+      "x": 0.7418027246555683,
+      "y": 4.452416732995757
     },
-    "rotation": 0
+    "rotation": -59.88448421065863
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "deflect"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "4 PB Alt - path 1"
+            "pathName": "4 Piece Bottom - Path 2"
           }
         },
         {
@@ -26,25 +32,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4 PB Alt - path 2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 PB Alt - path 3"
+            "pathName": "4 Piece Bottom - Path 3"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "autoShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "4 PB Alt - path 4"
           }
         }
       ]

@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9712379281560473,
-        "y": 3.3748241243499195
+        "x": 0.7457572106605034,
+        "y": 4.460181991065981
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1663860941087036,
-        "y": 2.414787073010899
+        "x": 1.34917310406916,
+        "y": 2.7527593002648594
       },
       "isLocked": false,
-      "linkedName": "4 Piece Bottom - Path 1"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -20,24 +20,24 @@
         "y": 0.8620740869166703
       },
       "prevControl": {
-        "x": 6.168950953653697,
-        "y": 1.4204629841240586
+        "x": 6.051395396341908,
+        "y": 1.2735185374873919
       },
       "nextControl": {
-        "x": 8.584094964283825,
-        "y": 0.6702547628384066
+        "x": 8.598776433783032,
+        "y": 0.726255092109223
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.9712379281560473,
-        "y": 3.3748241243499195
+        "x": 1.94674718705046,
+        "y": 3.448296347666681
       },
       "prevControl": {
-        "x": 3.1859786869931734,
-        "y": 2.3805000354630783
+        "x": 3.02022547682109,
+        "y": 2.4611864108799693
       },
       "nextControl": null,
       "isLocked": false,
@@ -86,6 +86,23 @@
           ]
         }
       }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.7,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -96,13 +113,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -44.090619551059255,
+    "rotation": -46.66663515524268,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4 Piece Bottom",
+  "folder": "3 Piece Bottom",
   "previewStartingState": {
-    "rotation": -43.76359239714392,
+    "rotation": -60.11952547325142,
     "velocity": 0
   },
   "useDefaultConstraints": true

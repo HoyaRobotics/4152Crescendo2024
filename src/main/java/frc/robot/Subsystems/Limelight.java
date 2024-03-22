@@ -94,10 +94,10 @@ public class Limelight extends SubsystemBase {
       publishToField(limelightMeasurement);
       SmartDashboard.putBoolean("PoseUpdate", true);
       SmartDashboard.putNumber("LLConfidence", confide);
-      var visionDeveations = VecBuilder.fill(confide, confide, 99);
+      /*var visionDeveations = VecBuilder.fill(confide, confide, 99);
       if(DriverStation.isDisabled() && confide <= 1.0){
         visionDeveations = VecBuilder.fill(confide, confide, confide);
-      }
+      }*/
       drivetrain.addVisionMeasurement(
           limelightMeasurement.pose,
           limelightMeasurement.timestampSeconds,

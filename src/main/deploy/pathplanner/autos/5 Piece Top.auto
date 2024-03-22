@@ -2,25 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.463789772448279,
-      "y": 7.347222331676167
+      "x": 0.7553686346251124,
+      "y": 6.640588220492705
     },
-    "rotation": 0.0
+    "rotation": 59.87023488452822
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "5 Piece Top - Path 1"
-          }
-        },
-        {
           "type": "named",
           "data": {
-            "name": "autoShoot"
+            "name": "deflect"
           }
         },
         {
