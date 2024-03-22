@@ -121,22 +121,29 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         field.setRobotPose(this.getState().Pose);
     }*/
 
-    public Command pathfindingCommand (Pose2d endPose, PathConstraints constraints) {
-        return AutoBuilder.pathfindToPose(endPose, constraints);
+    public Command pathfindingCommand (stageLocation position, PathConstraints constraints) {
+        Alliance alliance = Alliance.Blue;
+        try {
+            alliance = DriverStation.getAlliance().get();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        if(alliance == Alliance.Blue) return AutoBuilder.pathfindToPose(stagePose(position, alliance), constraints);
+        else return AutoBuilder.pathfindToPoseFlipped(stagePose(position, alliance), constraints);
     }
 
-    public Pose2d stagePose(stageLocation position) {
+    public Pose2d stagePose(stageLocation position, Alliance alliance) {
         Pose2d leftStage = new Pose2d(4.62, 4.5, Rotation2d.fromDegrees(120.0));
         Pose2d rightStage = new Pose2d(4.68, 3.75, Rotation2d.fromDegrees(-120.0));
         Pose2d centerStage = new Pose2d(5.31, 4.10, Rotation2d.fromDegrees(0.0));
         if(position == stageLocation.leftStage) {
-            if(DriverStation.getAlliance().get() == Alliance.Blue) {
+            if(alliance == Alliance.Blue) {
                 return leftStage;
             }else{
                 return rightStage;
             }
         }else if(position == stageLocation.rightStage) {
-            if(DriverStation.getAlliance().get() == Alliance.Blue) {
+            if(alliance == Alliance.Blue) {
                 return rightStage;
             }else{
                 return leftStage;

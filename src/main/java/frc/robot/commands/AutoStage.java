@@ -25,7 +25,7 @@ public class AutoStage extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      drivetrain.pathfindingCommand(drivetrain.stagePose(position), new PathConstraints(4.00, 3.0, Units.degreesToRadians(90.0), Units.degreesToRadians(360.0))),
+      drivetrain.pathfindingCommand(position, new PathConstraints(4.00, 3.0, Units.degreesToRadians(90.0), Units.degreesToRadians(360.0))),
       new ClimberPosition(climber, ClimberConstants.climbingPosition),
       new PrintCommand("Start Drive"),
       new ParallelDeadlineGroup(

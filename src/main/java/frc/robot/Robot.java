@@ -15,22 +15,23 @@ import frc.robot.generated.ShooterConstants;
 import monologue.Logged;
 import monologue.Monologue;
 
-public class Robot extends TimedRobot implements Logged {
+public class Robot extends TimedRobot implements Logged{
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
 
   @Override
   public void robotInit() {
+    System.out.println("CreateRobotContainer");
     m_robotContainer = new RobotContainer();
+    System.out.println("Loading AprilTagLayout");
     ShooterConstants.aprilTags = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
     
-    DataLogManager.start();
+    /*DataLogManager.start();
     DataLog log = DataLogManager.getLog();
-    DriverStation.startDataLog(log);
+    DriverStation.startDataLog(log);*/
 
     boolean fileOnly = false;
-    if(DriverStation.isFMSAttached()) fileOnly=true;
     boolean lazyLogging = false;
     Monologue.setupMonologue(this, "Robot", fileOnly, lazyLogging);
   }

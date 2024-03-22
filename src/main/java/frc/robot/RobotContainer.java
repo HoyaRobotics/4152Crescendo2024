@@ -56,9 +56,9 @@ public class RobotContainer {
   private final CommandXboxController driverController = new CommandXboxController(0); // My driverController
   private final CommandXboxController operatorController = new CommandXboxController(1);
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
-  private final Intake intake = new Intake(drivetrain);
+  private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
-  private final Climber climber = new Climber(drivetrain);
+  private final Climber climber = new Climber();
   private final Elevator elevator = new Elevator();
   private final Trap trap = new Trap();
   private final Limelight limelight = new Limelight(drivetrain, "limelight-shooter");

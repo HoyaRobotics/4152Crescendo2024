@@ -34,6 +34,8 @@ public class PIDToPose extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    xController.reset();
+    yController.reset();
     yawController.setSetpoint(endPose.getRotation().getDegrees());
     yawController.setTolerance(2.0);
     xController.setSetpoint(endPose.getX());
@@ -68,6 +70,8 @@ public class PIDToPose extends Command {
   public void end(boolean interrupted) {
     drivetrain.setControl(new SwerveRequest.Idle());
     finished = false;
+    xController.reset();
+    yController.reset();
   }
 
   // Returns true when the command should end.
