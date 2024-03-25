@@ -125,9 +125,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("stopIntake", new IntakeStop(intake));
     //NamedCommands.registerCommand("autoShoot", new AutoShoot(intake,shooter, drivetrain, false));
     NamedCommands.registerCommand("autoShoot", new ShootPoseAuto(drivetrain, shooter, intake));
-    NamedCommands.registerCommand("autoIntake", new IntakeStart(intake, drivetrain, true));
+    NamedCommands.registerCommand("autoIntake", new IntakeStart(intake, drivetrain, false));
     NamedCommands.registerCommand("autoShootAlign", new AutoShoot(intake, shooter,drivetrain, true));
-    NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain));
+    NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, intake));
     NamedCommands.registerCommand("deflect", new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();

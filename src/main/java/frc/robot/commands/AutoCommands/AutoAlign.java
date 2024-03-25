@@ -13,13 +13,17 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.LimelightHelpers;
+import frc.robot.Subsystems.Intake;
 
 public class AutoAlign extends Command {
   private final CommandSwerveDrivetrain drivetrain;
+  private final Intake intake;
   /** Creates a new AutoAlign. */
-  public AutoAlign(CommandSwerveDrivetrain drivetrain) {
+  public AutoAlign(CommandSwerveDrivetrain drivetrain, Intake intake) {
     this.drivetrain = drivetrain;
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.

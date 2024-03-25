@@ -20,8 +20,8 @@
         "y": 4.251242788199862
       },
       "prevControl": {
-        "x": 1.6441815740774344,
-        "y": 4.691026524910193
+        "x": 1.366984552150922,
+        "y": 4.651046185209253
       },
       "nextControl": null,
       "isLocked": false,
@@ -50,7 +50,7 @@
     },
     {
       "name": "Auto Align",
-      "waypointRelativePos": 0.8,
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {

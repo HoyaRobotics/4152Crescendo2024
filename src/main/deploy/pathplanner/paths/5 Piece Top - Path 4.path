@@ -54,7 +54,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "AlignIntake",
+      "name": "StopIntake",
       "waypointRelativePos": 0.4,
       "command": {
         "type": "parallel",
@@ -64,12 +64,6 @@
               "type": "named",
               "data": {
                 "name": "autoIntake"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "autoAlign"
               }
             }
           ]
@@ -87,6 +81,23 @@
               "type": "named",
               "data": {
                 "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.6,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
               }
             }
           ]

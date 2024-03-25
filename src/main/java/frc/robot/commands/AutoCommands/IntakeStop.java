@@ -24,6 +24,7 @@ public class IntakeStop extends Command {
   public void initialize() {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
+    PPHolonomicDriveController.setRotationTargetOverride(null);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 8.049839870562796,
-        "y": 2.3756018872419604
+        "x": 8.211618708951704,
+        "y": 2.433470009797163
       },
       "prevControl": {
-        "x": 5.6644416868786,
-        "y": 1.675166691622166
+        "x": 5.826220525267509,
+        "y": 1.7330348141773684
       },
       "nextControl": {
-        "x": 8.690883545246633,
-        "y": 2.5638344241614446
+        "x": 8.852662383635542,
+        "y": 2.621702546716647
       },
       "isLocked": false,
       "linkedName": null
@@ -47,7 +47,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 15.580923848251707,
+      "rotationDegrees": 20.0,
       "rotateFast": true
     }
   ],
@@ -72,7 +72,7 @@
     },
     {
       "name": "StopIntake",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 1.2,
       "command": {
         "type": "parallel",
         "data": {
@@ -89,7 +89,7 @@
     },
     {
       "name": "AutoAlign",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {

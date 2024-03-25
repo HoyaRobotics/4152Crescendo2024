@@ -13,25 +13,19 @@ import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.IntakeConstants;
-import monologue.LogLevel;
-import monologue.Logged;
-import monologue.Annotations.Log;
 
 
-public class Intake extends SubsystemBase implements Logged {
+public class Intake extends SubsystemBase {
   private final TalonFX rotationMotor = new TalonFX(IntakeConstants.rotatoinMotorID);
   private final CANSparkFlex rollerMotor = new CANSparkFlex(IntakeConstants.rollerMotorID, MotorType.kBrushless);
 
   private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
   private final VoltageOut voltageRequest = new VoltageOut(0);
 
-  @Log.NT(level = LogLevel.DEFAULT) Pose3d intakePose;
+  //@Log.NT(level = LogLevel.DEFAULT) Pose3d intakePose;
 
   //@Log.NT(level = LogLevel.DEFAULT) double IntakeRotationPosition = rotationMotor.getPosition().getValueAsDouble();
 
@@ -49,7 +43,7 @@ public class Intake extends SubsystemBase implements Logged {
     SmartDashboard.putNumber("IntakeRotationPosition", rotationMotor.getPosition().getValueAsDouble());
     SmartDashboard.putNumber("IntakeRollerVelocity", rollerMotor.getEncoder(/*SparkRelativeEncoder.Type.kQuadrature, 7168*/).getVelocity());
 
-    intakePose = new Pose3d(0, 0, 0, new Rotation3d(0, Units.rotationsToRadians(rotationMotor.getPosition().getValueAsDouble()), 0));
+    //intakePose = new Pose3d(0, 0, 0, new Rotation3d(0, Units.rotationsToRadians(rotationMotor.getPosition().getValueAsDouble()), 0));
   }
 
   private void configureRotationMotor() {
