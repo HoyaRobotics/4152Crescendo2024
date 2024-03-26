@@ -29,6 +29,7 @@ import frc.robot.commands.Elevate;
 import frc.robot.commands.HoldClimber;
 import frc.robot.commands.HoldElevator;
 import frc.robot.commands.RunTrap;
+import frc.robot.commands.TrapAmpShot;
 import frc.robot.commands.TrapScoring;
 import frc.robot.commands.AutoCommands.AutoAlign;
 import frc.robot.commands.AutoCommands.AutoShoot;
@@ -89,7 +90,8 @@ public class RobotContainer {
     //driverController.leftBumper().whileTrue(new Shoot(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new ShootPose(drivetrain, shooter, intake));
     driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake, ShooterConstants.shootingRPM));
-    driverController.b().whileTrue(new Amp(intake));
+    //driverController.b().whileTrue(new Amp(intake)); // Disabled for the trapshot test
+    driverController.b().onTrue(new TrapAmpShot(elevator, intake, shooter, trap));
     driverController.povLeft().whileTrue(new AutoStage(drivetrain, climber, stageLocation.leftStage));
     driverController.povLeft().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
     driverController.povUp().whileTrue(new AutoStage(drivetrain, climber, stageLocation.centerStage));

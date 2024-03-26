@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "RunIntake",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -50,7 +50,7 @@
     },
     {
       "name": "AutoAlign",
-      "waypointRelativePos": 0.35,
+      "waypointRelativePos": 0.25,
       "command": {
         "type": "parallel",
         "data": {
