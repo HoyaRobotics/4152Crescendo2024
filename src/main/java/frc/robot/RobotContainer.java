@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -12,8 +11,6 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.SteerRequestType;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,6 +20,7 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Limelight;
+import frc.robot.commands.AutoAmp;
 import frc.robot.commands.AutoStage;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Elevate;
@@ -32,6 +30,7 @@ import frc.robot.commands.RunTrap;
 import frc.robot.commands.TrapAmpShot;
 import frc.robot.commands.TrapScoring;
 import frc.robot.commands.AutoCommands.AutoAlign;
+import frc.robot.commands.AutoCommands.AutoManuelShoot;
 import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.AutoCommands.IntakeStart;
 import frc.robot.commands.AutoCommands.IntakeStop;
@@ -72,7 +71,7 @@ public class RobotContainer {
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
 
-  private final Telemetry logger = new Telemetry(MaxSpeed);
+  //private final Telemetry logger = new Telemetry(MaxSpeed);
 
 
   private void configureBindings() {
@@ -98,7 +97,7 @@ public class RobotContainer {
     driverController.povUp().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
     driverController.povRight().whileTrue(new AutoStage(drivetrain, climber, stageLocation.rightStage));
     driverController.povRight().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
-    driverController.rightStick().whileTrue(new AutoAmp(intake, drivetrain));
+    driverController.rightStick().whileTrue(new AutoAmp(intake, drivetrain, elevator, shooter, trap));
     driverController.a().whileTrue(new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
     operatorController.a().whileTrue(new Climb(climber, ()-> -operatorController.getLeftY())).onFalse(new HoldClimber(climber));
     operatorController.y().whileTrue(new Elevate(elevator, ()-> operatorController.getLeftY())).onFalse(new HoldElevator(elevator));
@@ -111,10 +110,10 @@ public class RobotContainer {
     //driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
     //driverController.povUp().whileTrue(new ShootFromIntake(intake));
 
-    if (Utils.isSimulation()) {
+    /*if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
-    drivetrain.registerTelemetry(logger::telemeterize);
+    drivetrain.registerTelemetry(logger::telemeterize);*/
 
     
     //TODO remove line after this. It's being used for testing purposes
@@ -131,6 +130,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoShootAlign", new AutoShoot(intake, shooter,drivetrain, true));
     NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, intake));
     NamedCommands.registerCommand("deflect", new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
+    NamedCommands.registerCommand("manuelShoot", new AutoManuelShoot(shooter, intake, ShooterConstants.shootingRPM));
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();
     SmartDashboard.putData("Auto Chooser", autoChooser);

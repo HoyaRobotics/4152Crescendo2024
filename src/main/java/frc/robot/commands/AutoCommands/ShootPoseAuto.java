@@ -103,7 +103,7 @@ public class ShootPoseAuto extends Command {
         timeStampLock = false;
       }
 
-      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.4){
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.2){
         finished = true;
       }
     };

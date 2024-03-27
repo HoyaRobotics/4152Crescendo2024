@@ -46,7 +46,7 @@ public class ElevatorConstants {
     public static final double elevatorHandoffPosition = 0.5; //0.6
     public static final double trapPosition = 2.27;
     public static final double ampPosition = 0.6;
-    public static final double ShootDeflect = 0.2;
+    public static final double ShootDeflect = 0.235;//
 
     public static final double positionError = 0.05;
 }

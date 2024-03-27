@@ -46,7 +46,7 @@ public class IntakeConstants {
         .withReverseSoftLimitThreshold(-0.58);
     public static final double stowedPosition = 0.01;
     public static final double shootPosition = 0.01;
-    public static final double floorPosition = -0.55;
+    public static final double floorPosition = -0.562; //
     public static final double outakePosition = -0.078;
     public static final double sourcePosition = 0.0;
     public static final double ampPosition = -0.21;//-0.21
@@ -60,6 +60,7 @@ public class IntakeConstants {
     public static final double trapSpeed = -0.5;
     public static final double shootTrapSpeed = -0.70;
     public static final double outakeSpeed = -1.0;
+    public static final double handoffAmpSpeed = -1.0;
 
     public static final double stallTriggerTime = 0.05;
     public static final double stallRPM = 0.05;

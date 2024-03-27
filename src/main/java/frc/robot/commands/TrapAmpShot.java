@@ -22,9 +22,9 @@ public class TrapAmpShot extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ElevatorPosition(elevator, ElevatorConstants.elevatorHandoffPosition),
-      new TrapHandoff(intake, shooter, elevator, trap),
-      new ElevatorPosition(elevator, ElevatorConstants.ampPosition),
-      new TrapFeedShot(trap),
+      new AmpHandoff(intake, shooter, elevator, trap),
+      //new ElevatorPosition(elevator, ElevatorConstants.ampPosition),
+      //new TrapFeedShot(trap, elevator),
       new ElevatorPosition(elevator, ElevatorConstants.elevatorStowedPosition)
     );
   }

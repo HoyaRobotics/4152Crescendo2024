@@ -8,15 +8,19 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Trap;
+import frc.robot.generated.ElevatorConstants;
 import frc.robot.generated.TrapConstants;
 
 public class TrapFeedShot extends Command {
   private double scoreTime;
   private final Trap trap;
+  private final Elevator elevator;
   /** Creates a new TrapFeedShot. */
-  public TrapFeedShot(Trap trap) {
+  public TrapFeedShot(Trap trap, Elevator elevator) {
     this.trap = trap;
+    this.elevator = elevator;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(trap);
   }
@@ -38,6 +42,7 @@ public class TrapFeedShot extends Command {
   @Override
   public void end(boolean interrupted) {
     trap.setTrapSpeed(0.0);
+    elevator.setElevatorPosition(ElevatorConstants.elevatorStowedPosition);
   }
 
   // Returns true when the command should end.

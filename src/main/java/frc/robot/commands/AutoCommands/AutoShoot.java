@@ -102,7 +102,7 @@ public class AutoShoot extends Command {
         timeStampLock = false;
       }
 
-      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.4){
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.1){ //0.4
         finished = true;
       }
 

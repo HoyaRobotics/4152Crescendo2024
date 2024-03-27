@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.0061784798894275,
-        "y": 6.290240112947758
+        "x": 2.792950001484418,
+        "y": 6.889945208461845
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0546463950070764,
-        "y": 6.288907434957727
+        "x": 1.7534611692600006,
+        "y": 6.396854352150263
       },
       "isLocked": false,
-      "linkedName": "4 Piece Wing Path 1 end"
+      "linkedName": "BP Path 1 End"
     },
     {
       "anchor": {
-        "x": 14.720418012264597,
-        "y": 7.729532342181567
+        "x": 2.792950001484418,
+        "y": 4.19793566859861
       },
       "prevControl": {
-        "x": 14.735077470154941,
-        "y": 8.125337705220865
-      },
-      "nextControl": {
-        "x": 14.706724142398604,
-        "y": 7.35979785579979
-      },
-      "isLocked": false,
-      "linkedName": "End Of Test Path 1.1"
-    },
-    {
-      "anchor": {
-        "x": 2.87557603686636,
-        "y": 5.52661562465982
-      },
-      "prevControl": {
-        "x": 2.127943684458798,
-        "y": 5.467977793098444
+        "x": 1.127102513945287,
+        "y": 5.330711960125218
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "runIntake",
-      "waypointRelativePos": 0.2,
+      "name": "Start Intake",
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "parallel",
         "data": {
@@ -65,8 +49,25 @@
       }
     },
     {
-      "name": "stopIntake",
-      "waypointRelativePos": 2.0,
+      "name": "Auto Align",
+      "waypointRelativePos": 0.9,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Stop Intake",
+      "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -90,13 +91,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 2.0454084888874666,
+    "rotation": -25.769327624338775,
     "rotateFast": true
   },
   "reversed": false,
-  "folder": "4 Piece Wing",
+  "folder": "Big Piece",
   "previewStartingState": {
-    "rotation": 19.430335187247568,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

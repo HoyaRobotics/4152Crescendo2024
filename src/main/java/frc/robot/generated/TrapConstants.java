@@ -13,8 +13,8 @@ public class TrapConstants {
     public static final double trapHandoffSpeed = 0.2;
     public static final double trapHandoffTime = 0.35;
     public static final double trapScoreSpeed = 1.0;
-    public static final double trapScoreTime = 3.0;
+    public static final double trapScoreTime = 2.0;
 
-    public static final double trapAmpScoreSpeed = 0.75;
-    public static final double trapAmpScoreTime = 3.0;
+    public static final double trapAmpScoreSpeed = 1.0;
+    public static final double trapAmpScoreTime = 0.7; //0.6
 }
