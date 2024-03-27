@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.4357923001560295,
+        "y": 4.104648209296419
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.500743858630575,
+        "y": 5.849123698247397
+      },
+      "isLocked": false,
+      "linkedName": "5PC - P1 End"
+    },
+    {
+      "anchor": {
+        "x": 2.5530679632787843,
+        "y": 5.541275082550166
+      },
+      "prevControl": {
+        "x": 1.8970572226858744,
+        "y": 5.398345368119309
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "5PC - Path 2 End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.35,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 90.0,
+    "maxAngularAcceleration": 360.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "5 Piece Centre",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

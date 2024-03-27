@@ -1,0 +1,274 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.728981457962916,
+        "y": 5.541275082550166
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.960375920751842,
+        "y": 5.731848035124642
+      },
+      "isLocked": false,
+      "linkedName": "4PM P1 End"
+    },
+    {
+      "anchor": {
+        "x": 8.021045756377227,
+        "y": 7.227112739939765
+      },
+      "prevControl": {
+        "x": 7.302732319750354,
+        "y": 6.889945208461845
+      },
+      "nextControl": {
+        "x": 8.739359193004098,
+        "y": 7.564280271417686
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.9781922420987708,
+        "y": 5.907761529808774
+      },
+      "prevControl": {
+        "x": 4.414819115352517,
+        "y": 6.684712797997025
+      },
+      "nextControl": {
+        "x": 1.821631005076358,
+        "y": 5.2822743301946105
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.021045756377227,
+        "y": 4.089988751406074
+      },
+      "prevControl": {
+        "x": 7.185456656627599,
+        "y": 3.6648644725860886
+      },
+      "nextControl": {
+        "x": 8.19875784707697,
+        "y": 4.18040367474454
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.9781922420987708,
+        "y": 5.248085924743279
+      },
+      "prevControl": {
+        "x": 4.370840741681484,
+        "y": 4.295221161870895
+      },
+      "nextControl": {
+        "x": 2.3681441724295826,
+        "y": 5.665487235569566
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.509089589607751,
+        "y": 4.295221161870895
+      },
+      "prevControl": {
+        "x": 2.2195652962734487,
+        "y": 4.980550818244493
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 32.735226272107575,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 7.594643368591529,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 4,
+      "rotationDegrees": -5.710593137499619,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 3,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "StartIntake",
+      "waypointRelativePos": 0.55,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "startIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 1.4000000000000001,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "FlyShooting",
+      "waypointRelativePos": 2.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "manuelShoot"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StartIntake",
+      "waypointRelativePos": 2.6500000000000004,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "startIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 3.4000000000000004,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "FlyShooting",
+      "waypointRelativePos": 4.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "manuelShoot"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StartIntake",
+      "waypointRelativePos": 4.35,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "startIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 5.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.35,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 90.0,
+    "maxAngularAcceleration": 360.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -27.645975363738707,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Double Middle 5 Piece",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
