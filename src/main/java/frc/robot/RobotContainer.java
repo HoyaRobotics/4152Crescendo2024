@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -11,6 +12,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.SteerRequestType;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -71,7 +74,10 @@ public class RobotContainer {
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
 
-  //private final Telemetry logger = new Telemetry(MaxSpeed);
+  private final SwerveRequest.SysIdSwerveTranslation identification = new SwerveRequest.SysIdSwerveTranslation()
+      .withVolts(null);
+
+  private final Telemetry logger = new Telemetry(MaxSpeed);
 
 
   private void configureBindings() {
@@ -110,10 +116,10 @@ public class RobotContainer {
     //driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
     //driverController.povUp().whileTrue(new ShootFromIntake(intake));
 
-    /*if (Utils.isSimulation()) {
+    if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
-    drivetrain.registerTelemetry(logger::telemeterize);*/
+    drivetrain.registerTelemetry(logger::telemeterize);
 
     
     //TODO remove line after this. It's being used for testing purposes
