@@ -21,12 +21,14 @@ public class PIDToPose extends Command {
   private final PIDController yController = new PIDController(3.5, 0, 0.02);
 
   private boolean finished = false;
+  private boolean alliance;
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric();
   /** Creates a new PIDToPose. */
-  public PIDToPose(CommandSwerveDrivetrain drivetrain, Pose2d endPose) {
+  public PIDToPose(CommandSwerveDrivetrain drivetrain, Pose2d endPose, boolean isRedAlliance) {
     this.drivetrain = drivetrain;
     this.endPose = endPose;
+    this.alliance = isRedAlliance;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
   }
@@ -54,9 +56,13 @@ public class PIDToPose extends Command {
     double ySpeed = 0.0;
     if(Math.abs(yawController.getPositionError()) < 5) {
       xSpeed = xController.calculate(drivetrain.getState().Pose.getX());
-      xSpeed = MathUtil.clamp(xSpeed, -4.2, 4.2);
+      xSpeed = MathUtil.clamp(xSpeed, -4.0, 4.0);
       ySpeed = yController.calculate(drivetrain.getState().Pose.getY());
-      ySpeed = MathUtil.clamp(ySpeed, -4.2, 4.2);
+      ySpeed = MathUtil.clamp(ySpeed, -4.0, 4.0);
+    }
+    if(alliance == true) {
+      xSpeed = -xSpeed;
+      ySpeed = -ySpeed;
     }
     drivetrain.setControl(drive.withRotationalRate(yawSpeed).withVelocityX(xSpeed).withVelocityY(ySpeed));
 

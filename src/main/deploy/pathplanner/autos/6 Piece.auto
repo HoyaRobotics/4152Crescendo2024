@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7646141006567733,
-      "y": 4.441815740774339
+      "x": 0.7470258312823471,
+      "y": 4.422709128625429
     },
-    "rotation": -58.39249775375103
+    "rotation": -59.578655196555296
   },
   "command": {
     "type": "sequential",
@@ -20,13 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "5 Piece Center Path 1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "autoShoot"
+            "pathName": "6 Piece"
           }
         }
       ]

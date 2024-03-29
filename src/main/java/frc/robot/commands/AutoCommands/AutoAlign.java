@@ -37,7 +37,7 @@ public class AutoAlign extends Command {
   public void execute() {
     if(LimelightHelpers.getTV("limelight-intake")){
       double limelighMeasurement = LimelightHelpers.getTX("limelight-intake");
-      limelighMeasurement = MathUtil.inverseInterpolate(-29.8, 29.8, limelighMeasurement);
+      limelighMeasurement = MathUtil.inverseInterpolate(-31.25, 31.25, limelighMeasurement);
       limelighMeasurement = MathUtil.interpolate(-20, 20, limelighMeasurement);
       double rotation = drivetrain.getState().Pose.getRotation().getDegrees()-limelighMeasurement;
       Rotation2d rotationTarget = Rotation2d.fromDegrees(rotation);

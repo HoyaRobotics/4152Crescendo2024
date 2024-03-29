@@ -42,6 +42,7 @@ import frc.robot.commands.IntakeCommands.*;
 import frc.robot.commands.ShootCommands.ManuelShoot;
 import frc.robot.commands.ShootCommands.ShootDeflect;
 import frc.robot.commands.ShootCommands.ShootPose;
+import frc.robot.commands.ShootCommands.ShootPoseDefence;
 import frc.robot.generated.ShooterConstants;
 import frc.robot.generated.TunerConstants;
 import frc.robot.generated.OtherConstants.stageLocation;
@@ -74,8 +75,8 @@ public class RobotContainer {
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
 
-  private final SwerveRequest.SysIdSwerveTranslation identification = new SwerveRequest.SysIdSwerveTranslation()
-      .withVolts(null);
+  /*private final SwerveRequest.SysIdSwerveTranslation identification = new SwerveRequest.SysIdSwerveTranslation()
+      .withVolts(null);*/
 
   private final Telemetry logger = new Telemetry(MaxSpeed);
 
@@ -112,6 +113,7 @@ public class RobotContainer {
     operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(true), climber));
     operatorController.rightBumper().onTrue(new TrapScoring(elevator, intake, shooter, trap));
     operatorController.rightTrigger().whileTrue(new TryHarder(intake));
+    operatorController.rightStick().whileTrue(new ShootPoseDefence(drivetrain, shooter, intake));
 
     //driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));
     //driverController.povUp().whileTrue(new ShootFromIntake(intake));

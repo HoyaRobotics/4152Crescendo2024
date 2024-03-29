@@ -55,6 +55,7 @@ public class AmpHandoff extends Command {
     intake.setRollerSpeed(IntakeConstants.stallRPM);
     trap.stopTrapMotor();
     shooter.stopShooter();
+    elevator.setElevatorPosition(ElevatorConstants.elevatorStowedPosition);
   }
 
   // Returns true when the command should end.

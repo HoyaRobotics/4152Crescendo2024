@@ -2,25 +2,31 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7646141006567733,
-      "y": 4.441815740774339
+      "x": 1.3656518741608918,
+      "y": 5.541275082550166
     },
-    "rotation": -58.39249775375103
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Big Piece Path 1"
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "deflect"
+            "name": "autoShoot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "5 Piece Center Path 1"
+            "pathName": "LTA 5 Piece Path 1"
           }
         },
         {

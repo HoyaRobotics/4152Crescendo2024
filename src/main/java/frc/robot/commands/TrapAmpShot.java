@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
@@ -21,7 +20,7 @@ public class TrapAmpShot extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ElevatorPosition(elevator, ElevatorConstants.elevatorHandoffPosition),
+      new ElevatorPosition(elevator, ElevatorConstants.ampPosition),
       new AmpHandoff(intake, shooter, elevator, trap),
       //new ElevatorPosition(elevator, ElevatorConstants.ampPosition),
       //new TrapFeedShot(trap, elevator),

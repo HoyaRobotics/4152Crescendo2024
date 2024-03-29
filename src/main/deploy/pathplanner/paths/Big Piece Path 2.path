@@ -48,12 +48,12 @@
     },
     {
       "anchor": {
-        "x": 2.792950001484418,
-        "y": 6.889945208461845
+        "x": 2.9089921237855143,
+        "y": 6.993894091684287
       },
       "prevControl": {
-        "x": 0.8111586931394954,
-        "y": 5.930417055639307
+        "x": 1.327004212449983,
+        "y": 6.260921197167069
       },
       "nextControl": null,
       "isLocked": false,
@@ -79,7 +79,18 @@
       "maxWaypointRelativePos": 2.05,
       "constraints": {
         "maxVelocity": 1.8,
-        "maxAcceleration": 3.0,
+        "maxAcceleration": 3.2,
+        "maxAngularVelocity": 90.0,
+        "maxAngularAcceleration": 360.0
+      }
+    },
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 2.05,
+      "maxWaypointRelativePos": 3.0,
+      "constraints": {
+        "maxVelocity": 4.35,
+        "maxAcceleration": 2.9,
         "maxAngularVelocity": 90.0,
         "maxAngularAcceleration": 360.0
       }
@@ -173,7 +184,7 @@
     },
     {
       "name": "RunIntake2",
-      "waypointRelativePos": 2.25,
+      "waypointRelativePos": 2.15,
       "command": {
         "type": "parallel",
         "data": {
@@ -208,13 +219,13 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.35,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 3.2,
     "maxAngularVelocity": 90.0,
     "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 29.489013563138606,
+    "rotation": 28.29611564767986,
     "rotateFast": true
   },
   "reversed": false,
@@ -223,5 +234,5 @@
     "rotation": 0.0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
