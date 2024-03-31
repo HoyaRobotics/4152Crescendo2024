@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ShootCommands;
+package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,7 +13,7 @@ import frc.robot.generated.ElevatorConstants;
 import frc.robot.generated.IntakeConstants;
 import frc.robot.generated.ShooterConstants;
 
-public class ShootDeflect extends Command {
+public class AutoShootDeflect extends Command {
   private final Shooter shooter;
   private final Intake intake;
   private final Elevator elevator;
@@ -22,7 +22,7 @@ public class ShootDeflect extends Command {
   private boolean timeStampLock = true;
   private double shootTime = 0;
   /** Creates a new ShootDeflect. */
-  public ShootDeflect(Shooter shooter, Intake intake, Elevator elevator, double speed) {
+  public AutoShootDeflect(Shooter shooter, Intake intake, Elevator elevator, double speed) {
     this.shooter = shooter;
     this.intake = intake;
     this.elevator = elevator;
@@ -66,7 +66,6 @@ public class ShootDeflect extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    shooter.stopShooter();
     elevator.setElevatorPosition(ElevatorConstants.elevatorStowedPosition);
     finished = false;
   }

@@ -5,12 +5,16 @@
 package frc.robot;
 
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.wpilibj.DataLogManager;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.generated.ShooterConstants;
+import monologue.Logged;
+import monologue.Monologue;
 
-public class Robot extends TimedRobot{
+public class Robot extends TimedRobot implements Logged{
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
@@ -21,14 +25,11 @@ public class Robot extends TimedRobot{
     m_robotContainer = new RobotContainer();
     System.out.println("Loading AprilTagLayout");
     ShooterConstants.aprilTags = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
-    
-    /*DataLogManager.start();
-    DataLog log = DataLogManager.getLog();
-    DriverStation.startDataLog(log);*/
 
-    /*boolean fileOnly = false;
+    DriverStation.startDataLog(DataLogManager.getLog());
+    boolean fileOnly = false;
     boolean lazyLogging = false;
-    Monologue.setupMonologue(this, "Robot", fileOnly, lazyLogging);*/
+    Monologue.setupMonologue(this, "Robot", fileOnly, lazyLogging);
   }
 
   @Override
@@ -37,9 +38,9 @@ public class Robot extends TimedRobot{
 
     // setFileOnly is used to shut off NetworkTables broadcasting for most logging calls.
     // Basing this condition on the connected state of the FMS is a suggestion only.
-    //Monologue.setFileOnly(DriverStation.isFMSAttached());
+    Monologue.setFileOnly(DriverStation.isFMSAttached());
     // This method needs to be called periodically, or no logging annotations will process properly.
-    //Monologue.updateAll();
+    Monologue.updateAll();
   }
 
   @Override

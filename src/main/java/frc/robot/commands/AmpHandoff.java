@@ -12,6 +12,7 @@ import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
 import frc.robot.generated.ElevatorConstants;
 import frc.robot.generated.IntakeConstants;
+import frc.robot.generated.ShooterConstants;
 import frc.robot.generated.TrapConstants;
 
 public class AmpHandoff extends Command {
@@ -34,8 +35,7 @@ public class AmpHandoff extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setTrapShooterSpeeds();
-    //shooter.setShooterSpeeds(ShooterConstants.trapHandoffRPM, 0.0);
+    shooter.setShooterSpeeds(ShooterConstants.ampHandoffRPM, 0.0);
     intake.setIntakePosition(IntakeConstants.shootPosition);
     intake.setRollerSpeed(IntakeConstants.handoffAmpSpeed);
     elevator.setElevatorPosition(ElevatorConstants.ampPosition);

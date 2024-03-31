@@ -15,7 +15,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.CommandSwerveDrivetrain;
 import frc.robot.Subsystems.Intake;
@@ -73,8 +72,8 @@ public class ShootPose extends Command {
     Pose2d currentPose = drivetrain.getState().Pose;
     rotationToTarget = PhotonUtils.getYawToPose(currentPose, targetPose);
     distanceToTarget = PhotonUtils.getDistanceToPose(currentPose, targetPose);
-    SmartDashboard.putNumber("Yaw To Target", rotationToTarget.getDegrees());
-    SmartDashboard.putNumber("Distance To Target", distanceToTarget);
+    //SmartDashboard.putNumber("Yaw To Target", rotationToTarget.getDegrees());
+    //SmartDashboard.putNumber("Distance To Target", distanceToTarget);
 
     double yawSpeed = yawController.calculate(-rotationToTarget.getDegrees());
     yawSpeed = MathUtil.clamp(yawSpeed, -3.8, 3.8);
@@ -86,16 +85,20 @@ public class ShootPose extends Command {
       distanceSpeed = 0.0;
     }
 
-    SmartDashboard.putNumber("Yaw Speed", yawSpeed);
-    SmartDashboard.putNumber("Distance Speed", distanceSpeed);
+    //SmartDashboard.putNumber("Yaw Speed", yawSpeed);
+    //SmartDashboard.putNumber("Distance Speed", distanceSpeed);
 
     drivetrain.setControl(drive.withRotationalRate(yawSpeed).withVelocityX(distanceSpeed).withVelocityY(0));
 
-    System.out.println(yawController.atSetpoint());
-    System.out.println(distanceController.atSetpoint());
-    System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
-    System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
-    System.out.println("Cycle");
+    shooter.log("isYawAtPosition", yawController.atSetpoint());
+    shooter.log("isDistanceAtPosition", distanceController.atSetpoint());
+    intake.log("isIntakeAtPosition", intake.isIntakeAtPosition(IntakeConstants.shootPosition));
+    shooter.log("isShooterAtSpeed", shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
+    //System.out.println(yawController.atSetpoint());
+    //System.out.println(distanceController.atSetpoint());
+    //System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
+    //System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
+    //System.out.println("Cycle");
     if(yawController.atSetpoint() && distanceController.atSetpoint() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && shooter.isShooterAtSpeed(ShooterConstants.shootingRPM)) {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
       if(timeStampLock){

@@ -35,6 +35,7 @@ import frc.robot.commands.TrapScoring;
 import frc.robot.commands.AutoCommands.AutoAlign;
 import frc.robot.commands.AutoCommands.AutoManuelShoot;
 import frc.robot.commands.AutoCommands.AutoShoot;
+import frc.robot.commands.AutoCommands.AutoShootDeflect;
 import frc.robot.commands.AutoCommands.IntakeStart;
 import frc.robot.commands.AutoCommands.IntakeStop;
 import frc.robot.commands.AutoCommands.ShootPoseAuto;
@@ -46,10 +47,11 @@ import frc.robot.commands.ShootCommands.ShootPoseDefence;
 import frc.robot.generated.ShooterConstants;
 import frc.robot.generated.TunerConstants;
 import frc.robot.generated.OtherConstants.stageLocation;
+import monologue.Logged;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Trap;
 
-public class RobotContainer {
+public class RobotContainer implements Logged{
 
   private final SendableChooser<Command> autoChooser;
 
@@ -137,7 +139,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("autoIntake", new IntakeStart(intake, drivetrain, false));
     NamedCommands.registerCommand("autoShootAlign", new AutoShoot(intake, shooter,drivetrain, true));
     NamedCommands.registerCommand("autoAlign", new AutoAlign(drivetrain, intake));
-    NamedCommands.registerCommand("deflect", new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
+    NamedCommands.registerCommand("deflect", new AutoShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
     NamedCommands.registerCommand("manuelShoot", new AutoManuelShoot(shooter, intake, ShooterConstants.shootingRPM));
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();

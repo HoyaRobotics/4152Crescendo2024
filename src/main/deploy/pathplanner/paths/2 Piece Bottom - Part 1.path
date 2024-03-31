@@ -3,50 +3,102 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.4822008689363435,
-        "y": 4.138935246844241
+        "x": 0.7529741173297735,
+        "y": 4.4561079109016335
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.9769138392692055,
-        "y": 3.991990800210718
+        "x": 1.3384187673555499,
+        "y": 4.1691568279283615
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "2 Piece Bottom - Part 1"
     },
     {
       "anchor": {
-        "x": 2.2504323767597416,
-        "y": 3.54625931208903
+        "x": 2.611937304846085,
+        "y": 4.122134605005635
       },
       "prevControl": {
-        "x": 1.731228665321292,
-        "y": 3.8009630195871367
+        "x": 1.9085632202936207,
+        "y": 4.137808679313211
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "2 Piece Bottom - Part 1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RunIntake",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "startIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.5,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 4.35,
+    "maxVelocity": 1.5,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 90.0,
     "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -40.53284093861076,
-    "rotateFast": false
+    "rotation": -3.047089503385738,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "2 Sides",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -59.94187452051334,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

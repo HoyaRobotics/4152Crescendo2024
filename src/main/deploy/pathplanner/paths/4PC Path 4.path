@@ -3,59 +3,75 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.9018860901683614,
-        "y": 6.979861215092358
+        "x": 2.4855434913733787,
+        "y": 4.2075093219398845
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.087237959678784,
-        "y": 7.239463070811583
-      },
-      "isLocked": false,
-      "linkedName": "5 Piece Top - Path 2"
-    },
-    {
-      "anchor": {
-        "x": 7.9802861658229265,
-        "y": 7.401101962108458
-      },
-      "prevControl": {
-        "x": 6.903494676825222,
-        "y": 7.2694941134531845
-      },
-      "nextControl": {
-        "x": 8.421119505723503,
-        "y": 7.45498159254075
+        "x": 2.4071731198354995,
+        "y": 5.789611197360819
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.9018860901683614,
-        "y": 6.979861215092358
+        "x": 5.09135834500786,
+        "y": 4.359351916794526
       },
       "prevControl": {
-        "x": 4.346839815398008,
-        "y": 7.3913056656662235
+        "x": 4.2880620367445985,
+        "y": 4.8295741460218
+      },
+      "nextControl": {
+        "x": 5.850109366538098,
+        "y": 3.915204977362192
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.02534912945721,
+        "y": 2.6107130018555975
+      },
+      "prevControl": {
+        "x": 7.393488008933059,
+        "y": 2.9486852291127
+      },
+      "nextControl": {
+        "x": 8.657210249981361,
+        "y": 2.272740774598495
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.8822934972838916,
+        "y": 5.387963043229189
+      },
+      "prevControl": {
+        "x": 3.9549879577086124,
+        "y": 5.280203782364605
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "5 Piece Top - Path 2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 5.025041229383914,
-      "rotateFast": true
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": -29.01724135281605,
+      "rotateFast": false
     }
   ],
   "constraintZones": [
     {
-      "name": "Pickup 1",
-      "minWaypointRelativePos": 0.75,
-      "maxWaypointRelativePos": 1.1,
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 1.5500000000000003,
+      "maxWaypointRelativePos": 2.05,
       "constraints": {
         "maxVelocity": 2.0,
         "maxAcceleration": 4.0,
@@ -66,8 +82,8 @@
   ],
   "eventMarkers": [
     {
-      "name": "StartIntake",
-      "waypointRelativePos": 0.45,
+      "name": "RunIntake",
+      "waypointRelativePos": 1.0499999999999998,
       "command": {
         "type": "parallel",
         "data": {
@@ -75,24 +91,7 @@
             {
               "type": "named",
               "data": {
-                "name": "autoIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "StopIntake",
-      "waypointRelativePos": 1.3,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "stopIntake"
+                "name": "startIntake"
               }
             }
           ]
@@ -101,7 +100,7 @@
     },
     {
       "name": "AutoAlign",
-      "waypointRelativePos": 0.55,
+      "waypointRelativePos": 1.4,
       "command": {
         "type": "parallel",
         "data": {
@@ -110,6 +109,23 @@
               "type": "named",
               "data": {
                 "name": "autoAlign"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 2.15,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
               }
             }
           ]
@@ -125,13 +141,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 25.80453240063876,
+    "rotation": -1.7899106082460154,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5 Piece Top",
+  "folder": "4 Piece Center",
   "previewStartingState": {
-    "rotation": 25.48920055628665,
+    "rotation": -28.44292862436333,
     "velocity": 0
   },
   "useDefaultConstraints": false

@@ -41,8 +41,10 @@ public class AutoManuelShoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM))System.out.println("shooterNotAtSpeed");
-    if(!intake.isIntakeAtPosition(IntakeConstants.shootPosition))System.out.println("IntakeNotInPosition");
+    intake.log("isIntakeAtPosition", intake.isIntakeAtPosition(IntakeConstants.shootPosition));
+    shooter.log("isShooterAtSpeed", shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM));
+    //if(!shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM))System.out.println("shooterNotAtSpeed");
+    //if(!intake.isIntakeAtPosition(IntakeConstants.shootPosition))System.out.println("IntakeNotInPosition");
     if(shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition)) 
     {
 
@@ -63,7 +65,6 @@ public class AutoManuelShoot extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
-    //shooter.stopShooter();
     finished = false;
   }
 

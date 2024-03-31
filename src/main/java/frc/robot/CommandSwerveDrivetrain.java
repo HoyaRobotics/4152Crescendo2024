@@ -157,11 +157,11 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public void periodic() {
 
         SmartDashboard.putNumber("Drive Velocity", this.getModule(1).getCurrentState().speedMetersPerSecond);
-        /* Periodically try to apply the operator perspective */
-        /* If we haven't applied the operator perspective before, then we should apply it regardless of DS state */
-        /* This allows us to correct the perspective in case the robot code restarts mid-match */
-        /* Otherwise, only check and apply the operator perspective if the DS is disabled */
-        /* This ensures driving behavior doesn't change until an explicit disable event occurs during testing*/
+        /* Periodically try to apply the operator perspective
+        If we haven't applied the operator perspective before, then we should apply it regardless of DS state
+        This allows us to correct the perspective in case the robot code restarts mid-match
+        Otherwise, only check and apply the operator perspective if the DS is disabled
+        This ensures driving behavior doesn't change until an explicit disable event occurs during testing*/
         if (!hasAppliedOperatorPerspective || DriverStation.isDisabled()) {
             DriverStation.getAlliance().ifPresent((allianceColor) -> {
                 this.setOperatorPerspectiveForward(

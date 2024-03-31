@@ -9,16 +9,23 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ClimberConstants;
+import monologue.LogLevel;
+import monologue.Logged;
+import monologue.Annotations.Log;
 
-public class Climber extends SubsystemBase {
+public class Climber extends SubsystemBase implements Logged {
   private TalonFX rightClimberMotor = new TalonFX(ClimberConstants.rightClimberMotorID);
 
   private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
 
-  //@Log.NT(level = LogLevel.DEFAULT) Pose3d climberPose;
+  @Log.NT(level = LogLevel.DEFAULT) Pose3d climberPose;
   /** Creates a new Climber. */
   public Climber() {
     configureMotorsControllers();
@@ -29,7 +36,9 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Climber Position", rightClimberMotor.getPosition().getValueAsDouble());
     // This method will be called once per scheduler run
-    //climberPose = new Pose3d(0, 0, 0, new Rotation3d(0, Units.rotationsToRadians(rightClimberMotor.getPosition().getValueAsDouble()), 0));
+    double climberPosition = MathUtil.inverseInterpolate(0.0, 3.69, rightClimberMotor.getPosition().getValueAsDouble());
+    double climberRotatoins = MathUtil.interpolate(0.0, 73.6, climberPosition);
+    climberPose = new Pose3d(-0.223638, 0, 0.642606, new Rotation3d(0, -Units.degreesToRadians(climberRotatoins), 0));
   }
 
   public void moveClimber(double power) {

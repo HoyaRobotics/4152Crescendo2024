@@ -2,17 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.AutoCommands;
+package frc.robot.commands.ShootCommands;
+
+import java.util.function.DoubleSupplier;
 
 import org.photonvision.PhotonUtils;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.SteerRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,18 +26,25 @@ import frc.robot.Subsystems.Shooter;
 import frc.robot.generated.IntakeConstants;
 import frc.robot.generated.ShooterConstants;
 
-public class ShootPoseAuto extends Command {
+public class ShootToZone extends Command {
   private final CommandSwerveDrivetrain drivetrain;
   private final Shooter shooter;
   private final Intake intake;
 
   private final PIDController yawController = new PIDController(0.1, 0, 0);
-  private final PIDController distanceController = new PIDController(3.5, 0, 0.02);
 
   private Rotation2d rotationToTarget;
   private double distanceToTarget;
 
-  private final SwerveRequest.RobotCentric drive = new SwerveRequest.RobotCentric();
+  private final DoubleSupplier TranslationX;
+  private final DoubleSupplier TranslationY;
+  private double MaxSpeed;
+  private double MaxAngularRate;
+  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+      .withDeadband(MaxSpeed * 0.02).withRotationalDeadband(MaxAngularRate * 0.02) // Add a 2% deadband
+      .withSteerRequestType(SteerRequestType.MotionMagic)
+      .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
+                                                               // driving in open loop
 
   private int targetTag;
   private Pose2d targetPose;
@@ -43,10 +53,14 @@ public class ShootPoseAuto extends Command {
   private boolean timeStampLock = true;
   private double shootTime = 0;
   /** Creates a new ShootPose. */
-  public ShootPoseAuto(CommandSwerveDrivetrain drivetrain, Shooter shooter, Intake intake) {
+  public ShootToZone(CommandSwerveDrivetrain drivetrain, Shooter shooter, Intake intake, double MaxSpeed, double MaxAngularRate, DoubleSupplier TranslationX, DoubleSupplier TranslationY) {
     this.drivetrain = drivetrain;
     this.shooter = shooter;
     this.intake = intake;
+    this.MaxSpeed = MaxSpeed;
+    this.MaxAngularRate = MaxAngularRate;
+    this.TranslationX = TranslationX;
+    this.TranslationY = TranslationY;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain, shooter, intake);
   }
@@ -60,8 +74,6 @@ public class ShootPoseAuto extends Command {
     yawController.setSetpoint(180.0);
     yawController.setTolerance(2.0);
     yawController.enableContinuousInput(-180, 180);
-    distanceController.setSetpoint(3.0);
-    distanceController.setTolerance(Units.inchesToMeters(2.0));
     targetPose = ShooterConstants.aprilTags.getTagPose(targetTag).get().toPose2d();
     timeStampLock = true;
     finished = false;
@@ -78,36 +90,24 @@ public class ShootPoseAuto extends Command {
 
     double yawSpeed = yawController.calculate(-rotationToTarget.getDegrees());
     yawSpeed = MathUtil.clamp(yawSpeed, -3.8, 3.8);
-    double distanceSpeed;
-    if(Math.abs(yawController.getPositionError()) < 10.0) {
-      distanceSpeed = distanceController.calculate(distanceToTarget); 
-      distanceSpeed = MathUtil.clamp(distanceSpeed, -4.0, 4.0);
-    }else{
-      distanceSpeed = 0.0;
-    }
 
-    SmartDashboard.putNumber("Yaw Speed", yawSpeed);
-    SmartDashboard.putNumber("Distance Speed", distanceSpeed);
-
-    drivetrain.setControl(drive.withRotationalRate(yawSpeed).withVelocityX(distanceSpeed).withVelocityY(0));
+    drivetrain.setControl(drive.withRotationalRate(yawSpeed).withVelocityX(TranslationX.getAsDouble()).withVelocityY(TranslationY.getAsDouble()));
 
     shooter.log("isYawAtPosition", yawController.atSetpoint());
-    shooter.log("isDistanceAtPosition", distanceController.atSetpoint());
     intake.log("isIntakeAtPosition", intake.isIntakeAtPosition(IntakeConstants.shootPosition));
     shooter.log("isShooterAtSpeed", shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
     //System.out.println(yawController.atSetpoint());
-    //System.out.println(distanceController.atSetpoint());
     //System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
     //System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
     //System.out.println("Cycle");
-    if(yawController.atSetpoint() && distanceController.atSetpoint() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && shooter.isShooterAtSpeed(ShooterConstants.shootingRPM)) {
+    if(yawController.atSetpoint() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && shooter.getAverageRPM() > 500) {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
       if(timeStampLock){
         shootTime = Timer.getFPGATimestamp();
         timeStampLock = false;
       }
 
-      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.2){
+      if(!timeStampLock && Timer.getFPGATimestamp() - shootTime > 0.4){
         finished = true;
       }
     };
@@ -118,6 +118,7 @@ public class ShootPoseAuto extends Command {
   public void end(boolean interrupted) {
     intake.setIntakePosition(IntakeConstants.stowedPosition);
     intake.setRollerSpeed(IntakeConstants.stallSpeed);
+    shooter.stopShooter();
     finished = false;
   }
 

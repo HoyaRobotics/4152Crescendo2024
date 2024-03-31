@@ -14,8 +14,11 @@ import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.generated.ShooterConstants;
+import monologue.LogLevel;
+import monologue.Logged;
+import monologue.Annotations.Log;
 
-public class Shooter extends SubsystemBase {
+public class Shooter extends SubsystemBase implements Logged {
     private TalonFX shootLeft = new TalonFX(ShooterConstants.leftShooterMotorID);
     private TalonFX shootRight = new TalonFX(ShooterConstants.rightShooterMotorID);
 
@@ -27,6 +30,11 @@ public class Shooter extends SubsystemBase {
     
   private boolean upToSpeed = false;
 
+  @Log.File(level = LogLevel.DEFAULT) double leftShooterSpeed;
+  @Log.File(level = LogLevel.DEFAULT) double rightShooterSpeed;
+  @Log.File(level = LogLevel.DEFAULT) double leftShooterSetpoint;
+  @Log.File(level = LogLevel.DEFAULT) double rightShooterSetpoint;
+
   /** Creates a new Shooter. */
   public Shooter() {
     configShooterMotors();
@@ -37,6 +45,8 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("shooter speed", getAverageRPM());
+    leftShooterSpeed = shootLeft.getVelocity().getValueAsDouble();
+    rightShooterSpeed = shootRight.getVelocity().getValueAsDouble();
   }
   
   private void configShooterMotors() {

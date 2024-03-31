@@ -3,50 +3,108 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.463789772448279,
-        "y": 7.347222331676167
+        "x": 0.7553686346251124,
+        "y": 6.640588220492705
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8360490372532046,
-        "y": 7.32273159057058
+        "x": 1.445144620823841,
+        "y": 6.751462380510919
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.9906407284641562,
-        "y": 6.948583040023223
+        "x": 2.908594592628341,
+        "y": 6.995214151701608
       },
       "prevControl": {
-        "x": 0.7163444280815798,
-        "y": 6.752657111178526
+        "x": 2.2412553309269714,
+        "y": 6.88355249833072
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "5 Piece Top - Path 1"
+      "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.05,
+      "rotationDegrees": 60.79151354308575,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RunIntaker",
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopIntake",
+      "waypointRelativePos": 1.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "stopIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.65,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "autoAlign"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 4.35,
+    "maxVelocity": 1.5,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 90.0,
     "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 38.829824904970394,
+    "rotation": 8.236194408680424,
     "rotateFast": true
   },
   "reversed": false,
   "folder": "5 Piece Top",
   "previewStartingState": {
-    "rotation": -0.3354401105169994,
+    "rotation": 59.77301324740216,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

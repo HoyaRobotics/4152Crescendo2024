@@ -2,31 +2,25 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.4822008689363435,
-      "y": 4.138935246844241
+      "x": 0.7481859986252197,
+      "y": 4.455203671448283
     },
-    "rotation": 0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "deflect"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "2 Piece Bottom - Part 1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "autoShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "2 Piece Bottom - Part 2"
           }
         },
         {

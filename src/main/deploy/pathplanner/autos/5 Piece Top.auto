@@ -20,6 +20,18 @@
         {
           "type": "path",
           "data": {
+            "pathName": "5 Piece Top - Path 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "5 Piece Top - Path 2"
           }
         },
@@ -45,18 +57,6 @@
           "type": "path",
           "data": {
             "pathName": "5 Piece Top - Path 4"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "autoShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "5 Piece Top - Path 5"
           }
         },
         {

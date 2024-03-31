@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.2504323767597416,
-        "y": 3.54625931208903
+        "x": 0.7512377486895258,
+        "y": 6.64749715870844
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.0405897661437324,
-        "y": 4.756101922705039
+        "x": 1.382061794345558,
+        "y": 6.950191468083974
       },
       "isLocked": false,
-      "linkedName": "2 Piece Bottom - Part 1"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.6275897897857843,
-        "y": 4.246694507708824
+        "x": 2.7724207643832592,
+        "y": 6.986087138566874
       },
       "prevControl": {
-        "x": 1.5842842186877686,
-        "y": 4.863861183569623
+        "x": 1.7724207643832592,
+        "y": 6.986087138566874
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,17 @@
   "eventMarkers": [
     {
       "name": "RunIntake",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.05,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": []
+        }
+      }
+    },
+    {
+      "name": "AutoAlign",
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +51,7 @@
             {
               "type": "named",
               "data": {
-                "name": "startIntake"
+                "name": "autoAlign"
               }
             }
           ]
@@ -67,21 +77,21 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.35,
+    "maxVelocity": 1.5,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 90.0,
     "maxAngularAcceleration": 360.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -23.498565675952143,
-    "rotateFast": false
+    "rotation": 0.7472938768259297,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "2 Sides",
   "previewStartingState": {
-    "rotation": -34.21570213243735,
+    "rotation": 59.91349544599986,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

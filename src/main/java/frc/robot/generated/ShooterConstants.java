@@ -44,6 +44,7 @@ public class ShooterConstants {
     public static final double deflectSpeed = 4000;
 
     public static final double trapHandoffRPM = 500;
+    public static final double ampHandoffRPM = 1130;
 
     public static final double shootPosition = 112;
 
