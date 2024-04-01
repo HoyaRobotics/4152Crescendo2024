@@ -17,15 +17,15 @@
     {
       "anchor": {
         "x": 8.190295861111203,
-        "y": 7.383036064773428
+        "y": 7.43067265399935
       },
       "prevControl": {
-        "x": 7.47198242448433,
-        "y": 7.045868533295508
+        "x": 7.46910057977916,
+        "y": 7.168131909347455
       },
       "nextControl": {
-        "x": 8.908609297738074,
-        "y": 7.720203596251348
+        "x": 8.935934517087578,
+        "y": 7.702111656788868
       },
       "isLocked": false,
       "linkedName": null
@@ -80,12 +80,12 @@
     },
     {
       "anchor": {
-        "x": 2.84,
-        "y": 4.13
+        "x": 2.602618647195202,
+        "y": 4.200768195435078
       },
       "prevControl": {
-        "x": 1.1734217166055463,
-        "y": 4.393718377834382
+        "x": 0.9360403638007484,
+        "y": 4.46448657326946
       },
       "nextControl": null,
       "isLocked": false,
@@ -95,7 +95,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 28.926425835253664,
+      "rotationDegrees": 21.685196313324933,
       "rotateFast": true
     },
     {
@@ -123,7 +123,7 @@
     {
       "name": "Slow To Shoot 1",
       "minWaypointRelativePos": 1.85,
-      "maxWaypointRelativePos": 2.25,
+      "maxWaypointRelativePos": 2.0,
       "constraints": {
         "maxVelocity": 1.8,
         "maxAcceleration": 4.0,
@@ -134,7 +134,7 @@
     {
       "name": "Slow To Shoot 2",
       "minWaypointRelativePos": 3.9000000000000004,
-      "maxWaypointRelativePos": 4.55,
+      "maxWaypointRelativePos": 4.050000000000001,
       "constraints": {
         "maxVelocity": 1.8,
         "maxAcceleration": 4.0,
@@ -179,7 +179,7 @@
   "eventMarkers": [
     {
       "name": "StartIntake",
-      "waypointRelativePos": 0.44999999999999996,
+      "waypointRelativePos": 0.4,
       "command": {
         "type": "parallel",
         "data": {
@@ -213,7 +213,7 @@
     },
     {
       "name": "FlyShooting",
-      "waypointRelativePos": 1.9500000000000002,
+      "waypointRelativePos": 1.9,
       "command": {
         "type": "parallel",
         "data": {
@@ -281,7 +281,7 @@
     },
     {
       "name": "StartIntake",
-      "waypointRelativePos": 4.35,
+      "waypointRelativePos": 4.3,
       "command": {
         "type": "parallel",
         "data": {
@@ -298,7 +298,7 @@
     },
     {
       "name": "StopIntake",
-      "waypointRelativePos": 5.0,
+      "waypointRelativePos": 4.95,
       "command": {
         "type": "parallel",
         "data": {
@@ -315,7 +315,7 @@
     },
     {
       "name": "Auto Align 1",
-      "waypointRelativePos": 0.6,
+      "waypointRelativePos": 0.55,
       "command": {
         "type": "parallel",
         "data": {

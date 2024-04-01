@@ -60,7 +60,7 @@ public class ShootPoseAuto extends Command {
     yawController.setSetpoint(180.0);
     yawController.setTolerance(2.0);
     yawController.enableContinuousInput(-180, 180);
-    distanceController.setSetpoint(3.0);
+    distanceController.setSetpoint(2.9); //3.0
     distanceController.setTolerance(Units.inchesToMeters(2.0));
     targetPose = ShooterConstants.aprilTags.getTagPose(targetTag).get().toPose2d();
     timeStampLock = true;

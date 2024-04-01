@@ -48,6 +48,8 @@ public class ShootToZone extends Command {
 
   private int targetTag;
   private Pose2d targetPose;
+  private double shootSpeed;
+  private Pose2d currentPose;
 
   private boolean finished = false;
   private boolean timeStampLock = true;
@@ -68,7 +70,6 @@ public class ShootToZone extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setShooterSpeeds();
     intake.setIntakePosition(IntakeConstants.shootPosition);
     targetTag = DriverStation.getAlliance().get()==DriverStation.Alliance.Blue?7:4;
     yawController.setSetpoint(180.0);
@@ -77,14 +78,20 @@ public class ShootToZone extends Command {
     targetPose = ShooterConstants.aprilTags.getTagPose(targetTag).get().toPose2d();
     timeStampLock = true;
     finished = false;
+    currentPose = drivetrain.getState().Pose;
+    distanceToTarget = PhotonUtils.getDistanceToPose(currentPose, targetPose);
+    //shootSpeed = 228.98*(Math.pow(10.0, 0.2779*distanceToTarget));
+    shootSpeed = 228.98*(Math.exp(0.2779*distanceToTarget));
+    //shootSpeed = 1000;
+    SmartDashboard.putNumber("setShootSpeed", shootSpeed);
+    shooter.setShooterSpeeds(shootSpeed, 0.0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Pose2d currentPose = drivetrain.getState().Pose;
+    currentPose = drivetrain.getState().Pose;
     rotationToTarget = PhotonUtils.getYawToPose(currentPose, targetPose);
-    distanceToTarget = PhotonUtils.getDistanceToPose(currentPose, targetPose);
     SmartDashboard.putNumber("Yaw To Target", rotationToTarget.getDegrees());
     SmartDashboard.putNumber("Distance To Target", distanceToTarget);
 
@@ -100,7 +107,7 @@ public class ShootToZone extends Command {
     //System.out.println(intake.isIntakeAtPosition(IntakeConstants.shootPosition));
     //System.out.println(shooter.isShooterAtSpeed(ShooterConstants.shootingRPM));
     //System.out.println("Cycle");
-    if(yawController.atSetpoint() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && shooter.getAverageRPM() > 500) {
+    if(yawController.atSetpoint() && intake.isIntakeAtPosition(IntakeConstants.shootPosition) && shooter.isShooterAtSpeed(shootSpeed)) {
       intake.setRollerSpeed(IntakeConstants.shootSpeed);
       if(timeStampLock){
         shootTime = Timer.getFPGATimestamp();
