@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 8.025854632472072,
-        "y": 7.433356209594501
+        "x": 8.17696908121089,
+        "y": 7.423016404474367
       },
       "prevControl": {
-        "x": 6.949063143474367,
-        "y": 7.301748360939227
+        "x": 7.100177592213186,
+        "y": 7.2914085558190935
       },
       "nextControl": {
-        "x": 8.46668797237265,
-        "y": 7.487235840026792
+        "x": 8.617802421111469,
+        "y": 7.476896034906659
       },
       "isLocked": false,
       "linkedName": null
@@ -54,7 +54,7 @@
   "constraintZones": [
     {
       "name": "Pickup 1",
-      "minWaypointRelativePos": 0.75,
+      "minWaypointRelativePos": 0.8,
       "maxWaypointRelativePos": 1.1,
       "constraints": {
         "maxVelocity": 2.0,
@@ -67,7 +67,7 @@
   "eventMarkers": [
     {
       "name": "StartIntake",
-      "waypointRelativePos": 0.45,
+      "waypointRelativePos": 0.25,
       "command": {
         "type": "parallel",
         "data": {
@@ -84,7 +84,7 @@
     },
     {
       "name": "StopIntake",
-      "waypointRelativePos": 1.3,
+      "waypointRelativePos": 1.2,
       "command": {
         "type": "parallel",
         "data": {

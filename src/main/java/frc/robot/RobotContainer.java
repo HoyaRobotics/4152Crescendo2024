@@ -114,6 +114,7 @@ public class RobotContainer implements Logged{
     operatorController.back().onTrue(new InstantCommand(()-> climber.resetEncoder(true), climber));
     operatorController.rightBumper().onTrue(new TrapScoring(elevator, intake, shooter, trap));
     operatorController.rightTrigger().whileTrue(new TryHarder(intake));
+    operatorController.povCenter().whileFalse(new Amp(intake));
     //operatorController.rightStick().whileTrue(new ShootPoseDefence(drivetrain, shooter, intake));
 
     //driverController.povDown().whileTrue(new ShootDeflect(shooter, intake, elevator));

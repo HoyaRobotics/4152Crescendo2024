@@ -28,13 +28,7 @@
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.05,
-      "rotationDegrees": 60.79151354308575,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
@@ -73,7 +67,7 @@
     },
     {
       "name": "AutoAlign",
-      "waypointRelativePos": 0.65,
+      "waypointRelativePos": 0.55,
       "command": {
         "type": "parallel",
         "data": {
@@ -97,7 +91,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 8.236194408680424,
+    "rotation": 10.68899056495194,
     "rotateFast": true
   },
   "reversed": false,

@@ -25,8 +25,8 @@ import frc.robot.Subsystems.Trap;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoAmp extends SequentialCommandGroup {
-  Pose2d blueAmpPose = new Pose2d(1.83, 7.6, Rotation2d.fromDegrees(-90.0));
-  Pose2d redAmpPose = new Pose2d(14.72, 7.6, Rotation2d.fromDegrees(-90.0));
+  Pose2d blueAmpPose = new Pose2d(1.83, 7.62, Rotation2d.fromDegrees(-90.0));
+  Pose2d redAmpPose = new Pose2d(14.72, 7.62, Rotation2d.fromDegrees(-90.0));
   /** Creates a new AutoAmp. */
   public AutoAmp(Intake intake, CommandSwerveDrivetrain drivetrain, Elevator elevator, Shooter shooter, Trap trap) {
     // Add your commands in the addCommands() call, e.g.
@@ -35,8 +35,8 @@ public class AutoAmp extends SequentialCommandGroup {
       //drivetrain.pathfindingCommand(blueAmpPose, new PathConstraints(2.00, 3.0, Units.degreesToRadians(90), Units.degreesToRadians(360.0))),
       new ConditionalCommand(new PIDToPose(drivetrain, blueAmpPose, false), new PIDToPose(drivetrain, redAmpPose, true), ()-> DriverStation.getAlliance().get().equals(Alliance.Blue)),
       new ParallelRaceGroup(
-        new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.RobotCentric().withVelocityX(-0.3))),
-        new WaitCommand(0.2)
+        new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.RobotCentric().withVelocityX(-0.6))),
+        new WaitCommand(0.3)
       ),
       //new Amp(intake) 
       new TrapAmpShot(elevator, intake, shooter, trap)
