@@ -14,7 +14,8 @@ public class ElevatorConstants {
     
     public static final Slot0Configs elevatorSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Elevator_Static)
-        .withKS(0.3) // output to overcome static friction (output)
+        .withKG(0.2)
+        .withKS(0.1) // output to overcome static friction (output)
         .withKV(2.25) // output per unit of target velocity (output/rps)
         .withKA(.03) // output per unit of target acceleration (output/(rps/s))
         .withKP(10) // output per unit of error in position (output/rotation)

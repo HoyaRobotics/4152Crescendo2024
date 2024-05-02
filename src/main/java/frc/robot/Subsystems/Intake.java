@@ -5,6 +5,7 @@
 package frc.robot.Subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -29,6 +30,7 @@ public class Intake extends SubsystemBase implements Logged{
   private final CANSparkFlex rollerMotor = new CANSparkFlex(IntakeConstants.rollerMotorID, MotorType.kBrushless);
 
   private final MotionMagicVoltage magicRequest = new MotionMagicVoltage(0);
+  //private final MotionMagicExpoVoltage magicRequest = new MotionMagicExpoVoltage(0);
   private final VoltageOut voltageRequest = new VoltageOut(0);
 
   @Log.NT(level = LogLevel.DEFAULT) Pose3d intakePose;
@@ -63,8 +65,8 @@ public class Intake extends SubsystemBase implements Logged{
     talonfxConfigs.SoftwareLimitSwitch = IntakeConstants.rotationSoftwareLimitSwitchConfigs;
     talonfxConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     rotationMotor.getConfigurator().apply(talonfxConfigs);
-    rotationMotor.setPosition(0.0);
-    setIntakePosition(0.0);
+    rotationMotor.setPosition(IntakeConstants.offset);
+    setIntakePosition(IntakeConstants.stowedPosition);
   }
 
   private void configureRollerMotor() {

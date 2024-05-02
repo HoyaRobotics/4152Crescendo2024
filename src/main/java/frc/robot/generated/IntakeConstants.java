@@ -16,12 +16,14 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 /** Add your docs here. */
 public class IntakeConstants {
     public static final double rotationGearRatio = 45.7143;
+    public static final double offset = 0.448;
     public static final Slot0Configs rotationSlot0Configs = new Slot0Configs()
         .withGravityType(GravityTypeValue.Arm_Cosine)
-        .withKS(0.3) // output to overcome static friction (output)
+        .withKG(0.25)
+        .withKS(0.15) // output to overcome static friction (output)
         .withKV(5.17) // output per unit of target velocity (output/rps)
         .withKA(0.353) // output per unit of target acceleration (output/(rps/s))
-        .withKP(25) // output per unit of error in position (output/rotation)
+        .withKP(25) // output per unit of error in position (output/rotation) 25
         .withKI(0.0) // output per unit of integrated error in position (output/(rotation*s))
         .withKD(0.0); // output per unit of error in velocity (output/rps)
     public static final CurrentLimitsConfigs rotationCurrentLimits = new CurrentLimitsConfigs()
@@ -34,22 +36,24 @@ public class IntakeConstants {
         .withFeedbackSensorSource(FeedbackSensorSourceValue.RotorSensor)
         .withSensorToMechanismRatio(rotationGearRatio);
     public static final MotionMagicConfigs rotationMotionMagicConfigs = new MotionMagicConfigs()
-        .withMotionMagicAcceleration(3.5) // controls acceleration and deceleration rates during the beginning and end of motion
+        .withMotionMagicAcceleration(5.0) // controls acceleration and deceleration rates during the beginning and end of motion 3.5
         .withMotionMagicCruiseVelocity(2.0) // peak velocity of the profile; set to 0 to target the system’s max velocity
-        .withMotionMagicExpo_kA(0.0) // voltage required to apply a given acceleration, in V/(rps/s)
-        .withMotionMagicExpo_kV(0) // voltage required to maintain a given velocity, in V/rps
+        .withMotionMagicExpo_kA(0.353) // voltage required to apply a given acceleration, in V/(rps/s)
+        .withMotionMagicExpo_kV(5.17) // voltage required to maintain a given velocity, in V/rps
         .withMotionMagicJerk(0.0); // controls jerk, which is the derivative of acceleration
     public static final SoftwareLimitSwitchConfigs rotationSoftwareLimitSwitchConfigs = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(0.05)
+        .withForwardSoftLimitThreshold(0.05+offset)
         .withReverseSoftLimitEnable(true)
-        .withReverseSoftLimitThreshold(-0.58);
-    public static final double stowedPosition = 0.006;
-    public static final double shootPosition = 0.006;
-    public static final double floorPosition = -0.56; //-0.562
-    public static final double outakePosition = -0.078;
-    public static final double sourcePosition = 0.0;
-    public static final double ampPosition = -0.21;//-0.21
+        .withReverseSoftLimitThreshold(-0.58+offset);
+    
+    public static final double stowedPosition = 0.006+offset;
+    public static final double shootPosition = 0.006+offset;
+    public static final double floorPosition = -0.56+offset; //-0.562
+    public static final double outakePosition = -0.078+offset;
+    public static final double sourcePosition = 0.0+offset;
+    public static final double ampPosition = -0.21+offset;//-0.21
+
 
     public static final double positionError = 0.01;
     //Can assign later if need be
