@@ -74,6 +74,11 @@ public class Shooter extends SubsystemBase implements Logged {
     shootRight.setControl(voltageRequest.withVelocity(RPM*(1+spinFactor)/60));
   }
 
+  public void setIndividualSpeeds(double RPMLeft, double RPMRight) {
+    shootLeft.setControl(voltageRequest.withVelocity(RPMLeft/60));
+    shootRight.setControl(voltageRequest.withVelocity(RPMRight/60));
+  }
+
   public void setTrapShooterSpeeds(){
     shootLeft.setControl(voltageRequest.withVelocity(ShooterConstants.trapHandoffRPM/60));
     shootRight.setControl(voltageRequest.withVelocity(ShooterConstants.trapHandoffRPM/60));

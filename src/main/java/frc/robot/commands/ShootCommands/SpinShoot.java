@@ -8,14 +8,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.generated.IntakeConstants;
-import frc.robot.generated.ShooterConstants;
 
-public class ManuelShoot extends Command {
+public class SpinShoot extends Command {
   Intake intake;
   Shooter shooter;
   double speed;
   /** Creates a new ManuelShoot. */
-  public ManuelShoot(Shooter shooter, Intake intake, double speed) {
+  public SpinShoot(Shooter shooter, Intake intake, double speed) {
     this.shooter = shooter;
     this.intake = intake;
     this.speed = speed;
@@ -26,24 +25,14 @@ public class ManuelShoot extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setShooterSpeeds(speed, 0.05);
+    shooter.setIndividualSpeeds(1000, -1000);
     //shooter.setShooterSpeeds(ShooterConstants.trapShootRPM, 0.0);
     intake.setIntakePosition(IntakeConstants.shootPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    intake.log("isIntakeAtPosition", intake.isIntakeAtPosition(IntakeConstants.shootPosition));
-    shooter.log("isShooterAtSpeed", shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM));
-    //if(!shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM))System.out.println("shooterNotAtSpeed");
-    //if(!intake.isIntakeAtPosition(IntakeConstants.shootPosition))System.out.println("IntakeNotInPosition");
-    if(shooter.isShooterAtSpeed(ShooterConstants.trapShootRPM) && intake.isIntakeAtPosition(IntakeConstants.shootPosition)) 
-    {
-
-      intake.setRollerSpeed(IntakeConstants.shootSpeed);
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

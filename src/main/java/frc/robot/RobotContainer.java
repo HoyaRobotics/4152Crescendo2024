@@ -43,6 +43,7 @@ import frc.robot.commands.ShootCommands.ManuelShoot;
 import frc.robot.commands.ShootCommands.ShootDeflect;
 import frc.robot.commands.ShootCommands.ShootPose;
 import frc.robot.commands.ShootCommands.ShootToZone;
+import frc.robot.commands.ShootCommands.SpinShoot;
 import frc.robot.generated.ShooterConstants;
 import frc.robot.generated.TunerConstants;
 import monologue.Logged;
@@ -96,6 +97,7 @@ public class RobotContainer implements Logged{
     //driverController.leftBumper().whileTrue(new Shoot(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new ShootPose(drivetrain, shooter, intake));
     driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake, ShooterConstants.shootingRPM));
+    //driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake, 2000));
     //driverController.b().whileTrue(new Amp(intake)); // Disabled for the trapshot test
     driverController.b().onTrue(new TrapAmpShot(elevator, intake, shooter, trap));
     //driverController.povLeft().whileTrue(new AutoStage(drivetrain, climber, stageLocation.leftStage));
@@ -104,6 +106,7 @@ public class RobotContainer implements Logged{
     //driverController.povUp().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
     //driverController.povRight().whileTrue(new AutoStage(drivetrain, climber, stageLocation.rightStage));
     //driverController.povRight().onFalse(new InstantCommand(()-> drivetrain.setControl(new SwerveRequest.Idle()), drivetrain));
+    driverController.povDown().whileTrue(new SpinShoot(shooter, intake, MaxSpeed));
     driverController.rightStick().whileTrue(new AutoAmp(intake, drivetrain, elevator, shooter, trap));
     driverController.a().whileTrue(new ShootDeflect(shooter, intake, elevator, ShooterConstants.deflectSpeed));
     driverController.leftStick().whileTrue(new ShootToZone(drivetrain, shooter, intake, MaxSpeed, MaxAngularRate, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed));
