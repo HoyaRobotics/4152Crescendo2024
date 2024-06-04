@@ -55,7 +55,7 @@ public class IntakeConstants {
     public static final double ampPosition = -0.21+offset;//-0.21
 
 
-    public static final double positionError = 0.01;
+    public static final double positionError = 0.02;//made larger for school visits 0.01
     //Can assign later if need be
     public static final double floorSpeed = 0.75; //0.6
     public static final double stallSpeed = 0;  //0.04
