@@ -92,8 +92,9 @@ public class RobotContainer implements Logged{
 
     //BUTTON ASSIGNING BELOW//
     driverController.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative(new Pose2d())));
-    driverController.rightTrigger().whileTrue(new IntakeFromGroundOld(intake));
-    driverController.rightBumper().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
+    //driverController.rightTrigger().whileTrue(new IntakeFromGroundOld(intake));
+    //driverController.rightBumper().whileTrue(new AutoIntakeFromGround(intake,drivetrain,()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
+    driverController.rightTrigger(0.05).whileTrue(new AutoIntakeFromGroundDrive(intake,drivetrain, ()-> driverController.getRightTriggerAxis(),()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate, drive));
     //driverController.leftBumper().whileTrue(new Shoot(intake, shooter, drivetrain, ()-> -driverController.getLeftY() * MaxSpeed, ()-> -driverController.getLeftX() * MaxSpeed, ()-> -driverController.getRightX() * MaxAngularRate));
     driverController.leftBumper().whileTrue(new ShootPose(drivetrain, shooter, intake));
     driverController.leftTrigger().whileTrue(new ManuelShoot(shooter, intake, ShooterConstants.shootingRPM));
